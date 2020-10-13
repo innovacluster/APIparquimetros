@@ -918,6 +918,8 @@ namespace WebApiParquimetros.Controllers
             ParametrosController par = new ParametrosController(context);
             ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
             DateTime time = horaTransaccion.Value;
+
+           
             try
             {
 
@@ -926,6 +928,10 @@ namespace WebApiParquimetros.Controllers
                 {
                     return BadRequest();
                 }
+
+                var IDusuario = await context.tbmovimientos.FirstOrDefaultAsync(x => x.int_id_multa == intIdMulta);
+
+                var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == IDusuario.int_id_usuario_id );
 
                 response.last_modified_by = multas.last_modified_by;
                 response.last_modified_date = time;
@@ -943,9 +949,22 @@ namespace WebApiParquimetros.Controllers
                 response.str_categoria = multas.str_categoria;
                 response.str_clave = multas.str_clave;
                 response.str_tipo_pago = multas.str_tipo_pago;
-                response.str_tipo_multa = "MULTA AUT CON CANDADO";
+                response.str_tipo_multa = "MULTA AUT. CON CANDADO";
                 response.intidconcesion_id = multas.intidconcesion_id;
                 await context.SaveChangesAsync();
+
+                context.tbdetallemulta.Add(new DetalleMulta()
+                {
+                    int_id_multa = intIdMulta,
+                    bit_status = true,
+                    dtmFecha = time,
+                    str_usuario = usuario.strNombre + " " + usuario.strApellidos,
+                    flt_monto = 0,
+                    str_comentarios = "MULTA DESPUES DE LAS 10"
+                });
+                context.SaveChanges();
+
+
                 return Ok();
             }
             catch (Exception ex)
