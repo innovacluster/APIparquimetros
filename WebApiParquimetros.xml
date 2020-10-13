@@ -23,26 +23,44 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreoXDia(System.DateTime)">
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovimientosXIdSE(System.String)">
+            <summary>
+             Metodo para la consulta de movimientos activos X id de usuario. Esta consulta es para registros que en donde la cocesionaria tiene espacios.
+            </summary>
+            <param name="strIdUsuario"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovimientosInactivosXIdUsuarioSE(System.String)">
+            <summary>
+            Metodo para la consulta de movimientos inactivos X id de usuario. Esta consulta es para registros que no tiene asocido un id de espacio.
+            </summary>
+            <param name="strIdUsuario"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreoXDiaPrueba(System.String,System.String,System.Int32)">
             <summary>
             Método que obtiene los movimientos de acuerdo a una fecha en especifica.
             </summary>
             <param name="dtmFecha"></param>
+            <param name="dtmFechaFin"></param>           
             <returns></returns>
         </member>
-        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreo(System.DateTime,System.DateTime)">
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreo(System.Int32,System.DateTime,System.DateTime)">
             <summary>
             Método Get que obtiene los moviimento de acuerdo a un rango de fechas.
             </summary>
+            <param name="intIdConcesion"></param>
             <param name="dtmFechaInicio"></param>
-            <param name="dtmFechaFin"></param>
+            <param name="dtmFechaFin"></param>  
             <returns></returns>
         </member>
-        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarHistorial(System.String,System.Int32)">
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarHistorial(System.String,System.Int32,System.Int32)">
             <summary>
             Metodo GET que devuelve el historial de movimientos del usuario
             </summary>
             <param name="strEmail"></param>
+            <param name="intIdMovimiento"></param>
+            <param name="intIdConcesion"></param>
             <returns></returns>
         </member>
         <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdIngresarMovimientos(WebApiParquimetros.Models.Movimientos)">
@@ -104,6 +122,63 @@
             Método que permite Reactivar un movimiento
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdIngresosXDiaAndroid(System.Int32)">
+            <summary>
+            /// Método que devuelve ingresos x dia de aplicaciones Android
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdIngresosXDiaIos(System.Int32)">
+            <summary>
+            Método que devuelve ingresos x dia de aplicaciones IOS
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerIngresosSemAndroid(System.String,System.Int32)">
+            <summary>
+            Método que devuelve el ingreso x semana en Android
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerIngresosSemIOS(System.String,System.Int32)">
+            <summary>
+            Método que devuelve el ingreso x semana en IOS
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerCompIngresos(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Obtiene los ingresos de Ios y Android de acuerdo al rango de fachas enviadas
+            </summary>
+            <param name="intIdConcesion"></param>
+            <param name="dtmFechaInicio"></param>
+            <param name="dtmFechaFin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerCompTransaciones(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Obtiene la comprativa de transcciones por dispositivo
+            </summary>
+            <param name="intIdConcesion"></param>
+            <param name="dtmFechaInicio"></param>
+            <param name="dtmFechaFin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerResumenIngresosMensual(System.Int32)">
+            <summary>
+            obtiene el resumen de ingresos mensual, es la ultima parte del Dashboard
+            </summary>
+            <param name="intIdConcesion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MultasController.mtdConfirmarMulta(System.Int32,WebApiParquimetros.Models.Multas)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="multas"></param>
             <returns></returns>
         </member>
     </members>

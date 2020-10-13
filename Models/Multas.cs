@@ -57,11 +57,11 @@ namespace WebApiParquimetros.Models
         [ForeignKey("tbmovimientos")]
         public int? int_id_movimiento_id { get; set; }
 
-     
+
         //[ForeignKey("tbsaldo")]
         //public int? int_id_saldo_id { get; set; }
-   
-        //[ForeignKey("tbvehiculos")]
+
+        [ForeignKey("tbvehiculos")]
         public int? int_id_vehiculo_id { get; set; }
 
         public ApplicationUser NetUsers { get; set; }

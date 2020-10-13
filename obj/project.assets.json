@@ -13859,11 +13859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTO PARQ 2\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
+      "projectUniqueName": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
       "projectName": "WebApiParquimetros",
-      "projectPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTO PARQ 2\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
+      "projectPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
       "packagesPath": "C:\\Users\\Nadia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTO PARQ 2\\webapimonitor\\WebApiParquimetros\\obj\\",
+      "outputPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

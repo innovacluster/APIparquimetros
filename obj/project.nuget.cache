@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oLnow17QCer01oA+xV5cli8OEuICTW/l6ndP58fFRy+Zmiyh8zV8+jK/vzyXcOxkEB4l5rvpCaa4NRCPv877QA==",
+  "dgSpecHash": "O5Cjv5fOYd46ZFEer1hXp+M2GAZtouKjib3UxDu1yJq6kFqg4PTIPRVSavxcX4hKedutkMJOd6xdNsVgQMYdJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTO PARQ 2\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
+  "projectFilePath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nadia\\.nuget\\packages\\cronos\\0.7.0\\cronos.0.7.0.nupkg.sha512",
     "C:\\Users\\Nadia\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",

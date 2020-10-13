@@ -83,3 +83,40 @@ C:\Users\Nadia\OneDrive\Documentos\PROYECTO PARQ 2\webapimonitor\WebApiParquimet
 C:\Users\Nadia\OneDrive\Documentos\PROYECTO PARQ 2\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
 C:\Users\Nadia\OneDrive\Documentos\PROYECTO PARQ 2\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
 C:\Users\Nadia\OneDrive\Documentos\PROYECTO PARQ 2\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\appsettings.Development.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\appsettings.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\libman.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\app.yaml
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\Dockerfile
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.deps.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.dll
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
+C:\Users\Nadia\OneDrive\Documentos\PROYECTOPARQ3\webapimonitor\WebApiParquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
