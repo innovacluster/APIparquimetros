@@ -1,0 +1,45 @@
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.deps.json
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.dll
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.dll
+M:\Dulce\1.-2020\1.-Parkimetros\Api parquimetros\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\app.yaml
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\Dockerfile
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.deps.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.dll
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\View.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.g.cshtml.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\WebApiParquimetros\WebApiParquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.xml

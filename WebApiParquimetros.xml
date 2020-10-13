@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiParquimetros</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovimientos">
+            <summary>
+            Método get que obtiene todos los movimientos activos e inactivos existentes en la bd.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovimientosActivos(System.DateTime)">
+            <summary>
+            Método que permite obtener los movimientos activos.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovimientosXId(System.Int32)">
+            <summary>
+            Método Get que obtiene un movimiento de acuerdo al id solicitado
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreoXDia(System.DateTime)">
+            <summary>
+            Método que obtiene los movimientos de acuerdo a una fecha en especifica.
+            </summary>
+            <param name="dtmFecha"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreo(System.DateTime,System.DateTime)">
+            <summary>
+            Método Get que obtiene los moviimento de acuerdo a un rango de fechas.
+            </summary>
+            <param name="dtmFechaInicio"></param>
+            <param name="dtmFechaFin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarHistorial(System.String,System.Int32)">
+            <summary>
+            Metodo GET que devuelve el historial de movimientos del usuario
+            </summary>
+            <param name="strEmail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdIngresarMovimientos(WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Método que permite agregar un movimiento
+            </summary>
+            <param name="movimientos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdMovAparcar(WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Método que permte Aparcar un automóvil
+            </summary>
+            <param name="movimientos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdMovDesaparcar(System.Int32,WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Método que permite desparcar un automóvil 
+            </summary>
+            <param name="intIdMovimiento"></param>
+            <param name="movimientos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdMovDesocupar(System.Int32,WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Metodo PUT que permite cancelar el aparcamiento.
+            </summary>
+            <param name="intIdMovimiento"></param>
+            <param name="movimientos"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdMovAgregarTiempo(System.Int32,WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Método Put que permite hacer una extensión de tiempo
+            </summary>
+            <param name="intIdMovimiento"></param>
+            <param name="movimientos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdActualizaMovimientos(System.Int32,WebApiParquimetros.Models.Movimientos)">
+            <summary>
+            Método que permite actualizar un movimiento
+            </summary>
+            <param name="id"></param>
+            <param name="movimientos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdBajaMovimiento(System.Int32)">
+            <summary>
+            método que permite dar de baja un movimiento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdReactivarMovimiento(System.Int32)">
+            <summary>
+            Método que permite Reactivar un movimiento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
