@@ -41,13 +41,14 @@ namespace WebApiParquimetros.Services
             int intIdMulta = 0;
 
 
-            ParametrosController par = new ParametrosController(dbContext);
-            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            //ParametrosController par = new ParametrosController(dbContext);
+            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-            //DateTime time = DateTime.Now;
+           // DateTime time = time.Value;
+            DateTime time = DateTime.Now;
 
 
-            var movimientos = await dbContext.tbmovimientos.Where(x => x.dtm_hora_fin.Date == time.Value.Date && x.bit_status == true).ToListAsync();
+            var movimientos = await dbContext.tbmovimientos.Where(x => x.dtm_hora_fin.Date == time.Date && x.bit_status == true).ToListAsync();
             var tipoUsuario = await dbContext.tbtiposusuarios.FirstOrDefaultAsync(x=> x.strTipoUsuario == "AGENTE VIAL");
             var agente = await dbContext.NetUsers.FirstOrDefaultAsync(x=> x.intIdTipoUsuario == tipoUsuario.id);
 
@@ -57,7 +58,7 @@ namespace WebApiParquimetros.Services
                 {
                     if (item.str_comentarios == "APARCADO" || item.str_comentarios.Contains("EXTENSIÓN DE TIEMPO"))
                     {
-                        if (time.Value == item.dtm_hora_fin || time.Value > item.dtm_hora_fin)
+                        if (time == item.dtm_hora_fin || time > item.dtm_hora_fin)
                         {
                             if (item.int_id_espacio == null)
                             {
@@ -76,7 +77,7 @@ namespace WebApiParquimetros.Services
                                             {
                                                 created_by = "Api Automatica",
                                                 bit_status = true,
-                                                dtm_fecha = time.Value,
+                                                dtm_fecha = time,
                                                 flt_monto = 0.00,
                                                 str_motivo = "Tiempo vencido",
                                                 str_tipo_multa = "MULTA AUTOMATICA",
@@ -109,7 +110,7 @@ namespace WebApiParquimetros.Services
                                             {
                                                 int_id_multa = intIdMulta,
                                                 bit_status = true,
-                                                dtmFecha = time.Value,
+                                                dtmFecha = time,
                                                 str_usuario = usuario.strNombre + " " + usuario.strApellidos,
                                                 flt_monto = 0,
                                                 str_comentarios = "MULTA AUTOMÁTICA"
@@ -123,8 +124,8 @@ namespace WebApiParquimetros.Services
                                                 int_idmovimiento = item.id,
                                                 int_id_usuario_id = response.int_id_usuario_id,
                                                 int_duracion = 0,
-                                                dtm_horaInicio = time.Value,
-                                                dtm_horaFin = time.Value,
+                                                dtm_horaInicio = time,
+                                                dtm_horaFin = time,
                                                 flt_importe = 0.00,
                                                 flt_saldo_anterior = 0.00,
                                                 flt_saldo_fin = 0.00,
@@ -160,7 +161,7 @@ namespace WebApiParquimetros.Services
                                             {
                                                 created_by = "Api Automatica",
                                                 bit_status = true,
-                                                dtm_fecha = time.Value,
+                                                dtm_fecha = time,
                                                 flt_monto = 0.00,
                                                 str_motivo = "Tiempo vencido",
                                                 str_tipo_multa = "MULTA AUTOMATICA",
@@ -193,7 +194,7 @@ namespace WebApiParquimetros.Services
                                             {
                                                 int_id_multa = intIdMulta,
                                                 bit_status = true,
-                                                dtmFecha = time.Value,
+                                                dtmFecha = time,
                                                 str_usuario = usuario.strNombre + " " + usuario.strApellidos,
                                                 flt_monto = 0.00,
                                                 str_comentarios = "MULTA AUTOMÁTICA"
@@ -209,8 +210,8 @@ namespace WebApiParquimetros.Services
                                                 int_id_usuario_id = response.int_id_usuario_id,
                                                 int_id_zona = espacio.id_zona,
                                                 int_duracion = 0,
-                                                dtm_horaInicio = time.Value,
-                                                dtm_horaFin = time.Value,
+                                                dtm_horaInicio = time,
+                                                dtm_horaFin = time,
                                                 flt_importe = 0.00,
                                                 flt_saldo_anterior = 0.00,
                                                 flt_saldo_fin = 0.00,
