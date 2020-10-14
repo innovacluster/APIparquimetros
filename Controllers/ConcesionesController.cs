@@ -171,9 +171,9 @@ namespace WebApiParquimetros.Controllers
             ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
             string strIdUsuario = ""; 
             string strResult = "";
-                var strategy = context.Database.CreateExecutionStrategy();
-                await strategy.ExecuteAsync(async () =>
-                {
+                //var strategy = context.Database.CreateExecutionStrategy();
+                //await strategy.ExecuteAsync(async () =>
+                //{
                     using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                     {
                         try
@@ -284,7 +284,7 @@ namespace WebApiParquimetros.Controllers
                           
                         }
                     }
-                });
+                //});
 
             return Json(new { token = strResult });
 
@@ -321,9 +321,9 @@ namespace WebApiParquimetros.Controllers
                 return BadRequest();
             }
             
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
@@ -425,7 +425,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
             return Json(new { token = strResult });
         }

@@ -110,9 +110,9 @@ namespace WebApiParquimetros.Controllers
         {
             string strresult = " ";
             double dblSaldoInicial = 0;
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
@@ -176,7 +176,7 @@ namespace WebApiParquimetros.Controllers
                     }
                     
                 }
-            });
+            //});
             return Ok();
         }
 

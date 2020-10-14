@@ -1251,9 +1251,9 @@ namespace WebApiParquimetros.Controllers
                         movimientos.bit_status = true;
                        //movimientos.int_tiempo_comprado = movimientos.int_tiempo;
 
-                        var strategy = context.Database.CreateExecutionStrategy();
-                        await strategy.ExecuteAsync(async () =>
-                        {
+                        //var strategy = context.Database.CreateExecutionStrategy();
+                        //await strategy.ExecuteAsync(async () =>
+                        //{
 
                             using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                             {
@@ -1339,7 +1339,7 @@ namespace WebApiParquimetros.Controllers
 
                                 }
                             }
-                        });
+                        //});
 
 
                     }
@@ -1379,7 +1379,7 @@ namespace WebApiParquimetros.Controllers
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
                 DateTime time = time1.Value;
-                // DateTime time = DateTime.Now; 
+               // DateTime time = DateTime.Now; 
 
 
                 var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
@@ -1436,9 +1436,9 @@ namespace WebApiParquimetros.Controllers
                     movimientos.bit_status = true;
 
 
-                    var strategy = context.Database.CreateExecutionStrategy();
-                    await strategy.ExecuteAsync(async () =>
-                    {
+                    //var strategy = context.Database.CreateExecutionStrategy();
+                    //await strategy.ExecuteAsync(async () =>
+                    //{
 
                         using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                         {
@@ -1502,7 +1502,7 @@ namespace WebApiParquimetros.Controllers
                             }
                         }
 
-                    });
+                    //});
 
 
                 }
@@ -1539,11 +1539,21 @@ namespace WebApiParquimetros.Controllers
         public async Task<ActionResult<Movimientos>> mtdMovDesaparcar(int intIdMovimiento, [FromBody] Movimientos movimientos)
         {
 
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-            string strResult = "";
             ActionResult<String> actionResult = "";
+            string strResult = "";
+            //DateTime time = DateTime.Now;
+
+            Double dbleCobrar = 0;
+            var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
+           // var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
+
+            if (response.int_id_espacio == null)
+            {
+                actionResult = await mtdMovDesaparcarSE(intIdMovimiento, movimientos);
+                return Json(new { idMovimiento = strResult });
+            }
+
             Double dbleRegresar = 0;
             int intPlanMinutos = 0;
             int intMinutosRegresar = 0;
@@ -1551,10 +1561,10 @@ namespace WebApiParquimetros.Controllers
             int intPlanMinutosNext = 0;
             int intTimepoDeParking = 0;
             Double db_porc_comision = 0;
-            Double dbl_monto_comision_regresar= 0;
+            Double dbl_monto_comision_regresar = 0;
             Double dbl_total_con_comision = 0;
 
-           // Double dbl_monto_comision_regresar = 0;
+            // Double dbl_monto_comision_regresar = 0;
             Double dbl_cuanto_cobre = 0;
             Double dbl_monto_ant = 0;
             Double dbl_porc_comision_ant = 0;
@@ -1562,29 +1572,21 @@ namespace WebApiParquimetros.Controllers
             Double dbl_total_con_comision_ant = 0;
             Double dbl_saldo_anterior_insertar = 0;
 
-          
-            //DateTime time = DateTime.Now;
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-            Double dbleCobrar = 0;
-            var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
-            var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
             var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
 
-            if (esp == null)
-            {
-                actionResult = await mtdMovDesaparcarSE(intIdMovimiento, movimientos);
-                return Json(new { idMovimiento = strResult });
-            }
-
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
-                        var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
+                    var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
+                    var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
                         //var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
                         //var parametros = await context.tbparametros.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id);
                        
@@ -1726,12 +1728,7 @@ namespace WebApiParquimetros.Controllers
 
                             });
                             await context.SaveChangesAsync();
-                            //response.flt_monto = dbleRegresar;
-
-                            //usuario.dbl_saldo_anterior = dblSaldoA;
-                            //usuario.dbl_saldo_actual = usuario.dbl_saldo_actual + fltMontoNeg;
-                            //await context.SaveChangesAsync();
-
+                         
 
                             context.tbsaldo.Add(new Saldos()
                             {
@@ -1809,7 +1806,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
 
 
@@ -1873,9 +1870,9 @@ namespace WebApiParquimetros.Controllers
             var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
             var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -1886,14 +1883,11 @@ namespace WebApiParquimetros.Controllers
                         dbl_porc_comision_ant = response.flt_porcentaje_comision;
                         dbl_monto_porcentaje_ant = response.flt_monto_porcentaje;
                         dbl_total_con_comision_ant = response.flt_total_con_comision;
-                        var parametros = await context.tbparametros.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id);
-                        //var saldoAnterior = await context.tbsaldo.FirstOrDefaultAsync(x => x.int_id_usuario_id == response.int_id_usuario_id);
-
                        
                         dbl_saldo_anterior_insertar = usuario.dbl_saldo_actual;
 
                         double dblSaldoA = usuario.dbl_saldo_actual;
-                        int intParametroMinParking = parametros.int_minimo_estacionamiento;
+                       
                         int intTiempoRenta = response.int_tiempo;
                         TimeSpan tmsTiempoTranscurrido = response.dt_hora_inicio - time.Value;
                         int horas = tmsTiempoTranscurrido.Hours;
@@ -2080,26 +2074,17 @@ namespace WebApiParquimetros.Controllers
                         response.str_comentarios = "DESAPARCADO";
                         response.bit_status = false;
                         response.flt_monto = dbl_monto_ant;
-                        //  Double dbl_porc_comision_ant = 0;
-                        //Double dbl_monto_porcentaje_ant = 0;
-                        //Double dbl_total_con_comision_ant = 0;
-
-
-                        //response.flt_porcentaje_comision = dbl_porc_comision_ant;
                         response.flt_monto_porcentaje = dbl_monto_porcentaje_ant;
                         response.flt_total_con_comision = dbl_total_con_comision_ant;
                         response.dtm_hora_fin = response.dt_hora_inicio.AddMinutes(intTimepoDeParking);
                         response.int_tiempo = intTimepoDeParking;
-
                         response.int_tiempo_devuelto = intMinutosRegresar;
                         response.flt_monto_devolucion = dbleRegresar;
                         response.flt_monto_porc_devolucion = dbl_monto_comision_regresar;
                         response.flt_total_dev_con_comision = dbl_total_con_comision;
                         response.flt_monto_real = dbl_cuanto_cobre;
-                       
 
                         await context.SaveChangesAsync();
-
                        
                         transaction.Commit();
                     }
@@ -2108,11 +2093,10 @@ namespace WebApiParquimetros.Controllers
                     {
                         transaction.Rollback();
                         strResult = ex.Message;
-                        //return Json(new { token = ex.Message });
 
                     }
                 }
-            });
+            //});
 
             if (strResult == "")
             {
@@ -2130,10 +2114,6 @@ namespace WebApiParquimetros.Controllers
                 }
 
                 bolDevolucion = false;
-                String cadena1 = null;
-                String cadena2 = null;
-                Console.Write(cadena1 == cadena2);
-
 
                 return Ok();
             }
@@ -2219,9 +2199,9 @@ namespace WebApiParquimetros.Controllers
 
             string strResult = "";
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -2284,7 +2264,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
             if (strResult == "")
             {
@@ -2317,9 +2297,9 @@ namespace WebApiParquimetros.Controllers
             int intMinutosRegresar = 0;
             int intDato = 0;
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -2456,7 +2436,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
 
 
@@ -2485,36 +2465,33 @@ namespace WebApiParquimetros.Controllers
         {
             double fltSaldoAnterior;
             ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-
-            //DateTime time = DateTime.Now;
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+           // DateTime time = DateTime.Now;
 
             string strresult = " ";
 
-            //var saldo = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == movimientos.int_id_saldo_id);
-           // fltSaldoAnterior = saldo.flt_monto_final;
-            //var parametros = await context.tbparametros.FirstOrDefaultAsync(x => x.intidconcesion_id == movimientos.intidconcesion_id);
             var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
             var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
             fltSaldoAnterior = usuario.dbl_saldo_actual;
             DateTime horaFinalAnterior = response.dtm_hora_fin;
-            var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
-            if (esp == null)
+           
+            if ( response.int_id_espacio == null)
             {
                 ActionResult actionResult = await mtdMovAgregarTiempoSE(intIdMovimiento, movimientos);
                 return actionResult;
             }
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
-
-                        var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
+                     var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
+                    var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
                         //int intValidaTiempo = movimientos.int_tiempo;
 
                         if (usuario.dbl_saldo_actual < movimientos.flt_monto)
@@ -2541,7 +2518,7 @@ namespace WebApiParquimetros.Controllers
                             response.flt_monto_porcentaje = response.flt_monto_porcentaje +  dbl_comision_cobrada;
                             response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
 
-                            response.last_modified_date = time.Value;
+                            response.last_modified_date = time;
                             response.last_modified_by = movimientos.last_modified_by;
                             DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);
                             response.int_tiempo = response.int_tiempo + movimientos.int_tiempo;
@@ -2558,9 +2535,9 @@ namespace WebApiParquimetros.Controllers
                             context.tbsaldo.Add(new Saldos()
                             {
                                 created_by = movimientos.last_modified_by,
-                                created_date = time.Value,
-                                dtmfecha = time.Value,
-                                last_modified_date = time.Value,
+                                created_date = time,
+                                dtmfecha = time,
+                                last_modified_date = time,
                                 flt_monto_inicial = fltSaldoAnterior,
                                 flt_monto_final = usuario.dbl_saldo_actual,
                                 str_forma_pago = "VIRTUAL",
@@ -2607,7 +2584,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
             if (strresult == "")
             {
@@ -2633,17 +2610,13 @@ namespace WebApiParquimetros.Controllers
             ParametrosController par = new ParametrosController(context);
             ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-            //String responseString = await client.GetStringAsync(UrlFecha);
-            //dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
-            //string strFecha = fecha.resultado.ToString();
-           // DateTime time = DateTime.Now;
-
+           
             string strresult = " ";
             var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -2756,12 +2729,10 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
 
             if (strresult == "")
             {
-
-               
                 return Ok();
             }
             else

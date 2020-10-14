@@ -295,6 +295,10 @@ namespace WebApiParquimetros.Controllers
         [HttpPut("mtdMultaGarantizada")]
         public async Task<ActionResult<Multas>> mtdMultaGarantizada([FromBody] Multas multa)
         {
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+
             string strResult = "";
             int idMovNuevo = 0;
 
@@ -307,13 +311,10 @@ namespace WebApiParquimetros.Controllers
               strResult =  await mtdMultaGarantizadaSE(multa);
               return Json(new { idMovimiento = strResult });
             }
-            var strategy = context.Database.CreateExecutionStrategy();
-            //String responseString = await client.GetStringAsync(UrlFecha);
-            //dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
-            //string strFecha = fecha.resultado.ToString();
-            DateTime time = DateTime.Now;
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+          
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -374,7 +375,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
             if (strResult == "")
             {
                 return Ok();
@@ -392,14 +393,14 @@ namespace WebApiParquimetros.Controllers
         {
             string strResult = "";
             int idMovNuevo = 0;
-            var strategy = context.Database.CreateExecutionStrategy();
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
 
-            //String responseString = await client.GetStringAsync(UrlFecha);
-            //dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
-            //string strFecha = fecha.resultado.ToString();
-            DateTime time = DateTime.Now;
-            await strategy.ExecuteAsync(async () =>
-            {
+            //var strategy = context.Database.CreateExecutionStrategy();
+
+            //await strategy.ExecuteAsync(async () =>
+            //{
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
@@ -459,7 +460,7 @@ namespace WebApiParquimetros.Controllers
                     }
                 }
                 return strResult;
-            });
+            //});
             return strResult;
 
         }
@@ -480,14 +481,14 @@ namespace WebApiParquimetros.Controllers
               return Json(new { idMovimiento = strResult });
 
             }
-            //String responseString = await client.GetStringAsync(UrlFecha);
-            //dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
-            //string strFecha = fecha.resultado.ToString();
-            DateTime time = DateTime.Now;
 
-            var strategy = context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+
+            //var strategy = context.Database.CreateExecutionStrategy();
+            //await strategy.ExecuteAsync(async () =>
+            //{
 
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
@@ -552,7 +553,7 @@ namespace WebApiParquimetros.Controllers
 
                     }
                 }
-            });
+            //});
             if (strResult == "")
             {
                 return Ok();

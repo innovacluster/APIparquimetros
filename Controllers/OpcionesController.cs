@@ -90,10 +90,11 @@ namespace WebApiParquimetros.Controllers
             {
                 return BadRequest();
             }
-            response.str_opcion = opciones.str_opcion;
+          
             
             try
             {
+                response.str_opcion = opciones.str_opcion;
                 await context.SaveChangesAsync();
                 return NoContent();
             }
@@ -127,17 +128,17 @@ namespace WebApiParquimetros.Controllers
             }
         }
 
-        //[HttpPut("mtdReactivarMultas")]
-        //public async Task<ActionResult<Opciones>> mtdReactivarMultas(int id)
-        //{
-        //    var response = await context.tbopciones.FirstOrDefaultAsync(x => x.id == id);
-        //    if (response == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    response.bit_status = true;
-        //    await context.SaveChangesAsync();
-        //    return Ok();
-        //}*/
+        [HttpPut("mtdReactivarOpciones")]
+        public async Task<ActionResult<Opciones>> mtdReactivarMultas(int id)
+        {
+            var response = await context.tbopciones.FirstOrDefaultAsync(x => x.id == id);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            response.bit_status = true;
+            await context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
