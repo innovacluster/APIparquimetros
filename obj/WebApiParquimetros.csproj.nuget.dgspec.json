@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj": {}
+    "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj": {
+    "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
+        "projectUniqueName": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
         "projectName": "WebApiParquimetros",
-        "projectPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\WebApiParquimetros.csproj",
-        "packagesPath": "C:\\Users\\Nadia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia\\OneDrive\\Documentos\\PROYECTOPARQ3\\webapimonitor\\WebApiParquimetros\\obj\\",
+        "projectPath": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
+        "packagesPath": "C:\\Users\\Mari2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mari2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,16 +80,10 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }

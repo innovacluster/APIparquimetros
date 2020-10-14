@@ -1375,12 +1375,13 @@ namespace WebApiParquimetros.Controllers
 
             try
             {
-                //DateTime time = DateTime.Now;
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-                // var saldo = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == movimientos.int_id_saldo_id);
-                //fltSaldoAnterior = saldo.flt_monto_final;
+                //ParametrosController par = new ParametrosController(context);
+                //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+               // DateTime time = time.Value;
+                DateTime time = DateTime.Now; 
+
+               
                 var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
                 fltSaldoAnterior = usuario.dbl_saldo_actual;
                
@@ -1394,7 +1395,6 @@ namespace WebApiParquimetros.Controllers
 
                 else
                 {
-
                     var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == movimientos.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
                     var concesion = await context.tbconcesiones.FirstOrDefaultAsync(x => x.id == movimientos.intidconcesion_id);
 
@@ -1410,13 +1410,13 @@ namespace WebApiParquimetros.Controllers
                     movimientos.int_tiempo_comprado = movimientos.int_tiempo;
                     movimientos.str_nombre_concesion = concesion.str_nombre_cliente;
 
-                    movimientos.created_date = time.Value;
-                    // movimientos.last_modified_date = DateTime.Now;
+                    movimientos.created_date = time;
+                   
                     movimientos.last_modified_by = movimientos.created_by;
-                    movimientos.dt_hora_inicio = time.Value;
+                    movimientos.dt_hora_inicio = time;
                     DateTime horafin = movimientos.dt_hora_inicio.AddMinutes(movimientos.int_tiempo);
-                    movimientos.dtm_fecha_insercion_descuento = time.Value;
-                    movimientos.dtm_fecha_descuento = time.Value;
+                    movimientos.dtm_fecha_insercion_descuento = time;
+                    movimientos.dtm_fecha_descuento = time;
                     movimientos.dtm_hora_fin = horafin;
                     movimientos.flt_saldo_previo_descuento = 0.00;
                     movimientos.flt_valor_descuento = 0.00;
@@ -1444,21 +1444,11 @@ namespace WebApiParquimetros.Controllers
                         {
                             try
                             {
-                              
-                                //movimientos.flt_porcentaje_comision = db_porc_comision;
-                                //movimientos.flt_monto_porcentaje = dbl_comision_cobrada;
-                                //movimientos.flt_total_con_comision = dbl_total_con_comision;
-                                
-
                                 context.tbmovimientos.Add(movimientos);
                                 await context.SaveChangesAsync();
                                 idMovNuevo = movimientos.id.ToString();
 
-                                //saldo.flt_monto_final = saldo.flt_monto_final - movimientos.flt_monto;
-                                //saldo.flt_monto_inicial = fltSaldoAnterior;
-
-                                //await context.SaveChangesAsync();
-
+                              
                                 usuario.dbl_saldo_anterior = fltSaldoAnterior;
                                 usuario.dbl_saldo_actual = usuario.dbl_saldo_actual - movimientos.flt_monto;
                                 await context.SaveChangesAsync();
@@ -1467,9 +1457,9 @@ namespace WebApiParquimetros.Controllers
                                 context.tbsaldo.Add(new Saldos()
                                 {
                                     created_by = movimientos.created_by,
-                                    created_date = time.Value,
-                                    dtmfecha = time.Value,
-                                    last_modified_date = time.Value,
+                                    created_date = time,
+                                    dtmfecha = time,
+                                    last_modified_date = time,
                                     flt_monto_inicial = fltSaldoAnterior,
                                     flt_monto_final = usuario.dbl_saldo_actual,
                                     str_forma_pago = "VIRTUAL",
@@ -1500,24 +1490,17 @@ namespace WebApiParquimetros.Controllers
 
                                 context.SaveChanges();
 
-                              
-
                                 transaction.Commit();
-                                // return Ok();
+                                
                             }
 
                             catch (Exception ex)
                             {
                                 transaction.Rollback();
                                 strResult = ex.Message;
-                                //return Json(new { token = ex.Message });
 
                             }
                         }
-
-
-                       // return Json(new { idMovimiento = idMovNuevo });
-
 
                     });
 
@@ -2759,6 +2742,10 @@ namespace WebApiParquimetros.Controllers
                             transaction.Commit();
                         }
 
+                        await _emailSender.SendEmailAsync(usuario.Email, "Notificación de extensión de tiempo",
+                         "Se realizó exitosamente una extensión de tiempo de " + movimientos.int_tiempo + " minutos a las placas " + movimientos.str_placa + "<br/> si usted no reconoce este movimiento comuniquese con el equipo de soporte.");
+
+
                     }
 
                     catch (Exception ex)
@@ -2774,9 +2761,7 @@ namespace WebApiParquimetros.Controllers
             if (strresult == "")
             {
 
-                await _emailSender.SendEmailAsync(usuario.Email, "Notificación de extensión de tiempo",
-                          "Se realizó exitosamente una extensión de tiempo de " + movimientos.int_tiempo + " minutos a las placas " + movimientos.str_placa + "<br/> si usted no reconoce este movimiento comuniquese con el equipo de soporte.");
-
+               
                 return Ok();
             }
             else
