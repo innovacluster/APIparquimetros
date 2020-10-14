@@ -244,7 +244,7 @@ namespace WebApiParquimetros.Controllers
                                     str_versionapp = mov.str_versionapp,
                                     str_latitud = mov.str_latitud,
                                     str_longitud = mov.str_longitud,
-                                    int_id_saldo_id = mov.int_id_saldo_id.Value,
+                                   // int_id_saldo_id = mov.int_id_saldo_id.Value,
                                     int_id_usuario_id = mov.int_id_usuario_id,
                                     int_id_vehiculo_id = mov.int_id_vehiculo_id,
                                     intidconcesion_id = mov.intidconcesion_id,
@@ -447,7 +447,7 @@ namespace WebApiParquimetros.Controllers
                                     str_versionapp = mov.str_versionapp,
                                     str_nombre_zona = zonad.str_descripcion,
                                     int_id_espacio = mov.int_id_espacio.Value,
-                                    int_id_saldo_id = mov.int_id_saldo_id.Value,
+                                   // int_id_saldo_id = mov.int_id_saldo_id.Value,
                                     int_id_usuario_id = mov.int_id_usuario_id,
                                     int_id_vehiculo_id = mov.int_id_vehiculo_id,
                                     intidconcesion_id = mov.intidconcesion_id,
@@ -516,7 +516,7 @@ namespace WebApiParquimetros.Controllers
                                     str_versionapp = mov.str_versionapp,
                                     str_latitud = mov.str_latitud,
                                     str_longitud = mov.str_longitud,
-                                    int_id_saldo_id = mov.int_id_saldo_id.Value,
+                                    //int_id_saldo_id = mov.int_id_saldo_id.Value,
                                     int_id_usuario_id = mov.int_id_usuario_id,
                                     int_id_vehiculo_id = mov.int_id_vehiculo_id,
                                     intidconcesion_id = mov.intidconcesion_id,
@@ -1378,7 +1378,7 @@ namespace WebApiParquimetros.Controllers
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
                 DateTime time = time1.Value;
-               // DateTime time = DateTime.Now; 
+                //DateTime time = DateTime.Now; 
 
 
                 var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
@@ -1513,7 +1513,7 @@ namespace WebApiParquimetros.Controllers
                 }
                 if (strResult == "")
                 {
-
+                   await mtdEnviarCorreo(usuario.Email,usuario.UserName, movimientos.str_placa,"APARCAR",movimientos.int_tiempo,0,0,false);
                     return idMovNuevo;
                 }
                 else
@@ -1529,8 +1529,10 @@ namespace WebApiParquimetros.Controllers
             }
 
         }
-        [HttpGet("mtdEnviarCorreoAparcar")]
-        public async Task<ActionResult> mtdEnviarCorreo(string strCorreo, string strUserName,string strPlaca,string strOperacion, int intTiempo)
+
+        //[HttpGet("mtdEnviarCorreo")]
+        [NonAction]
+        public async Task<ActionResult> mtdEnviarCorreo(string strCorreo, string strUserName,string strPlaca,string strOperacion, int intTiempo, double flt_regresar, int intMinutosRegresar, bool bol_dev)
         {
             try
             {
@@ -1545,8 +1547,18 @@ namespace WebApiParquimetros.Controllers
                        "Se realizó exitosamente una extensión de tiempo de " + intTiempo + " minutos a las placas " + strPlaca+ "<br/> si usted no reconoce este movimiento comuniquese con el equipo de soporte.");
                         break;
                     case "DESAPARCADO":
-                        await _emailSender.SendEmailAsync(strCorreo, "Notificación de estacionamiento",
-                                       strUserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
+                        if (bol_dev)
+                        {
+                            await _emailSender.SendEmailAsync(strCorreo, "Notificación de estacionamiento",
+                                          strUserName + " su automóvil ha sido desaparcado, le informamos que ha recibido una devolución de $" + flt_regresar + " MXN. correspondiente a " + intMinutosRegresar + " minutos que no han sido utilizados.<br/>Esperamos su estancia haya sido agradable, lo esperamos pronto.<br/> ");
+
+                        }
+                        else {
+
+                            await _emailSender.SendEmailAsync(strCorreo, "Notificación de estacionamiento",
+                                          strUserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
+                        }
+                       
                         break;
                 
                 }
@@ -1878,8 +1890,10 @@ namespace WebApiParquimetros.Controllers
         {
 
             ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
             //DateTime time = DateTime.Now;
+
             string strResult = "";
             Double dbleRegresar = 0;
             int intPlanMinutos = 0;
@@ -1920,7 +1934,7 @@ namespace WebApiParquimetros.Controllers
                         double dblSaldoA = usuario.dbl_saldo_actual;
                        
                         int intTiempoRenta = response.int_tiempo;
-                        TimeSpan tmsTiempoTranscurrido = response.dt_hora_inicio - time.Value;
+                        TimeSpan tmsTiempoTranscurrido = response.dt_hora_inicio - time;
                         int horas = tmsTiempoTranscurrido.Hours;
                         int minutos = tmsTiempoTranscurrido.Minutes;
                         int HorasT = horas * 60;
@@ -2033,8 +2047,8 @@ namespace WebApiParquimetros.Controllers
                                 int_idmovimiento = intIdMovimiento,
                                 int_id_usuario_id = response.int_id_usuario_id,
                                 int_duracion = intTimepoRegresar,
-                                dtm_horaInicio = time.Value,
-                                dtm_horaFin = time.Value,
+                                dtm_horaInicio = time,
+                                dtm_horaFin = time,
                                 flt_descuentos = fltMontoNeg,
                                 flt_porcentaje_comision = db_porc_comision,
                                 flt_monto_porcentaje = dbl_monto_comision_regresar,
@@ -2057,9 +2071,9 @@ namespace WebApiParquimetros.Controllers
                             context.tbsaldo.Add(new Saldos()
                             {
                                 created_by = saldos.created_by,
-                                created_date = time.Value,
-                                dtmfecha = time.Value,
-                                last_modified_date = time.Value,
+                                created_date = time,
+                                dtmfecha = time,
+                                last_modified_date = time,
                                 flt_monto_inicial = dblSaldoA,
                                 flt_monto_final = saldos.dbl_saldo_actual,
                                 str_forma_pago = "VIRTUAL",
@@ -2084,8 +2098,8 @@ namespace WebApiParquimetros.Controllers
                             int_idmovimiento = intIdMovimiento,
                             int_id_usuario_id = response.int_id_usuario_id,
                             int_duracion = intPlanMinutos,
-                            dtm_horaInicio = time.Value,
-                            dtm_horaFin = time.Value,
+                            dtm_horaInicio = time,
+                            dtm_horaFin = time,
                             flt_importe = 0.0,
                             flt_saldo_anterior = dblSaldoA,
                             flt_saldo_fin = saldos.dbl_saldo_actual,
@@ -2098,7 +2112,7 @@ namespace WebApiParquimetros.Controllers
                         await context.SaveChangesAsync();
 
                         response.flt_saldo_anterior = dbl_saldo_anterior_insertar;
-                        response.last_modified_date = time.Value;
+                        response.last_modified_date = time;
                         response.last_modified_by = movimientos.last_modified_by;
                         response.str_comentarios = "DESAPARCADO";
                         response.bit_status = false;
@@ -2129,18 +2143,21 @@ namespace WebApiParquimetros.Controllers
 
             if (strResult == "")
             {
-                //if (bolDevolucion)
-                //{
-                //    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
-                //                           usuario.UserName + " su automóvil ha sido desaparcado, le informamos que ha recibido una devolución de $" + dbleRegresar + " MXN. correspondiente a " + intMinutosRegresar + " minutos que no han sido utilizados.<br/>Esperamos su estancia haya sido agradable, lo esperamos pronto.<br/> ");
+               
+                if (bolDevolucion)
+                {
+                    //await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
+                    //                       usuario.UserName + " su automóvil ha sido desaparcado, le informamos que ha recibido una devolución de $" + dbleRegresar + " MXN. correspondiente a " + intMinutosRegresar + " minutos que no han sido utilizados.<br/>Esperamos su estancia haya sido agradable, lo esperamos pronto.<br/> ");
+                    await mtdEnviarCorreo(usuario.Email, usuario.UserName, response.str_placa, "DESAPARCADO", movimientos.int_tiempo, dbleRegresar, intMinutosRegresar,bolDevolucion);
+                }
+                else
+                {
 
-                //}
-                //else
-                //{
-                //    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
-                //                         usuario.UserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
+                    await mtdEnviarCorreo(usuario.Email, usuario.UserName, movimientos.str_placa, "DESAPARCADO", movimientos.int_tiempo, 0, 0, bolDevolucion);
+                    //await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
+                    //                     usuario.UserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
 
-                //}
+                }
 
                 bolDevolucion = false;
 
@@ -2648,124 +2665,126 @@ namespace WebApiParquimetros.Controllers
             //await strategy.ExecuteAsync(async () =>
             //{
 
-                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+            using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+            {
+                try
                 {
-                    try
+                    //var saldo = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == movimientos.int_id_saldo_id);
+                    //fltSaldoAnterior = saldo.flt_monto_final;
+                    //var parametros = await context.tbparametros.FirstOrDefaultAsync(x => x.intidconcesion_id == movimientos.intidconcesion_id);
+                    var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
+
+                    fltSaldoAnterior = usuario.dbl_saldo_actual;
+                    DateTime horaFinalAnterior = response.dtm_hora_fin;
+                    //var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
+                    //var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
+                    int intValidaTiempo = movimientos.int_tiempo;
+
+                    if (usuario.dbl_saldo_actual < movimientos.flt_monto)
                     {
-                        //var saldo = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == movimientos.int_id_saldo_id);
-                        //fltSaldoAnterior = saldo.flt_monto_final;
-                        //var parametros = await context.tbparametros.FirstOrDefaultAsync(x => x.intidconcesion_id == movimientos.intidconcesion_id);
-                        var response = await context.tbmovimientos.FirstOrDefaultAsync(x => x.id == intIdMovimiento);
-                       
-                        fltSaldoAnterior = usuario.dbl_saldo_actual;
-                        DateTime horaFinalAnterior = response.dtm_hora_fin;
-                        //var esp = await context.tbespacios.FirstOrDefaultAsync(x => x.id == response.int_id_espacio);
-                        //var zon = await context.tbzonas.FirstOrDefaultAsync(x => x.id == esp.id_zona);
-                        int intValidaTiempo = movimientos.int_tiempo;
-
-                        if (usuario.dbl_saldo_actual < movimientos.flt_monto)
-                        {
-                            strresult = "No tiene saldo suficiente para realizar la operación";
-
-                        }
-                        else
-                        {
-                            var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
-
-
-                            Double db_porc_comision = comision.dcm_porcentaje;
-                            db_porc_comision = db_porc_comision / 100;
-
-                            Double dbl_comision_cobrada = movimientos.flt_monto * db_porc_comision;
-                            Double dbl_total_con_comision = movimientos.flt_monto + dbl_comision_cobrada;
-
-
-                            usuario.dbl_saldo_actual = usuario.dbl_saldo_actual - dbl_total_con_comision;
-                            usuario.dbl_saldo_anterior = fltSaldoAnterior;
-                            await context.SaveChangesAsync();
-
-                            response.flt_porcentaje_comision = db_porc_comision;
-                            response.flt_monto_porcentaje = response.flt_monto_porcentaje + dbl_comision_cobrada;
-                            response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
-
-                            response.last_modified_date = time.Value;
-                            response.last_modified_by = movimientos.last_modified_by;
-                            DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);
-                            response.int_tiempo = response.int_tiempo + movimientos.int_tiempo;
-                            response.int_tiempo_comprado = response.int_tiempo_comprado + movimientos.int_tiempo;
-                            response.dtm_hora_fin = horafin;
-                            response.flt_monto = response.flt_monto + movimientos.flt_monto;
-                            // response.int_id_espacio = response.int_id_espacio;
-                            response.str_comentarios = "EXTENSIÓN DE TIEMPO " + movimientos.int_tiempo;
-                            response.int_id_usuario_id = movimientos.int_id_usuario_id;
-                            await context.SaveChangesAsync();
-
-
-                            context.tbsaldo.Add(new Saldos()
-                            {
-                                created_by = movimientos.last_modified_by,
-                                created_date = time.Value,
-                                dtmfecha = time.Value,
-                                last_modified_date = time.Value,
-                                flt_monto_inicial = fltSaldoAnterior,
-                                flt_monto_final = usuario.dbl_saldo_actual,
-                                str_forma_pago = "VIRTUAL",
-                                str_tipo_recarga = "EXTENSION",
-                                int_id_usuario_id = usuario.Id,
-                                int_id_usuario_trans = usuario.Id
-
-                            });
-                            await context.SaveChangesAsync();
-
-
-                            var saldoV = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
-                            context.tbdetallemovimientos.Add(new DetalleMovimientos()
-                            {
-                                int_idmovimiento = intIdMovimiento,
-                                //int_idespacio = response.int_id_espacio.Value,
-                                int_id_usuario_id = response.int_id_usuario_id,
-                                int_duracion = movimientos.int_tiempo,
-                                dtm_horaInicio = horaFinalAnterior,
-                                dtm_horaFin = horafin,
-                                flt_importe = movimientos.flt_monto,
-                                flt_porcentaje_comision = db_porc_comision,
-                                flt_monto_porcentaje = dbl_comision_cobrada,
-                                flt_total_con_comision = dbl_total_con_comision,
-                                flt_saldo_anterior = fltSaldoAnterior,
-                                flt_saldo_fin = saldoV.dbl_saldo_actual,
-                                str_observaciones = "EXTENSIÓN DE TIEMPO " + movimientos.int_tiempo,
-                                str_latitud = response.str_latitud,
-                                str_longitud = response.str_longitud
-
-                            });
-
-                            await context.SaveChangesAsync();
-
-                         
-                            transaction.Commit();
-                        }
-
-                      
-                    }
-
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        strresult = ex.Message;
-                        //return Json(new { token = ex.Message });
+                        strresult = "No tiene saldo suficiente para realizar la operación";
 
                     }
+                    else
+                    {
+                        var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
+
+
+                        Double db_porc_comision = comision.dcm_porcentaje;
+                        db_porc_comision = db_porc_comision / 100;
+
+                        Double dbl_comision_cobrada = movimientos.flt_monto * db_porc_comision;
+                        Double dbl_total_con_comision = movimientos.flt_monto + dbl_comision_cobrada;
+
+
+                        usuario.dbl_saldo_actual = usuario.dbl_saldo_actual - dbl_total_con_comision;
+                        usuario.dbl_saldo_anterior = fltSaldoAnterior;
+                        await context.SaveChangesAsync();
+
+                        response.flt_porcentaje_comision = db_porc_comision;
+                        response.flt_monto_porcentaje = response.flt_monto_porcentaje + dbl_comision_cobrada;
+                        response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
+
+                        response.last_modified_date = time.Value;
+                        response.last_modified_by = movimientos.last_modified_by;
+                        DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);
+                        response.int_tiempo = response.int_tiempo + movimientos.int_tiempo;
+                        response.int_tiempo_comprado = response.int_tiempo_comprado + movimientos.int_tiempo;
+                        response.dtm_hora_fin = horafin;
+                        response.flt_monto = response.flt_monto + movimientos.flt_monto;
+                        // response.int_id_espacio = response.int_id_espacio;
+                        response.str_comentarios = "EXTENSIÓN DE TIEMPO " + movimientos.int_tiempo;
+                        response.int_id_usuario_id = movimientos.int_id_usuario_id;
+                        await context.SaveChangesAsync();
+
+
+                        context.tbsaldo.Add(new Saldos()
+                        {
+                            created_by = movimientos.last_modified_by,
+                            created_date = time.Value,
+                            dtmfecha = time.Value,
+                            last_modified_date = time.Value,
+                            flt_monto_inicial = fltSaldoAnterior,
+                            flt_monto_final = usuario.dbl_saldo_actual,
+                            str_forma_pago = "VIRTUAL",
+                            str_tipo_recarga = "EXTENSION",
+                            int_id_usuario_id = usuario.Id,
+                            int_id_usuario_trans = usuario.Id
+
+                        });
+                        await context.SaveChangesAsync();
+
+
+                        var saldoV = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
+                        context.tbdetallemovimientos.Add(new DetalleMovimientos()
+                        {
+                            int_idmovimiento = intIdMovimiento,
+                            //int_idespacio = response.int_id_espacio.Value,
+                            int_id_usuario_id = response.int_id_usuario_id,
+                            int_duracion = movimientos.int_tiempo,
+                            dtm_horaInicio = horaFinalAnterior,
+                            dtm_horaFin = horafin,
+                            flt_importe = movimientos.flt_monto,
+                            flt_porcentaje_comision = db_porc_comision,
+                            flt_monto_porcentaje = dbl_comision_cobrada,
+                            flt_total_con_comision = dbl_total_con_comision,
+                            flt_saldo_anterior = fltSaldoAnterior,
+                            flt_saldo_fin = saldoV.dbl_saldo_actual,
+                            str_observaciones = "EXTENSIÓN DE TIEMPO " + movimientos.int_tiempo,
+                            str_latitud = response.str_latitud,
+                            str_longitud = response.str_longitud
+
+                        });
+
+                        await context.SaveChangesAsync();
+
+                        transaction.Commit();
+                    }
+
+
+                    if (strresult == " ")
+                    {
+                        await mtdEnviarCorreo(usuario.Email, usuario.UserName, response.str_placa, "EXTENSION", movimientos.int_tiempo, 0, 0, false);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Json(new { token = strresult });
+                    }
+
                 }
-            //});
 
-            if (strresult == "")
-            {
-                return Ok();
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    strresult = ex.Message;
+                    //return Json(new { token = ex.Message });
+
+                }
             }
-            else
-            {
-                return Json(new { token = strresult });
-            }
+            //});
+            return Json(new { token = strresult });
+
 
 
         }
