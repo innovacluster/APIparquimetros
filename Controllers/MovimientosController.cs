@@ -1376,12 +1376,12 @@ namespace WebApiParquimetros.Controllers
             try
             {
 
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-               // DateTime time = time.Value;
-                DateTime time = DateTime.Now; 
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+                DateTime time = time1.Value;
+                // DateTime time = DateTime.Now; 
 
-               
+
                 var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
                 fltSaldoAnterior = usuario.dbl_saldo_actual;
                

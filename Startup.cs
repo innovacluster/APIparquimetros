@@ -89,8 +89,6 @@ namespace WebApiParquimetros
             //Linea funcional falta modificar
             services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT"));
-
-
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaDP10Job), "Multa Despues de las 10", "59 * * * * ?"));
             services.AddHostedService<QuartzMultaHostedService>();
             //services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, MultaHostedService>();
