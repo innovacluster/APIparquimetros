@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Npgsql;
 using System;
@@ -29,8 +30,8 @@ namespace WebApiParquimetros.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext context;
         Boolean bolDevolucion = false;
-        private static readonly string UrlFecha = "https://www.jobtool.online/restapis/servicioEdadGenero/post.php?opcion=30";
-        private static readonly HttpClient client = new HttpClient();
+       // private static readonly string UrlFecha = "https://www.jobtool.online/restapis/servicioEdadGenero/post.php?opcion=30";
+       // private static readonly HttpClient client = new HttpClient();
         private readonly string _connectionString;
         public MovimientosController(ApplicationDbContext context, IEmailSender emailSender, IConfiguration configuration)
         {
@@ -1326,8 +1327,6 @@ namespace WebApiParquimetros.Controllers
                                     await context.SaveChangesAsync();
 
                                     transaction.Commit();
-
-
                                   
                                 }
 
@@ -1366,8 +1365,8 @@ namespace WebApiParquimetros.Controllers
         }
 
 
-        [NonAction]
-        public async Task<String> mtdMovAparcarSE(Movimientos movimientos)
+        //[NonAction]
+        private async Task<string> mtdMovAparcarSE(Movimientos movimientos)
         {
             string strResult = "";
             string idMovNuevo = "0";
@@ -1440,7 +1439,12 @@ namespace WebApiParquimetros.Controllers
                     //await strategy.ExecuteAsync(async () =>
                     //{
 
-                        using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+
+                    //       ApplicationDbContext db = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> (options =>
+                    //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnectionString"))));
+
+
+                        using (var transaction = context.Database.BeginTransaction())
                         {
                             try
                             {
@@ -1488,13 +1492,14 @@ namespace WebApiParquimetros.Controllers
                                     flt_total_con_comision = dbl_total_con_comision
                                 });
 
-                                context.SaveChanges();
+                              await context.SaveChangesAsync();
 
-                                transaction.Commit();
-                                
-                            }
+                               transaction.Commit();
+                             
+                        }
+                        
 
-                            catch (Exception ex)
+                        catch (Exception ex)
                             {
                                 transaction.Rollback();
                                 strResult = ex.Message;
@@ -1509,10 +1514,6 @@ namespace WebApiParquimetros.Controllers
                 if (strResult == "")
                 {
 
-                    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
-                                         "Bienvenido " + usuario.UserName + " su solicitud de estacionamiento con las placas " + movimientos.str_placa + " se ha realizado exitosamente, le recomendamos estar pendiente de las notificaciones que le llegarán a su teléfono cuando se acerque su tiempo de expiración. <br/> Recuerde que puede extender su tiempo de parqueo si asi lo requiere. ");
-
-
                     return idMovNuevo;
                 }
                 else
@@ -1526,6 +1527,37 @@ namespace WebApiParquimetros.Controllers
 
                 return ex.Message + " Id de Movimiento: "+ idMovNuevo;
             }
+
+        }
+        [HttpGet("mtdEnviarCorreoAparcar")]
+        public async Task<ActionResult> mtdEnviarCorreo(string strCorreo, string strUserName,string strPlaca,string strOperacion, int intTiempo)
+        {
+            try
+            {
+                switch (strOperacion)
+                {
+                    case "APARCAR":
+                        await _emailSender.SendEmailAsync(strCorreo, "Notificación de estacionamiento",
+                     "Bienvenido " + strUserName + " su solicitud de estacionamiento con las placas " + strPlaca + " se ha realizado exitosamente, le recomendamos estar pendiente de las notificaciones que le llegarán a su teléfono cuando se acerque su tiempo de expiración. <br/> Recuerde que puede extender su tiempo de parqueo si asi lo requiere. ");
+                      break;
+                    case "EXTENSION":
+                        await _emailSender.SendEmailAsync(strCorreo, "Notificación de extensión de tiempo",
+                       "Se realizó exitosamente una extensión de tiempo de " + intTiempo + " minutos a las placas " + strPlaca+ "<br/> si usted no reconoce este movimiento comuniquese con el equipo de soporte.");
+                        break;
+                    case "DESAPARCADO":
+                        await _emailSender.SendEmailAsync(strCorreo, "Notificación de estacionamiento",
+                                       strUserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
+                        break;
+                
+                }
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { idMovimiento = ex.Message });
+            }
+
 
         }
 
@@ -1793,7 +1825,6 @@ namespace WebApiParquimetros.Controllers
 
 
                         await context.SaveChangesAsync();
-
                        
                         transaction.Commit();
                     }
@@ -1966,8 +1997,6 @@ namespace WebApiParquimetros.Controllers
 
                                         intMinutosRegresar = intTiempoRenta - intNext;
 
-                                       
-
                                         dbleRegresar = response.flt_monto - dbleCobrar;
 
 
@@ -2066,7 +2095,7 @@ namespace WebApiParquimetros.Controllers
 
                         });
 
-                        context.SaveChanges();
+                        await context.SaveChangesAsync();
 
                         response.flt_saldo_anterior = dbl_saldo_anterior_insertar;
                         response.last_modified_date = time.Value;
@@ -2100,18 +2129,18 @@ namespace WebApiParquimetros.Controllers
 
             if (strResult == "")
             {
-                if (bolDevolucion)
-                {
-                    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
-                                           usuario.UserName + " su automóvil ha sido desaparcado, le informamos que ha recibido una devolución de $" + dbleRegresar + " MXN. correspondiente a " + intMinutosRegresar + " minutos que no han sido utilizados.<br/>Esperamos su estancia haya sido agradable, lo esperamos pronto.<br/> ");
+                //if (bolDevolucion)
+                //{
+                //    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
+                //                           usuario.UserName + " su automóvil ha sido desaparcado, le informamos que ha recibido una devolución de $" + dbleRegresar + " MXN. correspondiente a " + intMinutosRegresar + " minutos que no han sido utilizados.<br/>Esperamos su estancia haya sido agradable, lo esperamos pronto.<br/> ");
 
-                }
-                else
-                {
-                    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
-                                         usuario.UserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
+                //}
+                //else
+                //{
+                //    await _emailSender.SendEmailAsync(usuario.Email, "Notificación de estacionamiento",
+                //                         usuario.UserName + " su automóvil ha sido desaparcado, esperamos su estancia haya sido agradable, lo esperamos pronto.");
 
-                }
+                //}
 
                 bolDevolucion = false;
 
@@ -2285,11 +2314,12 @@ namespace WebApiParquimetros.Controllers
             ParametrosController par = new ParametrosController(context);
             ActionResult<DateTime> horadeTransaccion = par.mtdObtenerHora();
 
-            String responseString = await client.GetStringAsync(UrlFecha);
-            dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
-            string strFecha = fecha.resultado.ToString();
+            //String responseString = await client.GetStringAsync(UrlFecha);
+            //dynamic fecha = JsonConvert.DeserializeObject<dynamic>(responseString);
+            //string strFecha = fecha.resultado.ToString();
 
-            DateTime time = DateTime.Parse(strFecha);
+            DateTime time = horadeTransaccion.Value;
+
 
             string strResult = "";
             Double dbleRegresar = 0;
@@ -2715,10 +2745,7 @@ namespace WebApiParquimetros.Controllers
                             transaction.Commit();
                         }
 
-                        await _emailSender.SendEmailAsync(usuario.Email, "Notificación de extensión de tiempo",
-                         "Se realizó exitosamente una extensión de tiempo de " + movimientos.int_tiempo + " minutos a las placas " + movimientos.str_placa + "<br/> si usted no reconoce este movimiento comuniquese con el equipo de soporte.");
-
-
+                      
                     }
 
                     catch (Exception ex)

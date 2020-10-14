@@ -79,11 +79,11 @@ namespace WebApiParquimetros.Controllers
             {
                 return BadRequest();
             }
-            // response.id_rol = permisos.id_rol;
-            response.id_opcion = permisos.id_opcion;
-
+          
             try
             {
+                response.id_rol = permisos.id_rol;
+                response.id_opcion = permisos.id_opcion;
                 await context.SaveChangesAsync();
                 return NoContent();
             }
