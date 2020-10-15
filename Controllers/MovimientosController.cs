@@ -556,60 +556,60 @@ namespace WebApiParquimetros.Controllers
                 return Json(new { token = ex.Message });
             }
         }
-        [HttpGet("mtdConsultarXRangoFechas")]
-        public async Task<ActionResult<ICollection<MovimientosJoin>>> mtdConsultarXRangoFechas(DateTime dtmFechaInicio, DateTime dtmFechaFin)
-        {
+        //[HttpGet("mtdConsultarXRangoFechas")]
+        //public async Task<ActionResult<ICollection<MovimientosJoin>>> mtdConsultarXRangoFechas(DateTime dtmFechaInicio, DateTime dtmFechaFin)
+        //{
 
-            try
-            {
-                // var par = await context.tbparametros.FirstOrDefaultAsync();
-                var result = (from mov in context.tbmovimientos
-                              join esp in context.tbespacios on mov.int_id_espacio equals esp.id
-                              join users in context.NetUsers on mov.int_id_usuario_id equals users.Id
-                              join zona in context.tbzonas on esp.id_zona equals zona.id
-                              join detalle in context.tbdetallemovimientos on mov.id equals detalle.int_idmovimiento
-                              where mov.dt_hora_inicio.Date <= dtmFechaInicio.Date && mov.dt_hora_inicio.Date >= dtmFechaFin.Date
-                              select new MovimientosJoin()
-                              {
-                                  id = mov.id,
-                                  str_status = "",
-                                  str_placa = mov.str_placa,
-                                  int_tiempo = mov.int_tiempo,
-                                  dt_hora_inicio = mov.dt_hora_inicio,
-                                  dtm_hora_fin = mov.dtm_hora_fin,
-                                  int_timpo_restante = 0,
-                                  str_tiemporest = "",
-                                  str_tiempo = "",
-                                  int_id_espacio = esp.id,
-                                  str_clave_esp = esp.str_clave,
-                                  str_marcador = esp.str_marcador,
-                                  str_descripcion_zona = zona.str_descripcion,
-                                  str_comentarios = mov.str_comentarios,
-                                  Email = users.Email,
-                                  str_nombre_completo = users.strNombre + ' ' + users.strApellidos,
-                                  str_rfc = users.str_rfc,
-                                  str_razon_social = users.str_razon_social,
-                                  bit_status = mov.bit_status,
-                                  boolean_auto_recarga = mov.boolean_auto_recarga,
-                                  detalleMovimientos = context.tbdetallemovimientos.Where(x => x.int_idmovimiento == mov.id).ToList(),
-                                  //datosUsuario = context.NetUsers.Where(x=> x.Id == mov.int_id_usuario_id).ToList()
-                              }).Distinct().ToList();
+        //    try
+        //    {
+        //        // var par = await context.tbparametros.FirstOrDefaultAsync();
+        //        var result = (from mov in context.tbmovimientos
+        //                      join esp in context.tbespacios on mov.int_id_espacio equals esp.id
+        //                      join users in context.NetUsers on mov.int_id_usuario_id equals users.Id
+        //                      join zona in context.tbzonas on esp.id_zona equals zona.id
+        //                      join detalle in context.tbdetallemovimientos on mov.id equals detalle.int_idmovimiento
+        //                      where mov.dt_hora_inicio.Date <= dtmFechaInicio.Date && mov.dt_hora_inicio.Date >= dtmFechaFin.Date
+        //                      select new MovimientosJoin()
+        //                      {
+        //                          id = mov.id,
+        //                          str_status = "",
+        //                          str_placa = mov.str_placa,
+        //                          int_tiempo = mov.int_tiempo,
+        //                          dt_hora_inicio = mov.dt_hora_inicio,
+        //                          dtm_hora_fin = mov.dtm_hora_fin,
+        //                          int_timpo_restante = 0,
+        //                          str_tiemporest = "",
+        //                          str_tiempo = "",
+        //                          int_id_espacio = esp.id,
+        //                          str_clave_esp = esp.str_clave,
+        //                          str_marcador = esp.str_marcador,
+        //                          str_descripcion_zona = zona.str_descripcion,
+        //                          str_comentarios = mov.str_comentarios,
+        //                          Email = users.Email,
+        //                          str_nombre_completo = users.strNombre + ' ' + users.strApellidos,
+        //                          str_rfc = users.str_rfc,
+        //                          str_razon_social = users.str_razon_social,
+        //                          bit_status = mov.bit_status,
+        //                          boolean_auto_recarga = mov.boolean_auto_recarga,
+        //                          detalleMovimientos = context.tbdetallemovimientos.Where(x => x.int_idmovimiento == mov.id).ToList(),
+        //                          //datosUsuario = context.NetUsers.Where(x=> x.Id == mov.int_id_usuario_id).ToList()
+        //                      }).Distinct().ToList();
 
-                var resultado = result.GroupBy(x => x.id).Select(grp => grp.First()).ToList(); //18800 ticks
+        //        var resultado = result.GroupBy(x => x.id).Select(grp => grp.First()).ToList(); //18800 ticks
 
-                //lstMovJ = response;
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return resultado;
-            }
-            catch (Exception ex)
-            {
-                return Json(new { token = ex.Message });
-            }
+        //        //lstMovJ = response;
+        //        if (result == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return resultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { token = ex.Message });
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Método que obtiene los movimientos de acuerdo a una fecha en especifica.
@@ -980,64 +980,64 @@ namespace WebApiParquimetros.Controllers
             }
         }
 
-        /// <summary>
-        /// Método Get que obtiene los moviimento de acuerdo a un rango de fechas.
-        /// </summary>
-        /// <param name="intIdConcesion"></param>
-        /// <param name="dtmFechaInicio"></param>
-        /// <param name="dtmFechaFin"></param>  
-        /// <returns></returns>
-        [HttpGet("mtdConsultarMovMonitoreo")]
-        public async Task<ActionResult<List<MovimientosJoin>>> mtdConsultarMovMonitoreo(int intIdConcesion,DateTime dtmFechaInicio, DateTime dtmFechaFin)
-        {
-            // List<MovimientosJoin> lstMovJ = new List<MovimientosJoin>();
-            try
-            {
+        ///// <summary>
+        ///// Método Get que obtiene los moviimento de acuerdo a un rango de fechas con entity framwrok
+        ///// </summary>
+        ///// <param name="intIdConcesion"></param>
+        ///// <param name="dtmFechaInicio"></param>
+        ///// <param name="dtmFechaFin"></param>  
+        ///// <returns></returns>
+        //[HttpGet("mtdConsultarMovMonitoreo")]
+        //public async Task<ActionResult<List<MovimientosJoin>>> mtdConsultarMovMonitoreo(int intIdConcesion,DateTime dtmFechaInicio, DateTime dtmFechaFin)
+        //{
+        //    // List<MovimientosJoin> lstMovJ = new List<MovimientosJoin>();
+        //    try
+        //    {
 
-                var response = (from mov in context.tbmovimientos
-                                join esp in context.tbespacios on mov.int_id_espacio equals esp.id
-                                join users in context.NetUsers on mov.int_id_usuario_id equals users.Id
-                                join zona in context.tbzonas on esp.id_zona equals zona.id
-                                where mov.dt_hora_inicio.Date <= dtmFechaInicio.Date && mov.dt_hora_inicio.Date >= dtmFechaFin.Date && mov.intidconcesion_id == intIdConcesion
-                                select new MovimientosJoin()
-                                {
-                                    id = mov.id,
-                                    str_status = "",
-                                    str_placa = mov.str_placa,
-                                    int_tiempo = mov.int_tiempo,
-                                    dt_hora_inicio = mov.dt_hora_inicio,
-                                    dtm_hora_fin = mov.dtm_hora_fin,
-                                    int_timpo_restante = 0,
-                                    str_tiemporest = "",
-                                    str_tiempo = "",
-                                    int_id_espacio = esp.id,
-                                    str_clave_esp = esp.str_clave,
-                                    str_marcador = esp.str_marcador,
-                                    str_descripcion_zona = zona.str_descripcion,
-                                    str_comentarios = mov.str_comentarios,
-                                    Email = users.Email,
-                                    str_nombre_completo = users.strNombre + ' ' + users.strApellidos,
-                                    str_rfc = users.str_rfc,
-                                    str_razon_social = users.str_razon_social,
-                                    bit_status = mov.bit_status,
-                                    boolean_auto_recarga = mov.boolean_auto_recarga,
-                                    detalleMovimientos = context.tbdetallemovimientos.Where(x => x.int_idmovimiento == mov.id).ToList(),
-                                }).ToList();
+        //        var response = (from mov in context.tbmovimientos
+        //                        join esp in context.tbespacios on mov.int_id_espacio equals esp.id
+        //                        join users in context.NetUsers on mov.int_id_usuario_id equals users.Id
+        //                        join zona in context.tbzonas on esp.id_zona equals zona.id
+        //                        where mov.dt_hora_inicio.Date <= dtmFechaInicio.Date && mov.dt_hora_inicio.Date >= dtmFechaFin.Date && mov.intidconcesion_id == intIdConcesion
+        //                        select new MovimientosJoin()
+        //                        {
+        //                            id = mov.id,
+        //                            str_status = "",
+        //                            str_placa = mov.str_placa,
+        //                            int_tiempo = mov.int_tiempo,
+        //                            dt_hora_inicio = mov.dt_hora_inicio,
+        //                            dtm_hora_fin = mov.dtm_hora_fin,
+        //                            int_timpo_restante = 0,
+        //                            str_tiemporest = "",
+        //                            str_tiempo = "",
+        //                            int_id_espacio = esp.id,
+        //                            str_clave_esp = esp.str_clave,
+        //                            str_marcador = esp.str_marcador,
+        //                            str_descripcion_zona = zona.str_descripcion,
+        //                            str_comentarios = mov.str_comentarios,
+        //                            Email = users.Email,
+        //                            str_nombre_completo = users.strNombre + ' ' + users.strApellidos,
+        //                            str_rfc = users.str_rfc,
+        //                            str_razon_social = users.str_razon_social,
+        //                            bit_status = mov.bit_status,
+        //                            boolean_auto_recarga = mov.boolean_auto_recarga,
+        //                            detalleMovimientos = context.tbdetallemovimientos.Where(x => x.int_idmovimiento == mov.id).ToList(),
+        //                        }).ToList();
 
 
-                //lstMovJ = response;
-                if (response == null)
-                {
-                    return NotFound();
-                }
-                return response;
+        //        //lstMovJ = response;
+        //        if (response == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return response;
 
-            }
-            catch (Exception ex)
-            {
-                return Json(new { token = ex.Message });
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { token = ex.Message });
+        //    }
+        //}
 
         /// <summary>
         /// Metodo GET que devuelve el historial de movimientos del usuario

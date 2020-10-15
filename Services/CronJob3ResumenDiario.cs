@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
+using WebApiParquimetros.Controllers;
 using WebApiParquimetros.Models;
 
 namespace WebApiParquimetros.Services
@@ -35,8 +37,9 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
-            //ParametrosController par = new ParametrosController(context);
-            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
 
             try
             {
@@ -220,11 +223,11 @@ namespace WebApiParquimetros.Services
                                     dbContext.tbresumendiario.Add(new ResumenDiario()
                                     {
                                         int_id_consecion = concns.id,
-                                        dtm_fecha = DateTime.Now,
-                                        int_dia = DateTime.Now.Day,
-                                        int_mes = DateTime.Now.Month,
-                                        int_anio = DateTime.Now.Year,
-                                        str_dia_semama = DateTime.Now.DayOfWeek.ToString(),
+                                        dtm_fecha = time,
+                                        int_dia = time.Day,
+                                        int_mes = time.Month,
+                                        int_anio =time.Year,
+                                        str_dia_semama = time.DayOfWeek.ToString(),
                                         dtm_dia_anterior = autosDiaAnteriorIos.dtm_fecha,
                                         str_dia_sem_ant = autosDiaAnteriorIos.str_dia_semama,
                                         int_ios = intTransIos,
@@ -332,6 +335,7 @@ namespace WebApiParquimetros.Services
                         }
 
                         totalIngresos = intTransIos + intTransAndriod;
+                        DateTime t = time.AddDays(-1);
 
                         var strategy = dbContext.Database.CreateExecutionStrategy();
                         strategy.Execute(() =>
@@ -344,14 +348,14 @@ namespace WebApiParquimetros.Services
                                     dbContext.tbresumendiario.Add(new ResumenDiario()
                                     {
                                         int_id_consecion = concns.id,
-                                        dtm_fecha = DateTime.Now,
-                                        int_dia = DateTime.Now.Day,
-                                        int_mes = DateTime.Now.Month,
-                                        int_anio = DateTime.Now.Year,
-                                        str_dia_semama = DateTime.Now.DayOfWeek.ToString(),
+                                        dtm_fecha = time,
+                                        int_dia = time.Day,
+                                        int_mes = time.Month,
+                                        int_anio = time.Year,
+                                        str_dia_semama = time.DayOfWeek.ToString(),
                                         //Aqui falta
-                                        //dtm_dia_anterior = autosDiaAnteriorIos.dtm_fecha,
-                                        //str_dia_sem_ant = autosDiaAnteriorIos.str_dia_semama,
+                                        dtm_dia_anterior = time.AddDays(-1),
+                                        str_dia_sem_ant =t.DayOfWeek.ToString(),
                                         int_ios = intTransIos,
                                         int_ant_ios = 0,
                                         int_por_ios = 100,

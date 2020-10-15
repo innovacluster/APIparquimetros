@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
+using WebApiParquimetros.Controllers;
 using WebApiParquimetros.Models;
 
 namespace WebApiParquimetros.Services
@@ -38,10 +40,9 @@ namespace WebApiParquimetros.Services
             int intIdMulta = 0;
 
 
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-
-            DateTime time = DateTime.Now;
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
 
             try
             {
@@ -53,7 +54,7 @@ namespace WebApiParquimetros.Services
                 int intAutosSemAnteriorAndroid = 0;
                 double totalIngresos = 0;
                 int intNoSemanaActual = 0;
-                DateTime dia = DateTime.Now;
+                DateTime dia = time;
                 //----------------------
                 int int_mes_por_ios = 0;
                 int int_mes_autos_por_ios = 0;
@@ -223,7 +224,7 @@ namespace WebApiParquimetros.Services
                                         dtm_fecha_inicio = oPrimerDiaDelMes,
                                         dtm_fecha_fin = oUltimoDiaDelMes,
                                         str_mes = strMes,
-                                        int_anio = DateTime.Now.Year,
+                                        int_anio = time.Year,
                                         //dtm_mes_anterior =
                                         int_mes_ios = sumaTransMesIos,
                                         int_mes_ant_ios = resumenMesAnterior.int_mes_ios,
@@ -304,7 +305,7 @@ namespace WebApiParquimetros.Services
                                         dtm_fecha_inicio = oPrimerDiaDelMes,
                                         dtm_fecha_fin = oUltimoDiaDelMes,
                                         str_mes = strMes,
-                                        int_anio = DateTime.Now.Year,
+                                        int_anio = time.Year,
                                         //dtm_mes_anterior =
                                         int_mes_ios = sumaTransMesIos,
                                         int_mes_ant_ios = 0,

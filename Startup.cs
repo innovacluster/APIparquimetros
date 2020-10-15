@@ -52,8 +52,8 @@ namespace WebApiParquimetros
             //});
             services.AddCronJob<CronJob2MultaDP10>(c =>
             {
-               c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-               // c.TimeZoneInfo = TimeZoneInfo.Local;
+               //c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.Local;
                 c.CronExpression = @" 0 22  *  * MON-SAT";
             });
             services.AddCronJob<CronJob3ResumenDiario>(c =>
@@ -67,7 +67,7 @@ namespace WebApiParquimetros
             services.AddCronJob<CronJob4ResumenSemanal>(c =>
             {
                 c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-               // c.TimeZoneInfo = TimeZoneInfo.Local;
+                  //c.TimeZoneInfo = TimeZoneInfo.Local;
                 // c.CronExpression = @" 30 23  *  * SAT";
                 c.CronExpression = @" 30 23  *  * SAT";
             });

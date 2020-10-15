@@ -45,15 +45,6 @@
             <param name="dtmFechaFin"></param>           
             <returns></returns>
         </member>
-        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarMovMonitoreo(System.Int32,System.DateTime,System.DateTime)">
-            <summary>
-            Método Get que obtiene los moviimento de acuerdo a un rango de fechas.
-            </summary>
-            <param name="intIdConcesion"></param>
-            <param name="dtmFechaInicio"></param>
-            <param name="dtmFechaFin"></param>  
-            <returns></returns>
-        </member>
         <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarHistorial(System.String,System.Int32,System.Int32)">
             <summary>
             Metodo GET que devuelve el historial de movimientos del usuario

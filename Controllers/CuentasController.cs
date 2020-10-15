@@ -197,7 +197,7 @@ namespace WebApiParquimetros.Controllers
                            "Por favor confirme su cuenta de correo haciendo clic en el siguiente enlace: <a href=\"" + confirmationLink + "\">link</a>");
                         return true;
                     //}
-                    return false; ;
+                 
                 }
                 else
                 {

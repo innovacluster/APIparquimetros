@@ -963,7 +963,7 @@ namespace WebApiParquimetros.Controllers
                     flt_monto = 0,
                     str_comentarios = "MULTA DESPUES DE LAS 10"
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 return Ok();

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
+using WebApiParquimetros.Controllers;
 using WebApiParquimetros.Models;
 
 namespace WebApiParquimetros.Services
@@ -35,9 +37,11 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var _dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            //ParametrosController par = new ParametrosController(_dbContext);
-            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-            DateTime time = DateTime.Now;
+            ParametrosController par = new ParametrosController(_dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+
+            // DateTime time = DateTime.Now;
 
             var movimientos =  _dbContext.tbmovimientos.Where(x => x.str_comentarios == "MULTA").ToList();
 
@@ -74,7 +78,7 @@ namespace WebApiParquimetros.Services
                                     bit_status = true,
                                     dtmFecha = time,
                                     str_usuario = usuario.strNombre + " " + usuario.strApellidos,
-                                    flt_monto = 0,
+                                    flt_monto = 0.00,
                                     str_comentarios = "MULTA DESPUES DE LAS 10"
                                 });
                                 _dbContext.SaveChanges();
@@ -89,9 +93,9 @@ namespace WebApiParquimetros.Services
                                         int_duracion = response.int_tiempo,
                                         dtm_horaInicio = response.dt_hora_inicio,
                                         dtm_horaFin = response.dtm_hora_fin,
-                                        flt_importe = 0.0,
-                                        flt_saldo_anterior = 0.0,
-                                        flt_saldo_fin = 0.0,
+                                        flt_importe = 0.00,
+                                        flt_saldo_anterior = 0.00,
+                                        flt_saldo_fin = 0.00,
                                         str_observaciones = response.str_comentarios
 
                                     });
@@ -110,9 +114,9 @@ namespace WebApiParquimetros.Services
                                         int_duracion = response.int_tiempo,
                                         dtm_horaInicio = response.dt_hora_inicio,
                                         dtm_horaFin = response.dtm_hora_fin,
-                                        flt_importe = 0.0,
-                                        flt_saldo_anterior = 0.0,
-                                        flt_saldo_fin = 0.0,
+                                        flt_importe = 0.00,
+                                        flt_saldo_anterior = 0.00,
+                                        flt_saldo_fin = 0.00,
                                         str_observaciones = response.str_comentarios
 
                                     });

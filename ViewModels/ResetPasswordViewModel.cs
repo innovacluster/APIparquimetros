@@ -10,11 +10,12 @@ namespace WebApiParquimetros.ViewModels
     {
         public string strCorreo { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "El {0} debe tener almenos {1} caracter.", MinimumLength = 8)]
+        [Required(ErrorMessage = "La contraseña es un campo requerido.")]
+        [StringLength(8, ErrorMessage = "El {0} debe tener almenos {1} caracter.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "La contraseña es un campo requerido.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password",

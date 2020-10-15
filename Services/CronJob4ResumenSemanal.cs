@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
+using WebApiParquimetros.Controllers;
 using WebApiParquimetros.Models;
 
 namespace WebApiParquimetros.Services
@@ -36,11 +38,11 @@ namespace WebApiParquimetros.Services
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
 
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
 
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-
-            DateTime time = DateTime.Now;
+           // DateTime time = DateTime.Now;
 
             try
             {
@@ -65,7 +67,7 @@ namespace WebApiParquimetros.Services
                // Double dec_sem_por_total = 0;
 
 
-                DateTime dia = DateTime.Now;
+                DateTime dia = time;
 
                 var concesiones =  dbContext.tbconcesiones.ToList();
 
@@ -76,7 +78,7 @@ namespace WebApiParquimetros.Services
                     intNoSemanaActual = cal.GetWeekOfYear(dia, norwCulture.DateTimeFormat.CalendarWeekRule, norwCulture.DateTimeFormat.FirstDayOfWeek);
                     int inNoSemAnterior = intNoSemanaActual - 1;
                     DayOfWeek weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
-                    DateTime startingDate = DateTime.Today;
+                    DateTime startingDate = time;
 
                     //while (startingDate.DayOfWeek != weekStart)
                     //    startingDate = startingDate.AddDays(-1);
@@ -186,7 +188,7 @@ namespace WebApiParquimetros.Services
                                         dtm_fecha_inicio = previousWeekStart,
                                         dtm_fecha_fin = previousWeekEnd,
                                         int_semana = intNoSemanaActual,
-                                        int_anio = DateTime.Now.Year,
+                                        int_anio = time.Year,
                                         int_semana_ant = resumenSemAnterior.int_semana,
                                         int_sem_ios = sumaTransSemIos,
                                         int_sem_ant_ios = resumenSemAnterior.int_sem_ios,
@@ -266,7 +268,7 @@ namespace WebApiParquimetros.Services
                                         dtm_fecha_inicio = previousWeekEnd,
                                         dtm_fecha_fin = previousWeekStart,
                                         int_semana = intNoSemanaActual,
-                                        int_anio = DateTime.Now.Year,
+                                        int_anio = time.Year,
                                         int_semana_ant = inNoSemAnterior,
                                         int_sem_ios = sumaTransSemIos,
                                         int_sem_ant_ios = 0,
