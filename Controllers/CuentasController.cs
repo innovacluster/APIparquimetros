@@ -667,6 +667,25 @@ namespace WebApiParquimetros.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("mtdConsultarUsuariosWeb")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> mtdConsultarUsuariosWeb()
+        {
+            try
+            {
+                var response = await context.NetUsers.Where(x => x.intIdTipoUsuario != 1).Include(x => x.tbtiposusuarios).Include(x => x.tbconcesiones).ToListAsync(); ;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { token = ex.Message });
+
+            }
+
+        }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("mtdConsultarUsuariosXId")]
         public async Task<ActionResult<ApplicationUser>> mtdObtenerUsuariosXId(string id)
         {

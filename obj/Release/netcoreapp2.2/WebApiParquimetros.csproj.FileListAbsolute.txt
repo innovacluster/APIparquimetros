@@ -139,12 +139,6 @@ C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.g.cshtml.cs
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.g.cshtml.cs
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.g.cshtml.cs
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.g.cshtml.cs
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.g.cshtml.cs
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\View.g.cshtml.cs
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
@@ -152,3 +146,14 @@ C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.xml
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.pdb
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\appsettings.Development.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\libman.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\appsettings.json
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
