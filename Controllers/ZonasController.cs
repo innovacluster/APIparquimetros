@@ -252,7 +252,7 @@ namespace WebApiParkimetrosPrueba.Controllers
                 int idZona = 0;
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> horadeTransaccion = par.mtdObtenerHora();
-                string jsonFeature = "{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[-73.989308, 40.741895]},\"properties\":{\"name\":\"New York\"}}";
+                
                 // string jsonFeature = zona.str_poligono;
                 // var results = JsonConvert.DeserializeObject<Feacture>(zona.str_poligono);
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(zona.str_poligono);

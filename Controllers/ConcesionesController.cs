@@ -194,7 +194,7 @@ namespace WebApiParquimetros.Controllers
                                 str_email = concesiones.str_email,
                                 str_rfc = concesiones.str_rfc,
                                 str_notas = concesiones.str_notas,
-                                str_poligono = concesiones.str_poligono,
+                              
                                 int_licencias = concesiones.int_licencias,
                                 dbl_costo_licencia = concesiones.dbl_costo_licencia,
                                 dtm_fecha_ingreso = concesiones.dtm_fecha_ingreso,
@@ -243,18 +243,7 @@ namespace WebApiParquimetros.Controllers
 
                                 await context.SaveChangesAsync();
                             }
-                            //foreach (var item in concesiones.opciones.to)
-                            //{
-
-                            //}
-
-
-
-                            //foreach (var item in concesiones.opciones)
-                            //{
-                            //    
-                            //}
-
+                            
                             foreach (var item in concesiones.tarifas)
                             {
                                 context.tbtarifas.Add(new Tarifas()

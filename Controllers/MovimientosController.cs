@@ -83,7 +83,7 @@ namespace WebApiParquimetros.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("mtdConsultarMovimientosXId")]
+        [HttpGet("mtdConsultarMovimientosXId")]//ObtenerMovimientosXId
         public async Task<ActionResult<Movimientos>> mtdConsultarMovimientosXId(int id)
         {
             try
@@ -206,7 +206,6 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-
                 var response = (from mov in context.tbmovimientos
                                 where mov.id == id
                                 select new MovimientosXId()
@@ -2060,14 +2059,7 @@ namespace WebApiParquimetros.Controllers
                                 str_longitud = response.str_longitud
                             });
                             await context.SaveChangesAsync();
-                            // context.SaveChanges();
-
-                            //usuario.dbl_saldo_anterior = dblSaldoA;
-                            ////Revisar si se hace la duma por el numero negativo
-                            //usuario.dbl_saldo_actual = usuario.dbl_saldo_actual + fltMontoNeg;
-                            //  await context.SaveChangesAsync();
-
-
+                            
                             context.tbsaldo.Add(new Saldos()
                             {
                                 created_by = saldos.created_by,
@@ -2077,16 +2069,14 @@ namespace WebApiParquimetros.Controllers
                                 flt_monto_inicial = dblSaldoA,
                                 flt_monto_final = saldos.dbl_saldo_actual,
                                 str_forma_pago = "VIRTUAL",
-                                str_tipo_recarga = "DEVOLUCION",
+                                str_tipo_recarga = "DESAPARCADO",
                                 int_id_usuario_id = usuario.Id,
                                 int_id_usuario_trans = usuario.Id
 
                             });
 
                             await context.SaveChangesAsync();
-                            //context.SaveChanges();
                             response.flt_monto = dbleRegresar;
-
 
                         }
                         else {

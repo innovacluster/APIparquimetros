@@ -207,9 +207,6 @@ namespace WebApiParquimetros.Controllers
         //}
            
        
-        
-
-
         [HttpPut("mtdActualizaSaldos")]
         public async Task<ActionResult> mtdActualizaSaldos(int id, [FromBody] Saldos saldos)
         {

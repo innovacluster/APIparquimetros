@@ -961,7 +961,7 @@ namespace WebApiParquimetros.Controllers
                     dtmFecha = time,
                     str_usuario = usuario.strNombre + " " + usuario.strApellidos,
                     flt_monto = 0,
-                    str_comentarios = "MULTA DESPUES DE LAS 10"
+                    str_comentarios = "MULTA AUT. CON CANDADO"
                 });
                 await context.SaveChangesAsync();
 

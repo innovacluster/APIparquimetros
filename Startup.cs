@@ -76,7 +76,7 @@ namespace WebApiParquimetros
             {
                 c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
                //c.TimeZoneInfo = TimeZoneInfo.Local;
-                c.CronExpression = @" 0 0  L  ? *";
+                c.CronExpression = @" 40 23  L  ? *";
                 //c.CronExpression = @" 47 11  *  * *";
             });
 
