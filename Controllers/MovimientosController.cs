@@ -4745,6 +4745,48 @@ namespace WebApiParquimetros.Controllers
             }
         }
 
+        [HttpGet("mtdObtenerIngresosMensuales")]
+        public async Task<ActionResult<IngresosMensuales>> mtdObtenerIngresosMensuales()
+        {
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            DateTime time = DateTime.Now;
+            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
+            var recargasMesAnt = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mesAnterior.Date.Month).ToListAsync();
+            var regargasUsuarios = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == time.Date.Month).ToListAsync();
+
+            double recargaUsMesAnt = recargasMesAnt.Sum(x => x.flt_monto);
+            double recargasUsuarios= regargasUsuarios.Sum(x => x.flt_monto);
+            double comisionRecargas = regargasUsuarios.Sum(x => x.flt_porcentaje_comision);
+            double totalCobrado = recargasUsuarios + comisionRecargas;
+            double saldoUsuarioMes = recargaUsMesAnt + recargasUsuarios;
+
+            var ventas = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == time.Date.Month).ToListAsync();
+
+            double ventasConcesion = ventas.Sum(x=> x.flt_monto);
+            double comision = ventas.Sum(x => x.flt_monto_porcentaje);
+            double totalCobradoC = ventasConcesion + comision;
+            double saldoFinUsuarios = saldoUsuarioMes - totalCobradoC;
+            double ingresoXCom = comisionRecargas + comision;
+
+            return new IngresosMensuales()
+            {
+                //(Math.Truncate(dbl_porc_dia_anterior * 100) / 100)
+                SaldoUsuarioMesAnterior = recargaUsMesAnt,
+                RecargaUsuario = recargasUsuarios,
+                ComisionRecarga = (Math.Round(comisionRecargas * 100) / 100),
+                TotalCobradoRecarga = totalCobrado,
+                SaldoUsuarioMes = saldoUsuarioMes,
+                VentaConcesion = ventasConcesion,
+                Comision = comision,
+                TotalCobradoCompra = totalCobradoC,
+                SaldoFinalUsuaios = saldoFinUsuarios,
+                IngresoXComisiones = (Math.Round(ingresoXCom * 100) / 100)
+            };
+        }
+
         [NonAction]
         private IngresosXSemana MapToValueIngresosXSem(NpgsqlDataReader reader)
         {

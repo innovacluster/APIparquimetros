@@ -117,19 +117,26 @@ namespace WebApiParquimetros.Controllers
                 {
                     try
                     {
-                        ParametrosController par = new ParametrosController(context);
-                        ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
-                        //Se ocomento esta linea por actualizacion 
-                       //var response = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == id);
-                       
+                    //    ParametrosController par = new ParametrosController(context);
+                    //    ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
+                    //DateTime time = horadeTransaccion.Value;
+                    DateTime time = DateTime.Now;
+                    //Se ocomento esta linea por actualizacion 
+                    //var response = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == id);
 
-                        var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == saldos.int_id_usuario_trans);
+                    //var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == movimientos.intidconcesion_id && x.str_tipo == "RECARGA");
+
+                    var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == saldos.int_id_usuario_trans);
                         dblSaldoInicial =usuario.dbl_saldo_actual;
 
                         usuario.dbl_saldo_actual = usuario.dbl_saldo_actual +  fltMonto;
                         usuario.dbl_saldo_anterior = dblSaldoInicial;
 
+                    var comision = await context.tbparametros.Where(x => x.intidconcesion_id == null).FirstOrDefaultAsync();
 
+                    double c = comision.PorcentajeComisionRecarga / 100;
+
+                    double total = fltMonto * c;
                         //Se comento esta linea por actualizacion 
                         //response.last_modified_by = saldos.last_modified_by;
                         //response.last_modified_date = horadeTransaccion.Value;
@@ -140,20 +147,23 @@ namespace WebApiParquimetros.Controllers
                         //response.str_forma_pago = saldos.str_forma_pago;
                         //response.str_tipo_recarga = saldos.str_tipo_recarga;
 
-                        //response.intidconcesion_id = saldos.intidconcesion_id;
+                    //response.intidconcesion_id = saldos.intidconcesion_id;
 
-                        await context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
 
                         context.tbsaldo.Add(new Saldos()
                         {
                             created_by = saldos.created_by,
                            // created_date = horadeTransaccion.Value,
-                            dtmfecha = horadeTransaccion.Value,
-                            last_modified_date = horadeTransaccion.Value,
+                            dtmfecha = time,
+                            last_modified_date = time,
                             flt_monto_inicial = dblSaldoInicial,
                             flt_monto_final = usuario.dbl_saldo_actual,
-                            str_forma_pago = "Virtual",
-                            str_tipo_recarga= "Virtual",
+                            str_forma_pago = "VIRTUAL",
+                            str_tipo_recarga= "RECARGA",
+                            flt_monto = fltMonto,
+                            flt_porcentaje_comision = total,
+                            flt_total_con_comision = fltMonto + total,
                            int_id_usuario_id = usuario.Id,
                            int_id_usuario_trans =  usuario.Id
 

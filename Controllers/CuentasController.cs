@@ -813,6 +813,61 @@ namespace WebApiParquimetros.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("mtdBajaAgente")]
+        public async Task<ActionResult<ApplicationUser>> mtdBajaAgente(string email)
+        {
+            try
+            {
+
+                var response = await context.NetUsers.FirstOrDefaultAsync(x => x.Email == email);
+
+                if (response == null)
+                {
+                    return NotFound();
+
+                }
+                response.bit_status = false;
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //ModelState.AddModelError("token", ex.Message);
+                //return BadRequest(ModelState);
+                return Json(new { token = ex.Message });
+            }
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("mtdReactivarAgente")]
+        public async Task<ActionResult<ApplicationUser>> mtdReactivarAgente(string email)
+        {
+            try
+            {
+
+                var response = await context.NetUsers.FirstOrDefaultAsync(x => x.Email == email);
+
+                if (response == null)
+                {
+                    return NotFound();
+
+                }
+                response.bit_status = true;
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //ModelState.AddModelError("token", ex.Message);
+                //return BadRequest(ModelState);
+                return Json(new { token = ex.Message });
+            }
+        }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("CambiarPassword")]
         public async Task<ActionResult<ApplicationUser>> CambiarPassword([FromBody] UserInfo model, string id)
         {

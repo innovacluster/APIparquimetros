@@ -420,4 +420,20 @@ namespace WebApiParquimetros.Models
         public int intPorcentajeTransacciones  { get; set; }
 
     }
+
+    public class IngresosMensuales
+    {
+        public double SaldoUsuarioMesAnterior { get; set; }
+        public double RecargaUsuario { get; set; }
+        public double ComisionRecarga { get; set; }
+        public double TotalCobradoRecarga { get; set; }
+        public double SaldoUsuarioMes { get; set; }
+        public double VentaConcesion { get; set; }
+        public double Comision { get; set; }
+        public double TotalCobradoCompra { get; set; }
+        public double SaldoFinalUsuaios { get; set; }
+        public double IngresoXComisiones { get; set; }
+
+
+    }
 }

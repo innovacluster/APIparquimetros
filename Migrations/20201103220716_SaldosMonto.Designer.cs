@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApiParquimetros.Contexts;
@@ -9,9 +10,10 @@ using WebApiParquimetros.Contexts;
 namespace WebApiParquimetros.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103220716_SaldosMonto")]
+    partial class SaldosMonto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -942,13 +944,13 @@ namespace WebApiParquimetros.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    b.Property<double>("PorcentajeComisionRecarga");
-
                     b.Property<bool>("bolUsarNomenclaturaCajones");
 
                     b.Property<double>("flt_Tarifa_minima");
 
                     b.Property<double>("flt_intervalo_tarifa");
+
+                    b.Property<double>("flt_porcentaje_comision");
 
                     b.Property<int>("intTimepoAviso");
 

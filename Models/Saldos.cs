@@ -28,13 +28,14 @@ namespace WebApiParquimetros.Models
         [Required]
         public DateTime dtmfecha { get; set; }
         [Required]
-        
+
+        public double flt_monto { get; set; }
         public Double flt_monto_final { get; set; }
         [Required]
         
         public Double flt_monto_inicial { get; set; }
 
-        [Required]
+  
         [StringLength(maximumLength: 50)]
         public string str_forma_pago { get; set; }
 

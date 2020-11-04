@@ -15,10 +15,12 @@ namespace WebApiParquimetros.Models
         public int id { get; set; }
         public Boolean bolUsarNomenclaturaCajones { get; set; }
         public int intTimepoAviso { get; set; }
+        public double PorcentajeComisionRecarga { get; set; }
         public Double flt_Tarifa_minima { get; set; }
         public Double flt_intervalo_tarifa { get; set; }
         public int int_intervalo_estacionamiento { get; set; }
         public int int_minimo_estacionamiento { get; set; }
+        
         public int int_maximo_estacionamiento { get; set; }
         [ForeignKey("tbconcesiones")]
         public System.Nullable<int> intidconcesion_id { get; set; }
