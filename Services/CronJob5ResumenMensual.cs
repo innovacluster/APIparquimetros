@@ -147,7 +147,10 @@ namespace WebApiParquimetros.Services
                             int_mes_por_ios = int_mes_por_ios * 100;
                         }
                         else {
-                            int_mes_por_ios = 100;
+                            if (sumaTransMesIos >0)
+                            {
+                                int_mes_por_ios = 100; 
+                            }
                         }
                         if (resumenMesAnterior.int_mes_autos_ios != 0)
                         {
@@ -155,7 +158,10 @@ namespace WebApiParquimetros.Services
                             int_mes_autos_por_ios = int_mes_autos_por_ios * 100;
                         }
                         else {
-                            int_mes_autos_por_ios = 100;
+                            if (sumaAutosIos>0)
+                            {
+                                int_mes_autos_por_ios = 100; 
+                            }
                         }
                         if (resumenMesAnterior.dec_mes_ios != 0)
                         {
@@ -163,7 +169,10 @@ namespace WebApiParquimetros.Services
                             dec_mes_por_ios = dec_mes_por_ios * 100;
                         }
                         else {
-                            dec_mes_por_ios = 100;
+                            if (dblingrMesIOs>0)
+                            {
+                                dec_mes_por_ios = 100; 
+                            }
                         }
                         if (resumenMesAnterior.int_mes_andriod != 0)
                         {
@@ -171,16 +180,21 @@ namespace WebApiParquimetros.Services
                             int_mes_por_andriod = int_mes_por_andriod * 100;
                         }
                         else {
-                            int_mes_por_andriod = 100;
+                            if (sumaTransMesAndroid > 0)
+                            {
+                                int_mes_por_andriod = 100; 
+                            }
                         }
                         if (resumenMesAnterior.int_mes_autos_andriod != 0)
                         {
                             int_mes_autos_por_andriod = ((sumaAutosAndriod / resumenMesAnterior.int_mes_autos_andriod) - 1);
                             int_mes_autos_por_andriod = int_mes_autos_por_andriod * 100;
-
                         }
                         else {
-                            int_mes_autos_por_andriod = 100;
+                            if (sumaAutosAndriod>0)
+                            {
+                                int_mes_autos_por_andriod = 100; 
+                            }
                         }
 
                         if (resumenMesAnterior.dec_mes_andriod != 0)
@@ -190,7 +204,10 @@ namespace WebApiParquimetros.Services
 
                         }
                         else {
-                            dec_mes_por_andriod = 100;
+                            if (dblingrMesAndroid >0)
+                            {
+                                dec_mes_por_andriod = 100; 
+                            }
                         }
                         if (resumenMesAnterior.int_mes_total != 0)
                         {
@@ -198,7 +215,10 @@ namespace WebApiParquimetros.Services
                             int_mes_por_total = int_mes_por_total * 100;
                         }
                         else {
-                            int_mes_por_total = 100;
+                            if (transTotales > 0)
+                            {
+                                int_mes_por_total = 100; 
+                            }
                         }
                         if (resumenMesAnterior.dec_mes_total != 0)
                         {
@@ -206,7 +226,10 @@ namespace WebApiParquimetros.Services
                             dec_mes_por_total = dec_mes_por_total * 100;
                         }
                         else {
-                            dec_mes_por_total = 100;
+                            if (dblIngTotales>0)
+                            {
+                                dec_mes_por_total = 100; 
+                            }
                         }
 
                         var strategy = dbContext.Database.CreateExecutionStrategy();
@@ -289,6 +312,47 @@ namespace WebApiParquimetros.Services
                         double dblIngTotales = dblingrMesIOs + dblingrMesAndroid;
 
 
+                        if (sumaTransMesIos > 0)
+                        {
+                            int_mes_por_ios = 100;
+                        }
+
+                        if (sumaAutosIos > 0)
+                        {
+                            int_mes_autos_por_ios = 100;
+                        }
+
+                        if (dblingrMesIOs > 0)
+                        {
+                            dec_mes_por_ios = 100;
+                        }
+
+                        if (sumaTransMesAndroid > 0)
+                        {
+                            int_mes_por_andriod = 100;
+                        }
+
+                        if (sumaAutosAndriod > 0)
+                        {
+                            int_mes_autos_por_andriod = 100;
+                        }
+
+                        if (dblingrMesAndroid > 0)
+                        {
+                            dec_mes_por_andriod = 100;
+                        }
+
+                        if (transTotales > 0)
+                        {
+                            int_mes_por_total = 100;
+                        }
+
+                        if (dblIngTotales > 0)
+                        {
+                            dec_mes_por_total = 100;
+                        }
+
+
                         var strategy = dbContext.Database.CreateExecutionStrategy();
 
                         strategy.Execute(() =>
@@ -309,30 +373,29 @@ namespace WebApiParquimetros.Services
                                         //dtm_mes_anterior =
                                         int_mes_ios = sumaTransMesIos,
                                         int_mes_ant_ios = 0,
-                                        int_mes_por_ios = 100,
+                                        int_mes_por_ios = int_mes_por_ios,
                                         int_mes_autos_ios = sumaAutosIos,
                                         int_mes_autos_ant_ios = 0,
-                                        int_mes_autos_por_ios = 100,
+                                        int_mes_autos_por_ios = int_mes_autos_por_ios,
                                         dec_mes_ios = dblingrMesIOs,
                                         dec_mes_ant_ios = 0,
-                                        dec_mes_por_ios = 100,
+                                        dec_mes_por_ios = dec_mes_por_ios,
                                         int_mes_andriod = sumaTransMesAndroid,
                                         int_mes_ant_andriod = 0,
-                                        int_mes_por_andriod = 100,
+                                        int_mes_por_andriod = int_mes_por_andriod,
                                         int_mes_autos_andriod = sumaAutosAndriod,
                                         int_mes_autos_ant_andriod = 0,
-                                        int_mes_autos_por_andriod = 100,
+                                        int_mes_autos_por_andriod = int_mes_autos_por_andriod,
                                         int_mes_total_autos = totalAutos,
                                         dec_mes_andriod = dblingrMesAndroid,
                                         dec_mes_ant_andriod = 0,
-                                        dec_mes_por_andriod = 100,
+                                        dec_mes_por_andriod = dec_mes_por_andriod,
                                         int_mes_total = transTotales,
                                         int_mes_total_ant = 0,
-                                        int_mes_por_total = 100,
+                                        int_mes_por_total = int_mes_por_total,
                                         dec_mes_total = dblIngTotales,
                                         dec_mes_total_ant = 0,
-                                        dec_mes_por_total = 100
-
+                                        dec_mes_por_total = dec_mes_por_total
                                     });
 
                                     dbContext.SaveChanges();
@@ -340,7 +403,6 @@ namespace WebApiParquimetros.Services
                                 }
                                 catch (Exception)
                                 {
-
                                     throw;
                                 }
                             }

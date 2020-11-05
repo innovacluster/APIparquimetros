@@ -116,7 +116,10 @@ namespace WebApiParquimetros.Services
                             int_sem_por_ios = int_sem_por_ios * 100;
                         }
                         else {
-                            int_sem_por_ios = 100;
+                            if (sumaTransSemIos>0)
+                            {
+                                int_sem_por_ios = 100; 
+                            }
                         }
 
                         if (resumenSemAnterior.int_sem_autos_ios != 0)
@@ -125,7 +128,10 @@ namespace WebApiParquimetros.Services
                             int_sem_autos_por_ios = int_sem_autos_por_ios * 100;
                         }
                         else {
-                            int_sem_autos_por_ios = 100;
+                            if (sumaAutosIos > 0)
+                            {
+                                int_sem_autos_por_ios = 100; 
+                            }
                         }
 
                         if (resumenSemAnterior.dec_sem_ios != 0)
@@ -134,7 +140,10 @@ namespace WebApiParquimetros.Services
                             dec_sem_por_ios = dec_sem_por_ios * 100;
                         }
                         else {
-                            dec_sem_por_ios = 100;
+                            if (dblingrSemaIOs > 0)
+                            {
+                                dec_sem_por_ios = 100; 
+                            }
                         }
                         if (resumenSemAnterior.int_sem_andriod != 0)
                         {
@@ -152,7 +161,10 @@ namespace WebApiParquimetros.Services
                             dec_sem_por_andriod = dec_sem_por_andriod * 100;
                         }
                         else {
-                            dec_sem_por_andriod = 100;
+                            if (dblingrSemaAndroid > 0)
+                            {
+                                dec_sem_por_andriod = 100; 
+                            }
                         }
                         if (resumenSemAnterior.int_sem_total != 0)
                         {
@@ -160,7 +172,10 @@ namespace WebApiParquimetros.Services
                             int_sem_por_ant = int_sem_por_ant * 100;
                         }
                         else {
-                            int_sem_por_ant = 100;
+                            if (transTotales > 0)
+                            {
+                                int_sem_por_ant = 100; 
+                            }
                         }
                         if (resumenSemAnterior.dec_sem_total != 0)
                         {
@@ -168,7 +183,10 @@ namespace WebApiParquimetros.Services
                             dec_sem_por_total = dec_sem_por_total * 100;
                         }
                         else {
-                            dec_sem_por_total = 100;
+                            if (dblIngTotales > 0)
+                            {
+                                dec_sem_por_total = 100; 
+                            }
                         }
 
                        
@@ -253,6 +271,48 @@ namespace WebApiParquimetros.Services
                         int transTotales = sumaTransSemIos + sumaTransSemAndroid;
                         double dblIngTotales = dblingrSemaIOs + dblingrSemaAndroid;
 
+                       
+                            if (sumaTransSemIos > 0)
+                            {
+                                int_sem_por_ios = 100;
+                            }
+                        
+                            if (sumaAutosIos > 0)
+                            {
+                                int_sem_autos_por_ios = 100;
+                            }
+                      
+                            if (dblingrSemaIOs > 0)
+                            {
+                                dec_sem_por_ios = 100;
+                            }
+
+                            if (sumaTransSemAndroid > 0)
+                            {
+                                int_sem_por_andriod = 100;
+                            }
+
+                             if (sumaAutosIos>0)
+                            {
+                                int_sem_autos_por_andriod = 100;
+                            }
+
+                            if (dblingrSemaAndroid > 0)
+                            {
+                                dec_sem_por_andriod = 100;
+                            }
+                      
+                            if (transTotales > 0)
+                            {
+                                int_sem_por_ant = 100;
+                            }
+                        
+                            if (dblIngTotales > 0)
+                            {
+                                dec_sem_por_total = 100;
+                            }
+
+
                         var strategy = dbContext.Database.CreateExecutionStrategy();
 
                         strategy.Execute(() =>
@@ -272,29 +332,29 @@ namespace WebApiParquimetros.Services
                                         int_semana_ant = inNoSemAnterior,
                                         int_sem_ios = sumaTransSemIos,
                                         int_sem_ant_ios = 0,
-                                        int_sem_por_ios = 100,
+                                        int_sem_por_ios = int_sem_por_ios,
                                         int_sem_autos_ios = sumaAutosIos,
                                         int_sem_autos_ant_ios = 0,
-                                        int_sem_autos_por_ios = 100,
+                                        int_sem_autos_por_ios = int_sem_autos_por_ios,
                                         dec_sem_ios = dblingrSemaIOs,
                                         dec_sem_ant_ios = 0.00,
-                                        dec_sem_por_ios = 100,
+                                        dec_sem_por_ios = dec_sem_por_ios,
                                         int_sem_andriod = sumaTransSemAndroid,
                                         int_sem_ant_andriod = 0,
-                                        int_sem_por_andriod = 100,
+                                        int_sem_por_andriod = int_sem_por_andriod,
                                         int_sem_autos_andriod = sumaAutosAndriod,
                                         int_sem_autos_ant_andriod = 0,
-                                        int_sem_autos_por_andriod = 100,
+                                        int_sem_autos_por_andriod = int_sem_autos_por_andriod,
                                         int_sem_total_autos = totalAutos,
                                         dec_sem_andriod = dblingrSemaAndroid,
                                         dec_sem_ant_andriod = 0.00,
-                                        dec_sem_por_andriod = 100,
+                                        dec_sem_por_andriod = dec_sem_por_andriod,
                                         int_sem_total = transTotales,
                                         int_sem_total_ant = 0,
-                                        int_sem_por_ant = 100,
+                                        int_sem_por_ant = int_sem_por_ant,
                                         dec_sem_total = dblIngTotales,
                                         dec_sem_total_ant = 0.00,
-                                        dec_sem_por_total = 100,
+                                        dec_sem_por_total = dec_sem_por_total,
 
 
                                     }); ;

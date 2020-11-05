@@ -237,8 +237,6 @@ namespace WebApiParquimetros.Services
                             {
                                 try
                                 {
-
-
                                     dbContext.tbresumendiario.Add(new ResumenDiario()
                                     {
                                         int_id_consecion = concns.id,
@@ -353,9 +351,62 @@ namespace WebApiParquimetros.Services
                             }
                         }
 
-                        totalIngresos = intTransIos + intTransAndriod;
+                        Double totalDia = dblTotalXDiaIos + dblTotalXDiaAndriod;
+                        int intSumTransacciones = intTransIos + intTransAndriod;
                         DateTime t = time.AddDays(-1);
+
+
+                      
+                            if (intTransIos > 0)
+                            {
+                                int_porc_ios = 100;
+                            }
+
+                        
+                       
+                            if (dblTotalXDiaIos > 0)
+                            {
+                                dec_porc_ios = 100;
+                            }
+                        
+                       
+                            if (intTransAndriod > 0)
+                            {
+                                int_porc_andriod = 100;
+                            }
+                        
+
+                      
+                            if (dblTotalXDiaAndriod > 0)
+                            {
+                                dec_porc_andriod = 100;
+                            }
+                        
+
+                       
+                            if (intSumTransacciones > 0)
+                            {
+                                int_por_ant_total = 100;
+                            }
+                        
+
+                      
+                            if (totalDia > 0)
+                            {
+                                dec_por_ant_total = 100;
+                            }
+                       
                      
+                        if (movTansaccionesAndriod.Count > 0)
+                        {
+                            int_autos_por_andriod = 100;
+                        }
+
+                        if (movTansacciones.Count > 0)
+                        {
+                            int_autos_por_ios = 100;
+                        }
+
 
                         var strategy = dbContext.Database.CreateExecutionStrategy();
                         strategy.Execute(() =>
@@ -378,9 +429,9 @@ namespace WebApiParquimetros.Services
                                         str_dia_sem_ant =t.DayOfWeek.ToString(),
                                         int_ios = intTransIos,
                                         int_ant_ios = 0,
-                                        int_por_ios = 100,
+                                        int_por_ios = int_porc_ios,
                                         int_autos_ios = movTansacciones.Count,
-                                        int_autos_por_ios = 100,
+                                        int_autos_por_ios = int_autos_por_ios,
                                         int_autos_ant_ios = 0,
                                         dec_ios = dblTotalXDiaIos,
                                         dec_ant_ios = 0,
@@ -389,8 +440,8 @@ namespace WebApiParquimetros.Services
                                         int_andriod = intTransAndriod,
                                         int_ant_andriod = 0,
                                         //*
-                                        int_por_andriod = 100,
-                                        int_autos_por_andriod = 100,
+                                        int_por_andriod = int_porc_andriod,
+                                        int_autos_por_andriod = int_autos_por_andriod,
                                         int_total_autos = movTansacciones.Count + movTansaccionesAndriod.Count,
                                         int_autos_andriod = movTansaccionesAndriod.Count,
                                         int_autos_ant_andriod = 0,
