@@ -4803,9 +4803,10 @@ namespace WebApiParquimetros.Controllers
         [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
         public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion()
         {
-            //ParametrosController par = new ParametrosController(context);
-            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            //DateTime time = horaTransaccion.Value;
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            DateTime time = horaTransaccion.Value;
+            DateTime mesAnterior = time.Date.AddMonths(-1);
             string nombreConcesion = "";
             int TiempoVendido = 0;
             double MontoVendido = 0;
@@ -4815,8 +4816,9 @@ namespace WebApiParquimetros.Controllers
             int IntIdConcesion = 0;
             double Total = 0;
 
-            DateTime time = DateTime.Now;
-            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+            //DateTime time = DateTime.Now;
+            //DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+           
 
             List<IngresosMensualesXConcesion> lstItems = new List<IngresosMensualesXConcesion>();
 
