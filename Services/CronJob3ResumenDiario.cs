@@ -51,7 +51,7 @@ namespace WebApiParquimetros.Services
                 int intAutosDiaAnteriorIos = 0;
                 int intAutosDiaAnteriorAndroid = 0;
                 double totalIngresos = 0;
-                DateTime dia = DateTime.Now;
+               // DateTime dia = DateTime.Now;
 
                 ///////////////////
 
@@ -72,7 +72,7 @@ namespace WebApiParquimetros.Services
                 foreach (var concns in concesiones)
                 {
                     //Para obtener dato de los autos del dia anterior
-                    DateTime diaanterior = dia.AddDays(-1);
+                    DateTime diaanterior = time.AddDays(-1);
                     var autosDiaAnteriorIos =  dbContext.tbresumendiario.FirstOrDefault(x => x.dtm_fecha.Date == diaanterior.Date && x.int_id_consecion == concns.id);
 
 
@@ -83,24 +83,24 @@ namespace WebApiParquimetros.Services
                         //Para obtener los detalles de ios
                         var movIOS = (from det in dbContext.tbdetallemovimientos
                                       join mov in dbContext.tbmovimientos on det.int_idmovimiento equals mov.id
-                                      where mov.str_so == "IOS" && det.dtm_horaInicio.Date == dia.Date
+                                      where mov.str_so == "IOS" && det.dtm_horaInicio.Date == time.Date
                                       && mov.intidconcesion_id == concns.id
                                       select det).ToList();
                         //Para obtener los detalles de andriod
                         var movAndriod = (from det in dbContext.tbdetallemovimientos
                                           join mov in dbContext.tbmovimientos on det.int_idmovimiento equals mov.id
-                                          where mov.str_so == "ANDROID" && det.dtm_horaInicio.Date == dia.Date
+                                          where mov.str_so == "ANDROID" && det.dtm_horaInicio.Date == time.Date
                                           && mov.intidconcesion_id == concns.id
                                           select det).ToList();
 
                         //Para obtener las transacciones de ios
                         var movTansacciones = (from mov in dbContext.tbmovimientos
-                                               where mov.str_so == "IOS" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == dia.Date
+                                               where mov.str_so == "IOS" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == time.Date
                                                select mov).ToList();
 
                         //Para obtener las transacciones de andriod
                         var movTansaccionesAndriod = (from mov in dbContext.tbmovimientos
-                                                      where mov.str_so == "ANDROID" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == dia.Date
+                                                      where mov.str_so == "ANDROID" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == time.Date
                                                       select mov).ToList();
 
                         foreach (var item in movIOS)
@@ -148,7 +148,11 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            int_porc_ios = 100;
+                            if (intTransIos > 0)
+                            {
+                                int_porc_ios = 100;
+                            }
+                           
                         }
                         if (autosDiaAnteriorIos.dec_ios != 0)
                         {
@@ -157,7 +161,10 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            dec_porc_ios = 100;
+                            if (dblTotalXDiaIos>0)
+                            {
+                                dec_porc_ios = 100; 
+                            }
                         }
                         if (intAutosDiaAnteriorAndroid != 0)
                         {
@@ -165,7 +172,10 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            int_porc_andriod = 100;
+                            if (intTransAndriod > 0)
+                            {
+                                int_porc_andriod = 100; 
+                            }
                         }
 
                         if (autosDiaAnteriorIos.dec_andriod != 0)
@@ -175,7 +185,10 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            dec_porc_andriod = 100;
+                            if (dblTotalXDiaAndriod > 0)
+                            {
+                                dec_porc_andriod = 100; 
+                            }
                         }
 
                         if (autosDiaAnteriorIos.int_total != 0)
@@ -185,7 +198,10 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            int_por_ant_total = 100;
+                            if (intSumTransacciones>0)
+                            {
+                                int_por_ant_total = 100; 
+                            }
                         }
 
                         if (autosDiaAnteriorIos.int_total != 0)
@@ -196,7 +212,10 @@ namespace WebApiParquimetros.Services
                         }
                         else
                         {
-                            dec_por_ant_total = 100;
+                            if (totalDia>0)
+                            {
+                                dec_por_ant_total = 100; 
+                            }
                         }
                         if (autosDiaAnteriorIos.int_autos_andriod != 0)
                         {
@@ -278,24 +297,24 @@ namespace WebApiParquimetros.Services
 
                         var movIOS = (from det in dbContext.tbdetallemovimientos
                                       join mov in dbContext.tbmovimientos on det.int_idmovimiento equals mov.id
-                                      where mov.str_so == "IOS" && det.dtm_horaInicio.Date == dia.Date
+                                      where mov.str_so == "IOS" && det.dtm_horaInicio.Date == time.Date
                                       && mov.intidconcesion_id == concns.id
                                       select det).ToList();
                         //Para obtener los detalles de andriod
                         var movAndriod = (from det in dbContext.tbdetallemovimientos
                                           join mov in dbContext.tbmovimientos on det.int_idmovimiento equals mov.id
-                                          where mov.str_so == "ANDROID" && det.dtm_horaInicio.Date == dia.Date
+                                          where mov.str_so == "ANDROID" && det.dtm_horaInicio.Date == time.Date
                                           && mov.intidconcesion_id == concns.id
                                           select det).ToList();
 
                         //Para obtener las transacciones de ios
                         var movTansacciones = (from mov in dbContext.tbmovimientos
-                                               where mov.str_so == "IOS" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == dia.Date
+                                               where mov.str_so == "IOS" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == time.Date
                                                select mov).ToList();
 
                         //Para obtener las transacciones de andriod
                         var movTansaccionesAndriod = (from mov in dbContext.tbmovimientos
-                                                      where mov.str_so == "ANDROID" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == dia.Date
+                                                      where mov.str_so == "ANDROID" && mov.intidconcesion_id == concns.id && mov.dt_hora_inicio.Date == time.Date
                                                       select mov).ToList();
 
 
@@ -336,6 +355,7 @@ namespace WebApiParquimetros.Services
 
                         totalIngresos = intTransIos + intTransAndriod;
                         DateTime t = time.AddDays(-1);
+                     
 
                         var strategy = dbContext.Database.CreateExecutionStrategy();
                         strategy.Execute(() =>

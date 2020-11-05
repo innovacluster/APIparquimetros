@@ -117,10 +117,10 @@ namespace WebApiParquimetros.Controllers
                 {
                     try
                     {
-                    //    ParametrosController par = new ParametrosController(context);
-                    //    ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
-                    //DateTime time = horadeTransaccion.Value;
-                    DateTime time = DateTime.Now;
+                    ParametrosController par = new ParametrosController(context);
+                    ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
+                    DateTime time = horadeTransaccion.Value;
+                    //DateTime time = DateTime.Now;
                     //Se ocomento esta linea por actualizacion 
                     //var response = await context.tbsaldo.FirstOrDefaultAsync(x => x.id == id);
 

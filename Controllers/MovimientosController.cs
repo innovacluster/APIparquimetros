@@ -1468,9 +1468,13 @@ namespace WebApiParquimetros.Controllers
                                     str_forma_pago = "VIRTUAL",
                                     str_tipo_recarga = "APARCADO",
                                     int_id_usuario_id = usuario.Id,
-                                    int_id_usuario_trans = usuario.Id
+                                    int_id_usuario_trans = usuario.Id,
+                                    flt_porcentaje_comision = dbl_comision_cobrada,
+                                    flt_total_con_comision = dbl_total_con_comision,
+                                    flt_monto = movimientos.flt_monto
 
-                                });
+
+                                });;
 
                                 context.tbdetallemovimientos.Add(new DetalleMovimientos()
                                 {
@@ -4328,9 +4332,11 @@ namespace WebApiParquimetros.Controllers
                 {
                     dblSumaMesAnteriorTotal = 0.00;
                     dblPorcentajeIngresos = 0.00;
-                    Porc = 100;
-
                     intSumaMesAnteriorTransTotal = 0;
+
+                   
+                        Porc = 100;
+                    
                 }
 
                 ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEF(fecha1, dtmFechaFin, intIdConcesion);
@@ -4400,10 +4406,17 @@ namespace WebApiParquimetros.Controllers
 
                 int intTotalTransMesActual = intMesActual + intTrans;
 
+                if (intSumaMesAnteriorTransTotal != 0)
+                {
 
-                intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
+                    intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
+                }
+                else if (intTotalTransMesActual > 0)
+                {
+                    intPorcentajeTransacciones = 100;
 
-
+                }
+              
                 var data = new ResumenIngresosMensual()
                 {
                     dtFechas = table,
@@ -4785,6 +4798,71 @@ namespace WebApiParquimetros.Controllers
                 SaldoFinalUsuaios = saldoFinUsuarios,
                 IngresoXComisiones = (Math.Round(ingresoXCom * 100) / 100)
             };
+        }
+
+        [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
+        public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion()
+        {
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            string nombreConcesion = "";
+            int TiempoVendido = 0;
+            double MontoVendido = 0;
+            int TiempoDevolucion = 0;
+            double MontoDevolucion =0;
+            double MontoComisionDevolucion = 0;
+            int IntIdConcesion = 0;
+            double Total = 0;
+
+            DateTime time = DateTime.Now;
+            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
+            List<IngresosMensualesXConcesion> lstItems = new List<IngresosMensualesXConcesion>();
+
+            var concesiones = await context.tbconcesiones.ToListAsync();
+            foreach (var item in concesiones)
+            {
+                var movimientosConcesion = await context.tbmovimientos.Where(x => x.intidconcesion_id == item.id && x.dt_hora_inicio.Month == time.Month).ToListAsync();
+
+                if (movimientosConcesion.Count != 0)
+                {
+                    IntIdConcesion = item.id;
+                    nombreConcesion = movimientosConcesion[0].str_nombre_concesion;
+                    TiempoVendido = movimientosConcesion.Sum(x => x.int_tiempo);
+                    MontoVendido = movimientosConcesion.Sum(x => x.flt_monto);
+                    TiempoDevolucion = movimientosConcesion.Sum(x => x.int_tiempo_devuelto);
+                    MontoDevolucion = movimientosConcesion.Sum(x => x.flt_monto_devolucion);
+                    MontoComisionDevolucion = movimientosConcesion.Sum(x => x.flt_monto_porc_devolucion);
+                    Total = MontoVendido + MontoDevolucion + MontoComisionDevolucion;
+                }
+                else {
+                    IntIdConcesion = item.id;
+                    nombreConcesion = item.str_nombre_cliente;
+                    TiempoVendido = 0;
+                    MontoVendido =0;
+                    TiempoDevolucion = 0;
+                    MontoDevolucion =0;
+                    MontoComisionDevolucion = 0;
+                    Total = MontoVendido + MontoDevolucion + MontoComisionDevolucion;
+                }
+
+                var element = new IngresosMensualesXConcesion()
+                {
+                    IntIdConcesion = IntIdConcesion,
+                    NombreConcesion = nombreConcesion,
+                    TiempoVendido = TiempoVendido,
+                    MontoVendido = MontoVendido,
+                    TiempoDevolucion = TiempoDevolucion,
+                    MontoDevolucion = MontoDevolucion,
+                    MontoComisionDevolucion = MontoComisionDevolucion,
+                    Total = Total
+                };
+                lstItems.Add(element);
+            }
+
+            return lstItems.OrderBy(x => x.NombreConcesion).ToList();
+           
         }
 
         [NonAction]

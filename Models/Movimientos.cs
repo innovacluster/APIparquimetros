@@ -436,4 +436,16 @@ namespace WebApiParquimetros.Models
 
 
     }
+
+    public class IngresosMensualesXConcesion
+    {
+        public int IntIdConcesion { get; set; }
+        public string NombreConcesion { get; set; }
+        public int TiempoVendido { get; set; }
+        public double MontoVendido { get; set; }
+        public int TiempoDevolucion{ get; set; }
+        public double MontoDevolucion { get; set; }
+        public double MontoComisionDevolucion { get; set; }
+        public double Total { get; set; }
+    }
 }
