@@ -42,7 +42,8 @@
             Método que obtiene los movimientos de acuerdo a una fecha en especifica.
             </summary>
             <param name="dtmFecha"></param>
-            <param name="dtmFechaFin"></param>           
+            <param name="dtmFechaFin"></param>
+            <param name="intIdConcesion"></param>           
             <returns></returns>
         </member>
         <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdConsultarHistorial(System.String,System.Int32,System.Int32)">

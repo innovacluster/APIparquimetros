@@ -614,7 +614,8 @@ namespace WebApiParquimetros.Controllers
         /// Método que obtiene los movimientos de acuerdo a una fecha en especifica.
         /// </summary>
         /// <param name="dtmFecha"></param>
-        /// <param name="dtmFechaFin"></param>           
+        /// <param name="dtmFechaFin"></param>
+        /// <param name="intIdConcesion"></param>           
         /// <returns></returns>
         [HttpGet("mtdConsultarMovMonitoreoXDia")]
         public async Task<ActionResult<ICollection<MovimientosJoin>>> mtdConsultarMovMonitoreoXDiaPrueba(string dtmFecha, string dtmFechaFin, int intIdConcesion)
@@ -3651,17 +3652,10 @@ namespace WebApiParquimetros.Controllers
                         DateTime dia1 = DateTime.Parse(selectedDates[i].ToString());
                         string anioF = dia1.Year.ToString();
                         int mesF = dia1.Month;
-
                         int diaF = dia1.Day;
-
                         string strMes = "";
                         string strDia = "";
 
-                        //string d = dia1.Date.ToString();
-                        //string o = d.Substring(0, 10);
-                        //string diaF = o.Substring(0,2);
-                        //string mesF = o.Substring(3,3);
-                        //string anioF = o.Substring(6);
 
                         if (mesF < 10)
                         {
@@ -3675,9 +3669,7 @@ namespace WebApiParquimetros.Controllers
 
                         if (diaF < 10)
                         {
-
                             strDia = 0 + diaF.ToString();
-
                         }
                         else
                         {
@@ -4803,10 +4795,10 @@ namespace WebApiParquimetros.Controllers
         [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
         public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion()
         {
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            DateTime time = horaTransaccion.Value;
-            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            //DateTime mesAnterior = time.Date.AddMonths(-1);
             string nombreConcesion = "";
             int TiempoVendido = 0;
             double MontoVendido = 0;
@@ -4816,9 +4808,9 @@ namespace WebApiParquimetros.Controllers
             int IntIdConcesion = 0;
             double Total = 0;
 
-            //DateTime time = DateTime.Now;
-            //DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
-           
+            DateTime time = DateTime.Now;
+            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
 
             List<IngresosMensualesXConcesion> lstItems = new List<IngresosMensualesXConcesion>();
 
