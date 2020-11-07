@@ -1290,7 +1290,10 @@ namespace WebApiParquimetros.Controllers
                                         str_forma_pago = "VIRTUAL",
                                         str_tipo_recarga = "APARCADO",
                                         int_id_usuario_id = usuario.Id,
-                                        int_id_usuario_trans = usuario.Id
+                                        int_id_usuario_trans = usuario.Id,
+                                        flt_porcentaje_comision = dbl_comision_cobrada,
+                                        flt_total_con_comision = dbl_total_con_comision,
+                                        flt_monto = movimientos.flt_monto
 
                                     });
 
@@ -1789,7 +1792,10 @@ namespace WebApiParquimetros.Controllers
                                 str_forma_pago = "VIRTUAL",
                                 str_tipo_recarga = "DEVOLUCION",
                                 int_id_usuario_id = usuario.Id,
-                                int_id_usuario_trans = usuario.Id
+                                int_id_usuario_trans = usuario.Id,
+                                flt_porcentaje_comision = dbl_monto_comision_regresar,
+                                flt_total_con_comision = dbl_total_con_comision,
+                                flt_monto = dbleRegresar
 
                             });
 
@@ -1953,71 +1959,32 @@ namespace WebApiParquimetros.Controllers
                         Double dblTarifaMin = Double.Parse(dtPlan.Rows[0]["Tarifa"].ToString());
 
 
-                        if (intTiempoTranscurridovalor < intTiempoRenta)
+                    if (intTiempoTranscurridovalor < intTiempoRenta)
+                    {
+                        intDatoRegresar = intTiempoRenta - intTiempoTranscurridovalor;
+
+                        for (int i = 0; i < dtPlan.Rows.Count; i++)
                         {
-                            intDatoRegresar = intTiempoRenta - intTiempoTranscurridovalor;
 
-                            for (int i = 0; i < dtPlan.Rows.Count; i++)
+                            intPlanMinutos = int.Parse(dtPlan.Rows[i]["Minutos"].ToString());
+                            int intNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
+
+                            if (intTiempoTranscurridovalor == intPlanMinutos || intTiempoTranscurridovalor < intTarifaMin)
                             {
-
-                                intPlanMinutos = int.Parse(dtPlan.Rows[i]["Minutos"].ToString());
-                                int intNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
-
-                                if (intTiempoTranscurridovalor == intPlanMinutos || intTiempoTranscurridovalor < intTarifaMin)
+                                if (intTiempoRenta > intTiempoTranscurridovalor)
                                 {
-                                    if (intTiempoRenta > intTiempoTranscurridovalor)
+                                    dbleCobrar = int.Parse(dtPlan.Rows[0]["Tarifa"].ToString());
+                                    //intPlanMinutosNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
+                                    intTimepoDeParking = intPlanMinutos;
+                                    intMinutosRegresar = intTiempoRenta - intTarifaMin;
+                                    dbleRegresar = response.flt_monto - dblTarifaMin;
+
+                                    if (dbleRegresar == 0)
                                     {
-                                        dbleCobrar = int.Parse(dtPlan.Rows[0]["Tarifa"].ToString());
-                                        //intPlanMinutosNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
-                                        intTimepoDeParking = intPlanMinutos;
-                                        intMinutosRegresar = intTiempoRenta - intTarifaMin;
-                                        dbleRegresar = response.flt_monto - dblTarifaMin;
-                                      
-                                        if (dbleRegresar == 0)
-                                        {
-                                            bolDevolucion = false;
-                                        }
-                                        else
-                                        {
-                                            var saldo = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
-                                            var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
-                                            db_porc_comision = comision.dcm_porcentaje;
-                                            db_porc_comision = db_porc_comision / 100;
-                                            dbl_monto_comision_regresar = dbleRegresar * db_porc_comision;
-                                            dbl_total_con_comision = dbleRegresar + dbl_monto_comision_regresar;
-
-                                            //Aqui para saber cuanto cobré
-                                            double dbl_comision_de_cobro_final = dbleCobrar * db_porc_comision;
-                                            dbl_cuanto_cobre = dbleCobrar + dbl_comision_de_cobro_final;
-
-
-                                            saldo.dbl_saldo_actual = saldo.dbl_saldo_actual + dbl_total_con_comision;
-                                            saldo.dbl_saldo_anterior = dblSaldoA;
-                                            await context.SaveChangesAsync();
-                                            bolDevolucion = true;
-                                        }
-
-                                        break;
+                                        bolDevolucion = false;
                                     }
                                     else
                                     {
-                                        intTimepoDeParking = intPlanMinutos;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    if (intTiempoTranscurridovalor < intNext || intTiempoTranscurridovalor == intNext)
-                                    {
-                                        dbleCobrar = int.Parse(dtPlan.Rows[i + 1]["Tarifa"].ToString());
-                                        intPlanMinutosNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
-                                        intTimepoDeParking = intPlanMinutosNext;
-
-                                        intMinutosRegresar = intTiempoRenta - intNext;
-
-                                        dbleRegresar = response.flt_monto - dbleCobrar;
-
-
                                         var saldo = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
                                         var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
                                         db_porc_comision = comision.dcm_porcentaje;
@@ -2025,23 +1992,65 @@ namespace WebApiParquimetros.Controllers
                                         dbl_monto_comision_regresar = dbleRegresar * db_porc_comision;
                                         dbl_total_con_comision = dbleRegresar + dbl_monto_comision_regresar;
 
-
                                         //Aqui para saber cuanto cobré
                                         double dbl_comision_de_cobro_final = dbleCobrar * db_porc_comision;
                                         dbl_cuanto_cobre = dbleCobrar + dbl_comision_de_cobro_final;
+
 
                                         saldo.dbl_saldo_actual = saldo.dbl_saldo_actual + dbl_total_con_comision;
                                         saldo.dbl_saldo_anterior = dblSaldoA;
                                         await context.SaveChangesAsync();
                                         bolDevolucion = true;
-
-                                        break;
                                     }
+
+                                    break;
+                                }
+                                else
+                                {
+                                    intTimepoDeParking = intPlanMinutos;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                if (intTiempoTranscurridovalor < intNext || intTiempoTranscurridovalor == intNext)
+                                {
+                                    dbleCobrar = int.Parse(dtPlan.Rows[i + 1]["Tarifa"].ToString());
+                                    intPlanMinutosNext = int.Parse(dtPlan.Rows[i + 1]["Minutos"].ToString());
+                                    intTimepoDeParking = intPlanMinutosNext;
+
+                                    intMinutosRegresar = intTiempoRenta - intNext;
+
+                                    dbleRegresar = response.flt_monto - dbleCobrar;
+
+
+                                    var saldo = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
+                                    var comision = await context.tbcomisiones.FirstOrDefaultAsync(x => x.intidconcesion_id == response.intidconcesion_id && x.str_tipo == "PARQUIMETRO");
+                                    db_porc_comision = comision.dcm_porcentaje;
+                                    db_porc_comision = db_porc_comision / 100;
+                                    dbl_monto_comision_regresar = dbleRegresar * db_porc_comision;
+                                    dbl_total_con_comision = dbleRegresar + dbl_monto_comision_regresar;
+
+
+                                    //Aqui para saber cuanto cobré
+                                    double dbl_comision_de_cobro_final = dbleCobrar * db_porc_comision;
+                                    dbl_cuanto_cobre = dbleCobrar + dbl_comision_de_cobro_final;
+
+                                    saldo.dbl_saldo_actual = saldo.dbl_saldo_actual + dbl_total_con_comision;
+                                    saldo.dbl_saldo_anterior = dblSaldoA;
+                                    await context.SaveChangesAsync();
+                                    bolDevolucion = true;
+
+                                    break;
                                 }
                             }
                         }
-
-                        var saldos = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
+                    }
+                    else {
+                        dbleCobrar = dbl_monto_ant;
+                    }
+                    
+                    var saldos = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == response.int_id_usuario_id);
                         var fltMontoNeg = -System.Math.Abs(dbleRegresar);
                         var intTimepoRegresar = -System.Math.Abs(intMinutosRegresar);
                         if (bolDevolucion)
@@ -2076,7 +2085,10 @@ namespace WebApiParquimetros.Controllers
                                 str_forma_pago = "VIRTUAL",
                                 str_tipo_recarga = "DESAPARCADO",
                                 int_id_usuario_id = usuario.Id,
-                                int_id_usuario_trans = usuario.Id
+                                int_id_usuario_trans = usuario.Id,
+                                flt_porcentaje_comision = dbl_monto_comision_regresar,
+                                flt_total_con_comision = dbl_total_con_comision,
+                                flt_monto = dbleRegresar
 
                             });
 
@@ -2111,7 +2123,7 @@ namespace WebApiParquimetros.Controllers
                         response.last_modified_by = movimientos.last_modified_by;
                         response.str_comentarios = "DESAPARCADO";
                         response.bit_status = false;
-                        response.flt_monto = dbl_monto_ant;
+                        response.flt_monto = dbleCobrar;
                         response.flt_monto_porcentaje = dbl_monto_porcentaje_ant;
                         response.flt_total_con_comision = dbl_total_con_comision_ant;
                         response.dtm_hora_fin = response.dt_hora_inicio.AddMinutes(intTimepoDeParking);
@@ -2585,7 +2597,10 @@ namespace WebApiParquimetros.Controllers
                                 str_forma_pago = "VIRTUAL",
                                 str_tipo_recarga = "EXTENSION",
                                 int_id_usuario_id = usuario.Id,
-                                int_id_usuario_trans = usuario.Id
+                                int_id_usuario_trans = usuario.Id,
+                                flt_porcentaje_comision = dbl_comision_cobrada,
+                                flt_total_con_comision = dbl_total_con_comision,
+                                flt_monto = movimientos.flt_monto
 
                             });
 
@@ -2650,9 +2665,11 @@ namespace WebApiParquimetros.Controllers
         {
             double fltSaldoAnterior;
             ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            ActionResult<DateTime> fecha = par.mtdObtenerFechaMexico();
+            DateTime time = fecha.Value;
+            //DateTime time = DateTime.Now;
 
-           
+
             string strresult = " ";
             var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
 
@@ -2700,7 +2717,7 @@ namespace WebApiParquimetros.Controllers
                         response.flt_monto_porcentaje = response.flt_monto_porcentaje + dbl_comision_cobrada;
                         response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
 
-                        response.last_modified_date = time.Value;
+                        response.last_modified_date = time;
                         response.last_modified_by = movimientos.last_modified_by;
                         DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);
                         response.int_tiempo = response.int_tiempo + movimientos.int_tiempo;
@@ -2716,15 +2733,18 @@ namespace WebApiParquimetros.Controllers
                         context.tbsaldo.Add(new Saldos()
                         {
                             created_by = movimientos.last_modified_by,
-                            created_date = time.Value,
-                            dtmfecha = time.Value,
-                            last_modified_date = time.Value,
+                            created_date = time,
+                            dtmfecha = time,
+                            last_modified_date = time,
                             flt_monto_inicial = fltSaldoAnterior,
                             flt_monto_final = usuario.dbl_saldo_actual,
                             str_forma_pago = "VIRTUAL",
                             str_tipo_recarga = "EXTENSION",
                             int_id_usuario_id = usuario.Id,
-                            int_id_usuario_trans = usuario.Id
+                            int_id_usuario_trans = usuario.Id,
+                            flt_porcentaje_comision = dbl_comision_cobrada,
+                            flt_total_con_comision = dbl_total_con_comision,
+                            flt_monto = movimientos.flt_monto
 
                         });
                         await context.SaveChangesAsync();
@@ -4753,11 +4773,13 @@ namespace WebApiParquimetros.Controllers
         [HttpGet("mtdObtenerIngresosMensuales")]
         public async Task<ActionResult<IngresosMensuales>> mtdObtenerIngresosMensuales()
         {
-            //ParametrosController par = new ParametrosController(context);
-            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            //DateTime time = horaTransaccion.Value;
-            DateTime time = DateTime.Now;
-            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            DateTime time = horaTransaccion.Value;
+            DateTime mesAnterior = time.Date.AddMonths(-1);
+            // DateTime time = DateTime.Now;
+            // DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
 
             var recargasMesAnt = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mesAnterior.Date.Month).ToListAsync();
             var regargasUsuarios = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == time.Date.Month).ToListAsync();
@@ -4771,10 +4793,13 @@ namespace WebApiParquimetros.Controllers
             var ventas = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == time.Date.Month).ToListAsync();
 
             double ventasConcesion = ventas.Sum(x=> x.flt_monto);
-            double comision = ventas.Sum(x => x.flt_monto_porcentaje);
+            double comisiones = ventas.Sum(x => x.flt_monto_porcentaje);
+            double comisionesDevueltas = ventas.Sum(x => x.flt_monto_porc_devolucion);
+            double comision = comisiones - comisionesDevueltas;
             double totalCobradoC = ventasConcesion + comision;
             double saldoFinUsuarios = saldoUsuarioMes - totalCobradoC;
             double ingresoXCom = comisionRecargas + comision;
+
 
             return new IngresosMensuales()
             {
@@ -4785,7 +4810,8 @@ namespace WebApiParquimetros.Controllers
                 TotalCobradoRecarga = totalCobrado,
                 SaldoUsuarioMes = saldoUsuarioMes,
                 VentaConcesion = ventasConcesion,
-                Comision = comision,
+
+                Comision = (Math.Round(comision * 100) / 100),
                 TotalCobradoCompra = totalCobradoC,
                 SaldoFinalUsuaios = saldoFinUsuarios,
                 IngresoXComisiones = (Math.Round(ingresoXCom * 100) / 100)
@@ -4795,10 +4821,11 @@ namespace WebApiParquimetros.Controllers
         [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
         public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion()
         {
-            //ParametrosController par = new ParametrosController(context);
-            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            //DateTime time = horaTransaccion.Value;
-            //DateTime mesAnterior = time.Date.AddMonths(-1);
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            DateTime time = horaTransaccion.Value;
+            DateTime mesAnterior = time.Date.AddMonths(-1);
+            // DateTime time = DateTime.Now;
             string nombreConcesion = "";
             int TiempoVendido = 0;
             double MontoVendido = 0;
@@ -4808,8 +4835,8 @@ namespace WebApiParquimetros.Controllers
             int IntIdConcesion = 0;
             double Total = 0;
 
-            DateTime time = DateTime.Now;
-            DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+            //DateTime time = DateTime.Now;
+            //DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
 
 
             List<IngresosMensualesXConcesion> lstItems = new List<IngresosMensualesXConcesion>();
@@ -4859,25 +4886,206 @@ namespace WebApiParquimetros.Controllers
            
         }
 
+
+        [HttpGet("mtdObtenerRendicionXConcesion")]
+        public async Task<ActionResult<List<RendicionCuentas>>> mtdObtenerRendicionXConcesion(int intIdConcesion)
+        {
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            DateTime time = horaTransaccion.Value;
+            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //DateTime time = DateTime.Now;
+            // DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
+
+            double monto = 0;
+            int No = 1;
+
+
+        
+            List<RendicionCuentas> lstItems = new List<RendicionCuentas>();
+
+            var movimientosConcesion = await (from det in context.tbdetallemovimientos
+                                              join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
+                                              where  mov.intidconcesion_id == intIdConcesion && det.dtm_horaInicio.Date.Month == time.Date.Month
+                                              && det.flt_importe > 0 || det.flt_descuentos != 0
+                                              join us in context.NetUsers on mov.int_id_usuario_id equals us.Id
+                                              select new { idMov = det.int_idmovimiento, strTipo = det.str_observaciones, strUsuario = us.Email, strSo = mov.str_so, dtmFecha = det.dtm_horaInicio, ftlMonto = det.flt_importe, fltDescuentos = det.flt_descuentos, strPlaca = mov.str_placa}).ToListAsync();
+            
+
+            foreach (var item in movimientosConcesion)
+            {
+               
+                if (item.fltDescuentos != 0)
+                {
+                    monto = item.fltDescuentos;
+                }
+                else {
+                    monto = item.ftlMonto;
+                }
+
+                var element = new RendicionCuentas()
+                {
+                   No = No,
+                   IntIdMovmiento = item.idMov,
+                   StrTipo = item.strTipo,
+                   Email = item.strUsuario,
+                   StrSo = item.strSo,
+                   DtmFecha = item.dtmFecha,
+                   Monto = monto,
+                   StrPlaca = item.strPlaca
+                };
+                lstItems.Add(element);
+                No++;
+            }
+
+            return lstItems.OrderBy(x => x.IntIdMovmiento).ToList();
+
+        }
+
+        [HttpGet("mtdObtenerResumenMensualUsuarios")]
+        public async Task<ActionResult<List<ResumenIngresosXUsuarios>>> mtdObtenerResumenMensualUsuarios()
+        {
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            DateTime time = horaTransaccion.Value;
+            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //DateTime time = DateTime.Now;
+            //DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
+
+            List<ResumenIngresosXUsuarios> lstItems = new List<ResumenIngresosXUsuarios>();
+
+            var usuarios = await context.NetUsers.Where(x => x.intIdTipoUsuario == 1).ToListAsync();
+
+
+            foreach (var item in usuarios)
+            {
+                var recargasMesAnt = await (from saldo in context.tbsaldo
+                                            join us in context.NetUsers on saldo.int_id_usuario_trans equals item.Id
+                                            where saldo.str_tipo_recarga == "RECARGA" && saldo.dtmfecha.Date.Month == mesAnterior.Date.Month
+                                            select new
+                                            {
+                                                Usuario = us.Email,
+                                                DtmFecha = saldo.dtmfecha,
+                                                FtlMonto = saldo.flt_monto,
+                                                MontoInicial = saldo.flt_monto_inicial,
+                                                MontoFinal = saldo.flt_monto_final,
+                                                PorcComision = saldo.flt_porcentaje_comision,
+                                                TotalConComision = saldo.flt_total_con_comision
+                                            }).ToListAsync();
+
+                var regargasUsuario= await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == time.Date.Month && x.int_id_usuario_trans == item.Id ).ToListAsync();
+
+
+                double recargaUsMesAnt = recargasMesAnt.Sum(x => x.FtlMonto);
+                double recargasUsuario = regargasUsuario.Sum(x => x.flt_monto);
+                double comisionRecargas = regargasUsuario.Sum(x => x.flt_porcentaje_comision);
+                double totalCobrado = recargasUsuario + comisionRecargas;
+                double saldoUsuarioMes = recargaUsMesAnt + recargasUsuario;
+
+                var cargosUsuarios = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == time.Date.Month && x.int_id_usuario_id == item.Id).ToListAsync();
+
+                double cargos = cargosUsuarios.Sum(x => x.flt_monto);
+                double comisiones = cargosUsuarios.Sum(x => x.flt_monto_porcentaje);
+                double comisionesDevueltas = cargosUsuarios.Sum(x => x.flt_monto_porc_devolucion);
+                double comision = comisiones - comisionesDevueltas;
+                double totalCobradoU = cargos + comision;
+                double saldoFinUsuarios = saldoUsuarioMes - totalCobradoU;
+                //double ingresoXCom = comisionRecargas + comision;
+
+                var element = new ResumenIngresosXUsuarios()
+                {
+                    //(Math.Truncate(dbl_porc_dia_anterior * 100) / 100)
+                    Usuario = item.Email,
+                    SaldoMesAnterior = recargaUsMesAnt,
+                    Saldo = recargasUsuario,
+                    Comision = (Math.Round(comisionRecargas * 100) / 100),
+                    TotalCobrado = totalCobrado,
+                    SaldoDelMes = saldoUsuarioMes,
+                    Cargos = cargos,
+                    ComisionMov= comision,
+                    ComisionTotal = totalCobradoU,
+                    SaldoFinal= saldoFinUsuarios
+                };
+                lstItems.Add(element);
+            }
+
+            return lstItems.OrderBy(x => x.Usuario).ToList();
+        }
+
+        [HttpGet("mtdObtenerResumenMensualXUsuario")]
+        public async Task<ActionResult<List<MovimientosXUsuario>>> mtdObtenerRendicionXConcesion(string strCorreo)
+        {
+            int No = 1;
+            List<MovimientosXUsuario> lstItems = new List<MovimientosXUsuario>();
+
+            var usuarios = await context.NetUsers.Where(x => x.intIdTipoUsuario == 1).ToListAsync();
+
+            foreach (var item in usuarios)
+            {
+                var movimientosUsuario = await (from mov in context.tbmovimientos
+                                            join us in context.NetUsers on mov.int_id_usuario_id equals item.Id
+                                            where mov.int_id_usuario_id == item.Id
+                                            select new
+                                            {
+                                                FechaInicio = mov.dt_hora_inicio,
+                                                FechaFin = mov.dtm_hora_fin,
+                                                Concesion = mov.str_nombre_concesion,
+                                                SaldoAnterior = mov.flt_saldo_anterior,
+                                                Tiempo =  mov.int_tiempo_comprado,
+                                                Monto = mov.flt_monto,
+                                                Comision = mov.flt_monto_porcentaje,
+                                                Cargo = mov.flt_total_con_comision,
+                                                TiempoDevuelto = mov.int_tiempo_devuelto,
+                                                MontoDevuelto = mov.flt_monto_devolucion,
+                                                ComisionDevuelta = mov.flt_monto_porc_devolucion,
+                                                MontoTotalDevolucion = mov.flt_total_dev_con_comision,
+                                                TiempoTotal = mov.int_tiempo,
+                                                MontoTotal = mov.flt_monto_real
+                                            }).Distinct().ToListAsync();
+
+
+                foreach (var movs in movimientosUsuario)
+                {
+                    var element = new MovimientosXUsuario()
+                    {
+                        //(Math.Truncate(dbl_porc_dia_anterior * 100) / 100)
+                        No = No,
+                        FechaInicio = movs.FechaInicio,
+                        FechaFin = movs.FechaFin,
+                        Concesion = movs.Concesion,
+                        SaldoAnterior = movs.SaldoAnterior,
+                        Tiempo = movs.Tiempo,
+                        Monto = movs.Monto,
+                        Comision = movs.Comision,
+                        Cargo = movs.Cargo,
+                        TiempoDevuelto = movs.TiempoDevuelto,
+                        MontoDevuelto = movs.MontoDevuelto,
+                        ComisionDevuelta = movs.ComisionDevuelta,
+                        MontoTotalDevolucion = movs.MontoTotalDevolucion,
+                        TiempoTotal = movs.TiempoTotal,
+                        MontoTotal = movs.MontoTotal
+                    };
+                    lstItems.Add(element);
+                    No++;
+                }
+            }
+
+            return lstItems.OrderBy(x => x.No).ToList();
+        }
+
         [NonAction]
         private IngresosXSemana MapToValueIngresosXSem(NpgsqlDataReader reader)
         {
             return new IngresosXSemana()
             {
-
                 fltTotal = reader["total"] == DBNull.Value ? Convert.ToDouble(0) : (double)reader["total"],
                 fltDevoluciones = reader["devoluciones"] == DBNull.Value ? Convert.ToDouble(0) : (double)reader["devoluciones"],
                 dtmFecha = reader["fecha"] == DBNull.Value ? Convert.ToDateTime(null) : (DateTime)reader["fecha"],
                 intAutos = reader["autos"] == DBNull.Value ? Convert.ToInt32(0) : (int)reader["autos"]
 
-
             };
-
-
         }
-
-        
-
     }
 
 }
