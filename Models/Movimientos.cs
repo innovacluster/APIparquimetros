@@ -56,7 +56,8 @@ namespace WebApiParquimetros.Models
         public Double flt_moneda_saldo_previo_descuento { get; set; }
         //***2
         public Double flt_monto { get; set; }
-    
+        public Double flt_monto_inicial { get; set; }
+
         public Double flt_porcentaje_comision { get; set; }
         //***3
         public Double flt_monto_porcentaje { get; set; }

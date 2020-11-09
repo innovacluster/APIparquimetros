@@ -1411,7 +1411,7 @@ namespace WebApiParquimetros.Controllers
                     movimientos.flt_total_con_comision = dbl_total_con_comision;
                     movimientos.int_tiempo_comprado = movimientos.int_tiempo;
                     movimientos.str_nombre_concesion = concesion.str_nombre_cliente;
-
+                    movimientos.flt_monto_inicial = movimientos.flt_monto;
                     movimientos.created_date = time;
                    
                     movimientos.last_modified_by = movimientos.created_by;
@@ -1899,10 +1899,10 @@ namespace WebApiParquimetros.Controllers
         public async Task<ActionResult<String>> mtdMovDesaparcarSE(int intIdMovimiento, [FromBody] Movimientos movimientos)
         {
 
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            DateTime time = time1.Value;
-            //DateTime time = DateTime.Now;
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            //DateTime time = time1.Value;
+            DateTime time = DateTime.Now;
 
             string strResult = "";
             Double dbleRegresar = 0;
@@ -2724,6 +2724,7 @@ namespace WebApiParquimetros.Controllers
                         response.int_tiempo_comprado = response.int_tiempo_comprado + movimientos.int_tiempo;
                         response.dtm_hora_fin = horafin;
                         response.flt_monto = response.flt_monto + movimientos.flt_monto;
+                        response.flt_monto_inicial = response.flt_monto;
                         // response.int_id_espacio = response.int_id_espacio;
                         response.str_comentarios = "EXTENSIÓN DE TIEMPO " + movimientos.int_tiempo;
                         response.int_id_usuario_id = movimientos.int_id_usuario_id;
@@ -5041,7 +5042,8 @@ namespace WebApiParquimetros.Controllers
                                                 ComisionDevuelta = mov.flt_monto_porc_devolucion,
                                                 MontoTotalDevolucion = mov.flt_total_dev_con_comision,
                                                 TiempoTotal = mov.int_tiempo,
-                                                MontoTotal = mov.flt_monto_real
+                                                MontoTotal = mov.flt_monto_real,
+                                                FltMontoInicial = mov.flt_monto_inicial
                                             }).Distinct().ToListAsync();
 
 
@@ -5056,7 +5058,7 @@ namespace WebApiParquimetros.Controllers
                         Concesion = movs.Concesion,
                         SaldoAnterior = movs.SaldoAnterior,
                         Tiempo = movs.Tiempo,
-                        Monto = movs.Monto,
+                        Monto = movs.FltMontoInicial,
                         Comision = movs.Comision,
                         Cargo = movs.Cargo,
                         TiempoDevuelto = movs.TiempoDevuelto,

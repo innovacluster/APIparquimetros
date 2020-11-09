@@ -903,6 +903,43 @@ namespace WebApiParquimetros.Controllers
             }
         }
 
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("CambiarPasswordXCorreo")]
+        public async Task<ActionResult<ApplicationUser>> CambiarPasswordXCorreo([FromBody] UserInfo model, string email)
+        {
+            try
+            {
+                Match myMatch = System.Text.RegularExpressions.Regex.Match(model.Password, @"^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$");
+                if (!myMatch.Success)
+                {
+                    return Json(new { token = "Contraseña inválida" });
+                }
+                else
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+                    await _userManager.RemovePasswordAsync(user);
+                    var result = await _userManager.AddPasswordAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //ModelState.AddModelError("token", ex.Message);
+                //return BadRequest(ModelState);
+
+                return Json(new { token = ex.Message });
+            }
+        }
+
         //[HttpPost("ForgotPassword")]
         //public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
         //{
