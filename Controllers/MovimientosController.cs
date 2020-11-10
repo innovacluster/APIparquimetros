@@ -4772,18 +4772,18 @@ namespace WebApiParquimetros.Controllers
         }
 
         [HttpGet("mtdObtenerIngresosMensuales")]
-        public async Task<ActionResult<IngresosMensuales>> mtdObtenerIngresosMensuales()
+        public async Task<ActionResult<IngresosMensuales>> mtdObtenerIngresosMensuales(int mes, int anio)
         {
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            DateTime time = horaTransaccion.Value;
-            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            int mesAnterior = mes - 1;
             // DateTime time = DateTime.Now;
             // DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
 
 
-            var recargasMesAnt = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mesAnterior.Date.Month).ToListAsync();
-            var regargasUsuarios = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == time.Date.Month).ToListAsync();
+            var recargasMesAnt = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mesAnterior && x.dtmfecha.Date.Year == anio).ToListAsync();
+            var regargasUsuarios = await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mes && x.dtmfecha.Date.Year == anio).ToListAsync();
 
             double recargaUsMesAnt = recargasMesAnt.Sum(x => x.flt_monto);
             double recargasUsuarios= regargasUsuarios.Sum(x => x.flt_monto);
@@ -4791,7 +4791,7 @@ namespace WebApiParquimetros.Controllers
             double totalCobrado = recargasUsuarios + comisionRecargas;
             double saldoUsuarioMes = recargaUsMesAnt + recargasUsuarios;
 
-            var ventas = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == time.Date.Month).ToListAsync();
+            var ventas = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == mes).ToListAsync();
 
             double ventasConcesion = ventas.Sum(x=> x.flt_monto);
             double comisiones = ventas.Sum(x => x.flt_monto_porcentaje);
@@ -4820,12 +4820,12 @@ namespace WebApiParquimetros.Controllers
         }
 
         [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
-        public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion()
+        public async Task<ActionResult<List<IngresosMensualesXConcesion>>> mtdObtenerIngresosMensualesXConcesion(int mes, int anio)
         {
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            DateTime time = horaTransaccion.Value;
-            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            int mesAnterior = mes-1;
             // DateTime time = DateTime.Now;
             string nombreConcesion = "";
             int TiempoVendido = 0;
@@ -4845,7 +4845,7 @@ namespace WebApiParquimetros.Controllers
             var concesiones = await context.tbconcesiones.ToListAsync();
             foreach (var item in concesiones)
             {
-                var movimientosConcesion = await context.tbmovimientos.Where(x => x.intidconcesion_id == item.id && x.dt_hora_inicio.Month == time.Month).ToListAsync();
+                var movimientosConcesion = await context.tbmovimientos.Where(x => x.intidconcesion_id == item.id && x.dt_hora_inicio.Month == mes && x.dt_hora_inicio.Date.Year == anio).ToListAsync();
 
                 if (movimientosConcesion.Count != 0)
                 {
@@ -4889,16 +4889,10 @@ namespace WebApiParquimetros.Controllers
 
 
         [HttpGet("mtdObtenerRendicionXConcesion")]
-        public async Task<ActionResult<List<RendicionCuentas>>> mtdObtenerRendicionXConcesion(int intIdConcesion)
+        public async Task<ActionResult<List<RendicionCuentas>>> mtdObtenerRendicionXConcesion(int intIdConcesion, int mes, int anio)
         {
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            DateTime time = horaTransaccion.Value;
-            DateTime mesAnterior = time.Date.AddMonths(-1);
-            //DateTime time = DateTime.Now;
-            // DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
-
-
+           
+            int mesAnterior = mes-1;
             double monto = 0;
             int No = 1;
 
@@ -4908,7 +4902,7 @@ namespace WebApiParquimetros.Controllers
 
             var movimientosConcesion = await (from det in context.tbdetallemovimientos
                                               join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
-                                              where  mov.intidconcesion_id == intIdConcesion && det.dtm_horaInicio.Date.Month == time.Date.Month
+                                              where  mov.intidconcesion_id == intIdConcesion && det.dtm_horaInicio.Date.Month == mes && det.dtm_horaInicio.Date.Year == anio
                                               && det.flt_importe > 0 || det.flt_descuentos != 0
                                               join us in context.NetUsers on mov.int_id_usuario_id equals us.Id
                                               select new { idMov = det.int_idmovimiento, strTipo = det.str_observaciones, strUsuario = us.Email, strSo = mov.str_so, dtmFecha = det.dtm_horaInicio, ftlMonto = det.flt_importe, fltDescuentos = det.flt_descuentos, strPlaca = mov.str_placa}).ToListAsync();
@@ -4945,12 +4939,12 @@ namespace WebApiParquimetros.Controllers
         }
 
         [HttpGet("mtdObtenerResumenMensualUsuarios")]
-        public async Task<ActionResult<List<ResumenIngresosXUsuarios>>> mtdObtenerResumenMensualUsuarios()
+        public async Task<ActionResult<List<ResumenIngresosXUsuarios>>> mtdObtenerResumenMensualUsuarios(int mes, int anio)
         {
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
-            DateTime time = horaTransaccion.Value;
-            DateTime mesAnterior = time.Date.AddMonths(-1);
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horaTransaccion = par.mtdObtenerFechaMexico();
+            //DateTime time = horaTransaccion.Value;
+            int mesAnterior = mes-1;
             //DateTime time = DateTime.Now;
             //DateTime mesAnterior = DateTime.Now.Date.AddMonths(-1);
 
@@ -4963,7 +4957,7 @@ namespace WebApiParquimetros.Controllers
             {
                 var recargasMesAnt = await (from saldo in context.tbsaldo
                                             join us in context.NetUsers on saldo.int_id_usuario_trans equals item.Id
-                                            where saldo.str_tipo_recarga == "RECARGA" && saldo.dtmfecha.Date.Month == mesAnterior.Date.Month
+                                            where saldo.str_tipo_recarga == "RECARGA" && saldo.dtmfecha.Date.Month == mesAnterior
                                             select new
                                             {
                                                 Usuario = us.Email,
@@ -4975,7 +4969,7 @@ namespace WebApiParquimetros.Controllers
                                                 TotalConComision = saldo.flt_total_con_comision
                                             }).ToListAsync();
 
-                var regargasUsuario= await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == time.Date.Month && x.int_id_usuario_trans == item.Id ).ToListAsync();
+                var regargasUsuario= await context.tbsaldo.Where(x => x.str_tipo_recarga == "RECARGA" && x.dtmfecha.Date.Month == mes && x.dtmfecha.Date.Year == anio && x.int_id_usuario_trans == item.Id ).ToListAsync();
 
 
                 double recargaUsMesAnt = recargasMesAnt.Sum(x => x.FtlMonto);
@@ -4984,7 +4978,7 @@ namespace WebApiParquimetros.Controllers
                 double totalCobrado = recargasUsuario + comisionRecargas;
                 double saldoUsuarioMes = recargaUsMesAnt + recargasUsuario;
 
-                var cargosUsuarios = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == time.Date.Month && x.int_id_usuario_id == item.Id).ToListAsync();
+                var cargosUsuarios = await context.tbmovimientos.Where(x => x.dt_hora_inicio.Date.Month == mes && x.dt_hora_inicio.Date.Year == anio && x.int_id_usuario_id == item.Id).ToListAsync();
 
                 double cargos = cargosUsuarios.Sum(x => x.flt_monto);
                 double comisiones = cargosUsuarios.Sum(x => x.flt_monto_porcentaje);
@@ -5075,6 +5069,24 @@ namespace WebApiParquimetros.Controllers
 
             return lstItems.OrderBy(x => x.No).ToList();
         }
+
+        [HttpGet("mtdObtenerMovimientosXConcesionXMes")]
+        public async Task<ActionResult<List<Movimientos>>> mtdObtenerMovimientosXConcesionXMes(int intIdConcesion, int mes, int anio)
+        {
+
+            try
+            {
+
+                var movimientosConcesion = await context.tbmovimientos.Where(x => x.intidconcesion_id == intIdConcesion && x.dt_hora_inicio.Date.Month == mes && x.dt_hora_inicio.Date.Year == anio).ToListAsync();
+
+                return movimientosConcesion;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { token = ex.Message });
+            }
+        }
+
 
         [NonAction]
         private IngresosXSemana MapToValueIngresosXSem(NpgsqlDataReader reader)
