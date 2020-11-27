@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApiParquimetros.Contexts;
@@ -9,9 +10,10 @@ using WebApiParquimetros.Contexts;
 namespace WebApiParquimetros.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201124202438_tbCuidadesPara")]
+    partial class tbCuidadesPara
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,8 +294,6 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<DateTime>("created_date");
 
-                    b.Property<int?>("int_id_ciudad");
-
                     b.Property<string>("last_modified_by")
                         .HasMaxLength(250);
 
@@ -302,8 +302,6 @@ namespace WebApiParquimetros.Migrations
                     b.Property<string>("str_ciudad")
                         .HasMaxLength(200);
 
-                    b.Property<string>("str_desc_ciudad");
-
                     b.Property<string>("str_latitud")
                         .HasMaxLength(50);
 
@@ -311,8 +309,6 @@ namespace WebApiParquimetros.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("id");
-
-                    b.HasIndex("int_id_ciudad");
 
                     b.ToTable("tbciudades");
                 });
@@ -1574,13 +1570,6 @@ namespace WebApiParquimetros.Migrations
                     b.HasOne("WebApiParquimetros.Models.Zonas", "tbzonas")
                         .WithMany()
                         .HasForeignKey("intidzona");
-                });
-
-            modelBuilder.Entity("WebApiParquimetros.Models.Ciudades", b =>
-                {
-                    b.HasOne("WebApiParquimetros.Models.CatCiudades", "tbcatciudades")
-                        .WithMany()
-                        .HasForeignKey("int_id_ciudad");
                 });
 
             modelBuilder.Entity("WebApiParquimetros.Models.Comerciantes", b =>

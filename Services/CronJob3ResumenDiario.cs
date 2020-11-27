@@ -39,7 +39,8 @@ namespace WebApiParquimetros.Services
             int intIdMulta = 0;
             ParametrosController par = new ParametrosController(dbContext);
             ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            DateTime time = time1.Value;
+            //DateTime time = time1.Value;
+            DateTime time = DateTime.Now;
 
             try
             {
@@ -112,7 +113,7 @@ namespace WebApiParquimetros.Services
                                 string d = item.flt_descuentos.ToString();
                                 double flt = double.Parse(d.Trim('-'));
 
-                                dblTotalXDiaIos = dblTotalXDiaIos - item.flt_descuentos;
+                                dblTotalXDiaIos = dblTotalXDiaIos - flt;
                             }
                             if (item.str_observaciones != "DESAPARCADO")
                             {
@@ -129,7 +130,7 @@ namespace WebApiParquimetros.Services
                                 string d = item.flt_descuentos.ToString();
                                 double flt = double.Parse(d.Trim('-'));
 
-                                dblTotalXDiaAndriod = dblTotalXDiaAndriod - item.flt_descuentos;
+                                dblTotalXDiaAndriod = dblTotalXDiaAndriod - flt;
                             }
                             if (item.str_observaciones != "DESAPARCADO")
                             {

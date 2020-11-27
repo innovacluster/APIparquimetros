@@ -26,9 +26,12 @@ namespace WebApiParquimetros.Models
         public string str_latitud { get; set; }
         [StringLength(maximumLength: 50)]
         public string str_longitud { get; set; }
-        //[ForeignKey("tbconcesiones")]
-        //public int intidconcesion_id { get; set; }
-        //public Concesiones tbconcesiones { get; set; }
+        public string str_desc_ciudad { get; set; }
+
+        [ForeignKey("tbcatciudades")]
+        public System.Nullable<int> int_id_ciudad { get; set; }
+        public CatCiudades tbcatciudades { get; set; }
+
 
 
     }

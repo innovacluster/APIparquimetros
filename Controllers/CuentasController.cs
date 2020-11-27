@@ -668,13 +668,42 @@ namespace WebApiParquimetros.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("mtdConsultarUsuariosWeb")]
-        public async Task<ActionResult<IEnumerable<ApplicationUser>>> mtdConsultarUsuariosWeb()
+        public async Task<ActionResult<IEnumerable<ConsultarUsuariosWeb>>> mtdConsultarUsuariosWeb(bool status = true)
         {
             try
             {
-                var response = await context.NetUsers.Where(x => x.intIdTipoUsuario != 1).Include(x => x.tbtiposusuarios).Include(x => x.tbconcesiones).ToListAsync(); ;
+                List<ConsultarUsuariosWeb> lstItems = new List<ConsultarUsuariosWeb>();
+                var response = await context.NetUsers.Where(x => x.intIdTipoUsuario != 1 && x.bit_status == status).Include(x => x.tbtiposusuarios).Include(x => x.tbconcesiones).ToListAsync(); ;
 
-                return response;
+                var parUsuario = await context.tbparametros.FirstOrDefaultAsync(x=> x.intidconcesion_id == null);
+
+                foreach (var item in response)
+                {
+                    if (item.tbconcesiones == null)
+                    {
+                        item.tbconcesiones.str_nombre_cliente = parUsuario.str_descrip_us_admin;
+                        item.tbconcesiones.id = 0;
+
+                    }
+
+                    var element = new ConsultarUsuariosWeb()
+                    {
+                        strNombre = item.strNombre,
+                        strApellidos = item.strApellidos,
+                        userName = item.UserName,
+                        email = item.Email,
+                        bit_status = item.bit_status,
+                        int_id_concesion = item.intidconcesion_id.Value,
+                        str_nombre_cliente = item.tbconcesiones.str_nombre_cliente,
+                        strTipoUsuario = item.tbtiposusuarios.strTipoUsuario,
+
+                    };
+
+                    lstItems.Add(element);
+                }
+                return lstItems;
+            
+                
             }
             catch (Exception ex)
             {

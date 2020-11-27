@@ -49,7 +49,7 @@ namespace WebApiParquimetros.Contexts
         public DbSet<ResumenDiario> tbresumendiario { get; set; }
         public DbSet<ResumenSemanal> tbresumensemanal { get; set; }
         public DbSet<ResumenMensual> tbresumenmensual { get; set; }
-
+        public DbSet<CatCiudades> tbcatciudades{ get; set; }
         public DbSet<UsuariosConcesiones> tbusersconcesiones { get; set; }
 
 

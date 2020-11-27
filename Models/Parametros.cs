@@ -26,5 +26,7 @@ namespace WebApiParquimetros.Models
         public System.Nullable<int> intidconcesion_id { get; set; }
         public Concesiones tbconcesiones { get; set; }
 
+        public string str_descrip_us_admin { get; set; }
+
     }
 }

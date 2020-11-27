@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApiParquimetros.Contexts;
@@ -9,9 +10,10 @@ using WebApiParquimetros.Contexts;
 namespace WebApiParquimetros.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201125213641_alterCiudades3")]
+    partial class alterCiudades3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,8 +303,6 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<string>("str_ciudad")
                         .HasMaxLength(200);
-
-                    b.Property<string>("str_desc_ciudad");
 
                     b.Property<string>("str_latitud")
                         .HasMaxLength(50);

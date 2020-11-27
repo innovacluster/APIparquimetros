@@ -149,11 +149,27 @@
             <param name="dtmFechaFin"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerCompIngresosAdmin(System.DateTime,System.DateTime)">
+            <summary>
+            Obtiene COmparativa de Ingresos del Administrador
+            </summary>
+            <param name="dtmFechaInicio"></param>
+            <param name="dtmFechaFin"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerCompTransaciones(System.Int32,System.DateTime,System.DateTime)">
             <summary>
             Obtiene la comprativa de transcciones por dispositivo
             </summary>
             <param name="intIdConcesion"></param>
+            <param name="dtmFechaInicio"></param>
+            <param name="dtmFechaFin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiParquimetros.Controllers.MovimientosController.mtdObtenerCompTransacionesAdmin(System.DateTime,System.DateTime)">
+            <summary>
+            Obtiene e transacciones por dispositivo
+            </summary>
             <param name="dtmFechaInicio"></param>
             <param name="dtmFechaFin"></param>
             <returns></returns>
