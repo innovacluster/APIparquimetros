@@ -178,6 +178,9 @@ namespace WebApiParquimetros.Controllers
                     {
                         try
                         {
+
+                            var ciudad = await context.tbciudades.Where(x => x.str_ciudad == concesiones.str_ciudad).FirstOrDefaultAsync();
+
                             concesiones.dtm_fecha_ingreso = horadeTransaccion.Value;
 
                             var tipoUsuario = await context.tbtiposusuarios.FirstOrDefaultAsync(x => x.strTipoUsuario == "AGENTE VIAL");
@@ -194,13 +197,13 @@ namespace WebApiParquimetros.Controllers
                                 str_email = concesiones.str_email,
                                 str_rfc = concesiones.str_rfc,
                                 str_notas = concesiones.str_notas,
-                              
                                 int_licencias = concesiones.int_licencias,
                                 dbl_costo_licencia = concesiones.dbl_costo_licencia,
                                 dtm_fecha_ingreso = concesiones.dtm_fecha_ingreso,
                                 dtm_fecha_activacion_licencia = concesiones.dtm_fecha_activacion_licencia,
                                 str_tipo = concesiones.str_tipo,
-                                intidciudad = concesiones.intidciudad,
+                                intidciudad = ciudad.id,
+                                intidciudad_cat = concesiones.intidciudad_cat,
                                 bit_status = true
                             };
 
@@ -208,7 +211,11 @@ namespace WebApiParquimetros.Controllers
 
                             await context.SaveChangesAsync();
 
-                            foreach (var item in concesiones.cuentas)
+                            ciudad.int_id_ciudad = concesiones.intidciudad_cat;
+                            ciudad.str_desc_ciudad = concesiones.str_ciudad;
+                            await context.SaveChangesAsync();
+
+                    foreach (var item in concesiones.cuentas)
                             {
                                 var user = new ApplicationUser
                                 {
@@ -217,7 +224,7 @@ namespace WebApiParquimetros.Controllers
                                     created_date = horadeTransaccion.Value,
                                     intidconcesion_id = concesion.id,
                                     intIdTipoUsuario = tipoUsuario.id,
-                                    intidciudad = concesiones.intidciudad,
+                                    intidciudad = ciudad.id,
                                     EmailConfirmed = true,
                                     bit_status = true
 

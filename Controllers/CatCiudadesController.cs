@@ -24,16 +24,18 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                var query = await (from c in context.tbcatciudades
-                             where !(from ciudades in context.tbciudades
-                                     select ciudades.int_id_ciudad)
-                                    .Contains(c.id)
+                var catciudades = await (from c in context.tbcatciudades
                              select c).ToListAsync();
 
-            
+                var ciudades = await (from c in context.tbciudades
+                                         select c).ToListAsync();
+
+                var res = from item1 in catciudades
+                          where !(ciudades.Any(item2 => item2.int_id_ciudad == item1.id))
+                select item1;
 
 
-                return query;
+                return res.ToList();
             }
             catch (Exception ex)
             {

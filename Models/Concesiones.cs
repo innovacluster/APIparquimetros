@@ -35,8 +35,9 @@ namespace WebApiParquimetros.Models
         public DateTime dtm_fecha_activacion_licencia{ get; set; }
         public string str_tipo { get; set; }
         public int intidciudad { get; set; }
+        public int intidciudad_cat{ get; set; }
+        public string str_ciudad { get; set; }
         public Boolean bit_status { get; set; }
-
     }
 
 
@@ -97,6 +98,8 @@ namespace WebApiParquimetros.Models
         public DateTime dtm_fecha_activacion_licencia { get; set; }
         public string str_tipo { get; set; }
         public int intidciudad { get; set; }
+        public int intidciudad_cat { get; set; }
+        public string str_ciudad { get; set; }
         public Boolean bit_status { get; set; }
         public IList<ApplicationUser> cuentas { get; set; }
         public object opciones { get; set; }
