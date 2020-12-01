@@ -57,6 +57,7 @@ namespace WebApiParquimetros.Controllers
                                     id = concesion.id,
                                     str_clave = concesion.str_clave,
                                     str_tipo = concesion.str_tipo,
+                                    str_ciudad = concesion.str_ciudad,
                                     str_telefono = concesion.str_telefono,
                                     str_email = concesion.str_email,
                                     dtm_fecha_ingreso = concesion.dtm_fecha_ingreso,
@@ -203,6 +204,7 @@ namespace WebApiParquimetros.Controllers
                                 dtm_fecha_activacion_licencia = concesiones.dtm_fecha_activacion_licencia,
                                 str_tipo = concesiones.str_tipo,
                                 intidciudad = ciudad.id,
+                                str_ciudad = concesiones.str_ciudad,
                                 intidciudad_cat = concesiones.intidciudad_cat,
                                 bit_status = true
                             };
