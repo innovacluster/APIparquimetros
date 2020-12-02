@@ -311,8 +311,10 @@ namespace WebApiParquimetros.Controllers
             var opcionesC = await context.tbpcionesconcesion.Where(x => x.int_id_concesion == id).ToListAsync();
             var tarifaC =  await context.tbtarifas.FirstOrDefaultAsync(x => x.intidconcesion_id == id);
 
-            ParametrosController par = new ParametrosController(context);
-            ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
+            //ParametrosController par = new ParametrosController(context);
+            //ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
+
+            DateTime horadeTransaccion = DateTime.Now;
 
             if (concesion.id != id)
             {
@@ -366,10 +368,10 @@ namespace WebApiParquimetros.Controllers
 
                                 usuarios[i].UserName = item.Email;
                                 usuarios[i].Email = item.Email;
-                                usuarios[i].created_date = horadeTransaccion.Value;
+                                usuarios[i].created_date = horadeTransaccion;
                                 usuarios[i].intidconcesion_id = concesion.id;
                                 usuarios[i].intIdTipoUsuario = tipoUsuario.id;
-                                usuarios[i].intidciudad = concesiones.intidciudad;
+                                usuarios[i].intidciudad = concesion.intidciudad;
 
                                 await context.SaveChangesAsync();
                                 await _userManager.RemovePasswordAsync(usuarios[i]);
