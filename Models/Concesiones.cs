@@ -49,6 +49,7 @@ namespace WebApiParquimetros.Models
         public string str_razon_social { get; set; }
         public string str_domicilio { get; set; }
         public string str_ciudad { get; set; }
+        public int intidciudad_cat { get; set; }
         public string str_nombre_cliente { get; set; }
         [StringLength(maximumLength: 15)]
         [Phone]

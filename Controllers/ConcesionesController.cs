@@ -288,15 +288,6 @@ namespace WebApiParquimetros.Controllers
 
         }
 
-        [NonAction]
-        public  string mtdEncriptar(string _cadenaAencriptar)
-        {
-            string result = string.Empty;
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar);
-            result = Convert.ToBase64String(encryted);
-            return result;
-        }
-
         
 
         [HttpPut("mtdActualizaConcesion")]
@@ -311,10 +302,13 @@ namespace WebApiParquimetros.Controllers
             var opcionesC = await context.tbpcionesconcesion.Where(x => x.int_id_concesion == id).ToListAsync();
             var tarifaC =  await context.tbtarifas.FirstOrDefaultAsync(x => x.intidconcesion_id == id);
 
-            //ParametrosController par = new ParametrosController(context);
-            //ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
 
-            DateTime horadeTransaccion = DateTime.Now;
+
+            ParametrosController par = new ParametrosController(context);
+            ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            DateTime horadeTransaccion = time.Value;
+
+            //DateTime horadeTransaccion = DateTime.Now;
 
             if (concesion.id != id)
             {
@@ -328,12 +322,28 @@ namespace WebApiParquimetros.Controllers
                 {
                     try
                     {
+
+                    var ciudadC = await context.tbciudades.Where(x => x.int_id_ciudad == concesion.intidciudad_cat).FirstOrDefaultAsync();
+                    ciudadC.int_id_ciudad = null;
+                    ciudadC.str_desc_ciudad = null;
+                    await context.SaveChangesAsync();
+
+                    var ciudad = await context.tbciudades.Where(x => x.str_ciudad == concesiones.str_ciudad).FirstOrDefaultAsync();
+                    ciudad.str_desc_ciudad = ciudad.str_ciudad;
+                    ciudad.int_id_ciudad = concesiones.intidciudad_cat;
+                    await context.SaveChangesAsync();
+
+
+
                         concesion.str_clave = concesiones.str_clave;
                         concesion.str_latitud = concesiones.str_latitud;
                         concesion.str_longitud = concesiones.str_longitud;
                         concesion.str_razon_social = concesiones.str_razon_social;
                         concesion.str_domicilio = concesiones.str_domicilio;
                         concesion.str_nombre_cliente = concesiones.str_nombre_cliente;
+                        concesion.intidciudad_cat = concesiones.intidciudad_cat;
+                        concesion.intidciudad = ciudad.id;
+                        concesion.str_ciudad = concesiones.str_ciudad;
                         concesion.str_telefono = concesiones.str_telefono;
                         concesion.str_email = concesiones.str_email;
                         concesion.str_rfc = concesiones.str_rfc;
