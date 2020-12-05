@@ -52,14 +52,14 @@ namespace WebApiParquimetros
             //});
             services.AddCronJob<CronJob2MultaDP10>(c =>
             {
-               c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-           //c.TimeZoneInfo = TimeZoneInfo.Local;
+              // c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+           c.TimeZoneInfo = TimeZoneInfo.Local;
                 c.CronExpression = @" 0 22  *  * MON-SAT";
             });
             services.AddCronJob<CronJob3ResumenDiario>(c =>
             {
-            c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-             // c.TimeZoneInfo = TimeZoneInfo.Local;
+           // c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+              c.TimeZoneInfo = TimeZoneInfo.Local;
               // c.CronExpression = @" 0 23  *  * MON-SAT";
                 c.CronExpression = @" 0 23  *  * MON-SAT";
                 // c.CronExpression = @" 9 11  *  * MON-SAT";
@@ -67,18 +67,19 @@ namespace WebApiParquimetros
 
             services.AddCronJob<CronJob4ResumenSemanal>(c =>
             {
-              c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-               //c.TimeZoneInfo = TimeZoneInfo.Local;
+             // c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+               c.TimeZoneInfo = TimeZoneInfo.Local;
                 // c.CronExpression = @" 30 23  *  * SAT";
                 // c.CronExpression = @" 30 23  *  * SAT";
                 c.CronExpression = @" 30 23  *  * 6";
             });
 
             services.AddCronJob<CronJob5ResumenMensual>(c =>
+
             {
-               c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-                //c.TimeZoneInfo = TimeZoneInfo.Local;
-                c.CronExpression = @" 35 23  L  * ?";
+                //c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @" 35 23  L  * ? ";
                 //c.CronExpression = @" 47 11  *  * *";
             });
 
