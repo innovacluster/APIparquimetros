@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,21 +74,43 @@ namespace WebApiParquimetros.Controllers
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
 
-                var response = await context.tbciudades.FirstOrDefaultAsync(x => x.str_ciudad == ciudades.str_ciudad);
-                if (response == null)
+                DateTime time = horadeTransaccion.Value;
+                //DateTime time = DateTime.Now;
+
+                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
-                    ciudades.created_date = horadeTransaccion.Value;
-                    ciudades.last_modified_date = horadeTransaccion.Value;
-                    context.tbciudades.Add(ciudades);
-                    await context.SaveChangesAsync();
-                    return Ok();
+                    try
+                    {
+
+                        ciudades.created_date =time;
+                        ciudades.last_modified_date = time;
+                        ciudades.int_id_ciudad = null;
+                        context.tbciudades.Add(ciudades);
+                        await context.SaveChangesAsync();
+
+                        context.tbcatciudades.Add(new CatCiudades()
+                        {
+                            str_ciudad = ciudades.str_ciudad
+
+                        });
+
+                        await context.SaveChangesAsync();
+
+
+                        transaction.Commit();
+
+                    }
+
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        
+                        return Json(new { token = ex.Message });
+
+                    }
                 }
-                else
-                {
-                    //ModelState.AddModelError("token", "El registro ya existe");
-                    //return BadRequest(ModelState);
-                    return Json(new { token = "El registro ya existe" });
-                }
+                return Ok();
+
             }
 
             catch (Exception ex)
@@ -142,6 +165,7 @@ namespace WebApiParquimetros.Controllers
             try
             {
                 var response = await context.tbciudades.FirstOrDefaultAsync(x => x.id == id);
+                
 
                 if (response == null)
                 {

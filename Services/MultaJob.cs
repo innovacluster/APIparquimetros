@@ -41,11 +41,11 @@ namespace WebApiParquimetros.Services
             int intIdMulta = 0;
 
 
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
-            //DateTime time = time1.Value;
-           DateTime time = DateTime.Now;
+            DateTime time = time1.Value;
+           // DateTime time = DateTime.Now;
 
 
             var movimientos = await dbContext.tbmovimientos.Where(x => x.dtm_hora_fin.Date == time.Date && x.bit_status == true).ToListAsync();
