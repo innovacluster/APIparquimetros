@@ -3750,10 +3750,12 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                //ParametrosController par = new ParametrosController(context);
+                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time1 = time2.Value;
+                //DateTime time1 = time2.Value;
+
+                DateTime time1 = DateTime.Now;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
 
@@ -3841,7 +3843,7 @@ namespace WebApiParquimetros.Controllers
                         string fechaDeConsulta = anioF + "/" + strMes + "/" + strDia;
 
 
-                        using (NpgsqlCommand cmd = new NpgsqlCommand("select * from public.fncconsultarIngresosXSemDiaAndriod('" + fechaDeConsulta + "'" + ")", sql))
+                        using (NpgsqlCommand cmd = new NpgsqlCommand("select * from public.fncconsultarIngresosXSemDiaAndriodadmin('" + fechaDeConsulta + "'" + ")", sql))
                         {
 
                             await sql.OpenAsync();
@@ -4764,11 +4766,11 @@ namespace WebApiParquimetros.Controllers
             try
             {
 
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+                //ParametrosController par = new ParametrosController(context);
+                //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
-                DateTime time = time1.Value;
-                //DateTime time = DateTime.Now;
+                //DateTime time = time1.Value;
+                DateTime time = DateTime.Now;
 
                 DateTime dia = time;
                 DateTime diaAnt = dia.AddDays(-1);
@@ -4850,6 +4852,7 @@ namespace WebApiParquimetros.Controllers
 
                 if (dia.DayOfWeek.ToString() == "Monday")
                 {
+                    bolLunes = true;
                     diaAnt = dia.AddDays(-2);
                     // bolLunes = true;
                     weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
@@ -4872,19 +4875,13 @@ namespace WebApiParquimetros.Controllers
                     }
 
 
-
                     dtIos = await mtdObtenerIngresosSemIOSLAdmin(previousWeekStart, previousWeekEnd);
-
-
-
                     foreach (DataRow row in dtIos.Value.Rows)
                     {
 
                         dblSumaTotalIos += Convert.ToDouble(row["flt_total"]);
                         dblSumaAutosIos += Convert.ToInt32(row["autos"]);
                     }
-
-
                 }
 
                 else
@@ -5030,8 +5027,19 @@ namespace WebApiParquimetros.Controllers
                 if (resumenSemanal != null)
                 {
                     // dbl_total_semanal= resumenSemanal.dec_sem_total;
-                    dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
-                    dbl_porc_semana = dbl_porc_semana * 100;
+
+                    if (resumenSemanal.dec_sem_total != 0)
+                    {
+                        dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                        dbl_porc_semana = dbl_porc_semana * 100;
+                    }
+                    else if (dbl_total > 0)
+                    {
+                        dbl_porc_semana = 100;
+                    }
+
+                   
+                 
                     dbl_dferencia_cant_semanal = total_semanal_ios_and - resumenSemanal.dec_sem_total;
 
                 }
@@ -5054,7 +5062,15 @@ namespace WebApiParquimetros.Controllers
                     dec_sem_andriod = 0;
                     dec_sem_ios = 0;
                     dbl_dferencia_cant_semanal = dbl_total - resumenSemanal.dec_sem_total;
-                    dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                    if (resumenSemanal.dec_sem_total != 0)
+                    {
+                        dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                    }
+                    else if (dbl_total > 0)
+                    {
+                        dbl_porc_semana = 100;
+                    }
+                    
 
                 }
                 else
@@ -5246,9 +5262,9 @@ namespace WebApiParquimetros.Controllers
                 //DateTime startingDate = DateTime.Today;
                 DateTime previousWeekStart = DateTime.MinValue;
                 DateTime previousWeekEnd = DateTime.MinValue;
-                Double dbl_total_andriod = 0;
-                Double dbl_total_ios = 0;
-                Double dbl_total = 0;
+                int int_total_andriod = 0;
+                int dbl_total_ios = 0;
+                int dbl_total = 0;
                 //previousWeekStart = startingDate.AddDays(-15);
                 //previousWeekEnd = startingDate.AddDays(-2);
                 dtCompTransAndroid = await mtdObtenerTransSemAndroidEF(dtmFechaInicio, dtmFechaFin, intIdConcesion);
@@ -5258,17 +5274,17 @@ namespace WebApiParquimetros.Controllers
 
                 foreach (DataRow row in dtCompTransAndroid.Value.Rows)
                 {
-                    dbl_total_andriod += Convert.ToDouble(row["int_transacciones"]);
+                    int_total_andriod += Convert.ToInt32(row["int_transacciones"]);
                 }
 
                 foreach (DataRow row in dtCompTransIOS.Value.Rows)
                 {
-                    dbl_total_ios += Convert.ToDouble(row["int_transacciones"]);
+                    dbl_total_ios += Convert.ToInt32(row["int_transacciones"]);
                 }
 
-                dbl_total = dbl_total_andriod + dbl_total_ios;
+                dbl_total = int_total_andriod + dbl_total_ios;
 
-                return Json(new { dtCompTransAndroid, dtCompTransIOS, dbl_total_andriod, dbl_total_ios, dbl_total });
+                return Json(new { dtCompTransAndroid, dtCompTransIOS, int_total_andriod, dbl_total_ios, dbl_total });
             }
             catch (Exception ex)
             {
@@ -5297,9 +5313,9 @@ namespace WebApiParquimetros.Controllers
                 //DateTime startingDate = DateTime.Today;
                 DateTime previousWeekStart = DateTime.MinValue;
                 DateTime previousWeekEnd = DateTime.MinValue;
-                Double dbl_total_andriod = 0;
-                Double dbl_total_ios = 0;
-                Double dbl_total = 0;
+                int dbl_total_andriod = 0;
+                int dbl_total_ios = 0;
+                int dbl_total = 0;
                 //previousWeekStart = startingDate.AddDays(-15);
                 //previousWeekEnd = startingDate.AddDays(-2);
                 dtCompTransAndroid = await mtdObtenerTransSemAndroidEFAdmin(dtmFechaInicio, dtmFechaFin);
@@ -5309,12 +5325,12 @@ namespace WebApiParquimetros.Controllers
 
                 foreach (DataRow row in dtCompTransAndroid.Value.Rows)
                 {
-                    dbl_total_andriod += Convert.ToDouble(row["int_transacciones"]);
+                    dbl_total_andriod += Convert.ToInt32(row["int_transacciones"]);
                 }
 
                 foreach (DataRow row in dtCompTransIOS.Value.Rows)
                 {
-                    dbl_total_ios += Convert.ToDouble(row["int_transacciones"]);
+                    dbl_total_ios += Convert.ToInt32(row["int_transacciones"]);
                 }
 
                 dbl_total = dbl_total_andriod + dbl_total_ios;
@@ -5605,17 +5621,286 @@ namespace WebApiParquimetros.Controllers
             }
         }
 
-        [HttpGet("mtdObtenerResumenIngresosMensualAdmin")]
+        //[HttpGet("mtdObtenerResumenIngresosMensualAdmin")]
+        ////[NonAction]
+        //public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensualAdmin()
+        //{
+        //    try
+        //    {
+        //        //ParametrosController par = new ParametrosController(context);
+        //        //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+
+        //        //DateTime time1 = time2.Value;
+        //       DateTime time1 = DateTime.Now; ;
+        //        DateTime dtmFechaFin = time1.AddDays(-1);
+        //        DateTime dtDiaAnt = DateTime.MinValue;
+
+        //        string strresult = "";
+        //        //DateTime date;
+        //        //date = DateTime.Today.AddDays(-5);
+
+        //        //DateTime date;
+        //        //DateTime time = DateTime.Now;
+
+        //        DataTable table = new DataTable("Transsacciones");
+        //        DataColumn column;
+        //        DataRow row;
+        //        Double dblSumaMesActualTotal = 0;
+        //        Double dblSumaMesAnteriorTotal = 0;
+        //        int intSumaMesAnteriorTransTotal = 0;
+        //        Double dblPorcentajeIngresos = 0;
+        //        int intPorcentajeTransacciones = 0;
+
+
+
+        //        Double mesAntIOS = 0;
+        //        int mesAntTransIOS = 0;
+        //        int intDiaTransIOS = 0;
+        //        int intDiaTransAndroid = 0;
+        //        Double mesAntAndroid = 0;
+        //        int mesAntTransAndroid = 0;
+        //        int intTransIOSMesActual = 0;
+        //        int intTransAndroidMesActual = 0;
+        //        int intTrans = 0;
+        //        // Create first column and add to the DataTable.
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.DateTime");
+        //        column.ColumnName = "fecha";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.Double");
+        //        column.ColumnName = "flt_monto";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        DateTime[] array = new DateTime[6];
+        //        var selectedDates = new ArrayList();
+
+
+        //        DateTime fecha1 = new DateTime(time1.Year, time1.Month, 1);
+
+        //        for (var datos = fecha1; datos <= dtmFechaFin; datos = datos.AddDays(1))
+        //        {
+        //            selectedDates.Add(datos);
+        //        }
+
+        //        for (int i = 0; i < selectedDates.Count; i++)
+        //        {
+
+        //            DateTime dia1 = DateTime.Parse(selectedDates[i].ToString());
+
+
+        //            var responseDiario = await context.tbresumendiario.Where(x => x.dtm_fecha.Date == dia1.Date).ToListAsync();
+
+        //            if (responseDiario != null)
+        //            {
+        //                foreach (var item in responseDiario)
+        //                {
+        //                    row = table.NewRow();
+        //                    row["fecha"] = item.dtm_fecha;
+        //                    row["flt_monto"] = item.dec_total;
+
+        //                    table.Rows.Add(row); 
+        //                }
+        //            }
+        //            else
+        //            {
+        //                row = table.NewRow();
+        //                row["fecha"] = dia1;
+        //                row["flt_monto"] = 0;
+        //                table.Rows.Add(row);
+        //            }
+        //        }
+
+
+
+        //        var datosIOS = await mtdIngresosXDiaIosAdmin();
+        //        var datosDiaAndriod = await mtdIngresosXDiaAndroidAdmin();
+
+        //        Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
+
+        //        row = table.NewRow();
+        //        row["fecha"] = time1;
+        //        row["flt_monto"] = dbltotal;
+        //        table.Rows.Add(row);
+
+
+        //        foreach (DataRow rows in table.Rows)
+        //        {
+
+        //            dblSumaMesActualTotal += Convert.ToDouble(rows["flt_monto"]);
+
+        //        }
+
+        //        DateTime fechaFin = time1.AddMonths(-1);
+        //        DateTime fechaIni = fecha1.AddMonths(-1);
+        //        string strMes = "";
+        //        switch (fechaIni.Month)
+        //        {
+        //            case 1:
+        //                strMes = "January";
+        //                break;
+        //            case 2:
+        //                strMes = "February";
+        //                break;
+        //            case 3:
+        //                strMes = "March";
+        //                break;
+        //            case 4:
+        //                strMes = "April";
+        //                break;
+        //            case 5:
+        //                strMes = "May";
+        //                break;
+        //            case 6:
+        //                strMes = "June";
+        //                break;
+        //            case 7:
+        //                strMes = "July";
+        //                break;
+        //            case 8:
+        //                strMes = "August";
+        //                break;
+        //            case 9:
+        //                strMes = "September";
+        //                break;
+        //            case 10:
+        //                strMes = "October";
+        //                break;
+        //            case 11:
+        //                strMes = "November";
+        //                break;
+        //            case 12:
+        //                strMes = "December";
+        //                break;
+        //        }
+
+        //        var mesAntResponse = await context.tbresumenmensual.Where(x => x.str_mes == strMes).ToListAsync();
+        //        Double Porc = 0;
+        //        double conteoIngresosMesAnterior = 0;
+        //        int conteoTransMesAnterior = 0;
+
+        //        if (mesAntResponse != null)
+        //        {
+        //            foreach (var item in mesAntResponse)
+        //            {
+        //                conteoIngresosMesAnterior += item.dec_mes_total;
+        //                conteoTransMesAnterior += item.int_mes_total;
+                        
+        //            }
+
+        //            dblSumaMesAnteriorTotal = conteoIngresosMesAnterior;
+
+        //            dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
+        //            Porc = dblPorcentajeIngresos * 100;
+
+                  
+
+        //            intSumaMesAnteriorTransTotal = conteoTransMesAnterior;
+        //        }
+        //        else
+        //        {
+        //            dblSumaMesAnteriorTotal = 0.00;
+        //            dblPorcentajeIngresos = 0.00;
+        //            intSumaMesAnteriorTransTotal = 0;
+
+
+        //            Porc = 100;
+
+        //        }
+
+               
+
+        //        intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
+
+
+        //        ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEFAdmin(fecha1, time1);
+        //        ActionResult<DataTable> dtTransAndroidDia = await mtdObtenerTransSemAndroidEFAdmin(fecha1, time1);
+
+
+        //        foreach (DataRow rows in dtTransIOSDia.Value.Rows)
+        //        {
+
+        //            intTransIOSMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+        //        foreach (DataRow rows in dtTransAndroidDia.Value.Rows)
+        //        {
+
+        //            intTransAndroidMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+
+        //        int intMesActual = intTransIOSMesActual + intTransAndroidMesActual;
+
+        //        var response = await (from det in context.tbdetallemovimientos
+        //                              join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
+        //                              where det.dtm_horaInicio.Date == time1.Date
+        //                              select new DetalleIngresos()
+        //                              {
+        //                                  id = det.id,
+        //                                  int_idmovimiento = det.int_idmovimiento,
+        //                                  dt_hora_inicio = det.dtm_horaInicio,
+        //                                  ftl_importe = det.flt_importe,
+        //                                  flt_descuentos = det.flt_descuentos,
+        //                                  str_so = mov.str_so,
+        //                                  str_observaciones = det.str_observaciones,
+
+
+        //                              }).ToListAsync();
+
+        //        foreach (var item in response)
+        //        {
+        //            if (item.str_observaciones != "DESAPARCADO")
+        //            {
+        //                intTrans++;
+        //            }
+
+        //        }
+
+        //        int intTotalTransMesActual = intMesActual + intTrans;
+
+        //        if (intSumaMesAnteriorTransTotal != 0)
+        //        {
+
+        //            intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
+        //        }
+        //        else if (intTotalTransMesActual > 0)
+        //        {
+        //            intPorcentajeTransacciones = 100;
+
+        //        }
+
+        //        var data = new ResumenIngresosMensual()
+        //        {
+        //            dtFechas = table,
+        //            dblMontoMensual = dblSumaMesActualTotal,
+        //            dblPorcentajeIngresos = Porc,
+        //            intPorcentajeTransacciones = intPorcentajeTransacciones
+        //        };
+        //        return data;
+        //    }
+
+
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { token = ex.Message });
+        //    }
+        //}
+
+        [HttpGet("mtdObtenerIngresosMesActual")]
         //[NonAction]
-        public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensualAdmin()
+        public async Task<ActionResult<DataTable>> mtdObteneringresosMesActual()
         {
             try
             {
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                //ParametrosController par = new ParametrosController(context);
+                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time1 = time2.Value;
-               // DateTime time1 = DateTime.Now; ;
+                //DateTime time1 = time2.Value;
+                 DateTime time1 = DateTime.Now; ;
                 DateTime dtmFechaFin = time1.AddDays(-1);
                 DateTime dtDiaAnt = DateTime.MinValue;
 
@@ -5626,7 +5911,7 @@ namespace WebApiParquimetros.Controllers
                 //DateTime date;
                 //DateTime time = DateTime.Now;
 
-                DataTable table = new DataTable("Transsacciones");
+                DataTable table = new DataTable("IngresosMesActual");
                 DataColumn column;
                 DataRow row;
                 Double dblSumaMesActualTotal = 0;
@@ -5655,7 +5940,7 @@ namespace WebApiParquimetros.Controllers
 
                 column = new DataColumn();
                 column.DataType = System.Type.GetType("System.Double");
-                column.ColumnName = "flt_monto";
+                column.ColumnName = "flt_total";
                 column.ReadOnly = false;
                 table.Columns.Add(column);
 
@@ -5684,16 +5969,16 @@ namespace WebApiParquimetros.Controllers
                         {
                             row = table.NewRow();
                             row["fecha"] = item.dtm_fecha;
-                            row["flt_monto"] = item.dec_total;
+                            row["flt_total"] = item.dec_total;
 
-                            table.Rows.Add(row); 
+                            table.Rows.Add(row);
                         }
                     }
                     else
                     {
                         row = table.NewRow();
                         row["fecha"] = dia1;
-                        row["flt_monto"] = 0;
+                        row["flt_total"] = 0;
                         table.Rows.Add(row);
                     }
                 }
@@ -5707,20 +5992,184 @@ namespace WebApiParquimetros.Controllers
 
                 row = table.NewRow();
                 row["fecha"] = time1;
-                row["flt_monto"] = dbltotal;
+                row["flt_total"] = dbltotal;
                 table.Rows.Add(row);
+
+
+              
+
+               
+                return table;
+            }
+
+
+            catch (Exception ex)
+            {
+                return Json(new { token = ex.Message });
+            }
+        }
+
+        [HttpGet("mtdObtenerResumenIngresosMensualAdmin")]
+        //[NonAction]
+        public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensualAdmin2(int anio)
+        {
+            try
+            {
+
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+
+               DateTime time1 = time2.Value;
+                // DateTime time1 = DateTime.Now;
+                DateTime dtmFechaFin = time1.AddDays(-1);
+                Double dblSumaMesActualTotal = 0;
+                Double dblSumaMesAnteriorTotal = 0;
+                int intSumaMesAnteriorTransTotal = 0;
+                Double dblPorcentajeIngresos = 0;
+                int intPorcentajeTransacciones = 0;
+
+
+
+                Double mesAntIOS = 0;
+                int mesAntTransIOS = 0;
+                int intDiaTransIOS = 0;
+                int intDiaTransAndroid = 0;
+                Double mesAntAndroid = 0;
+                int mesAntTransAndroid = 0;
+                int intTransIOSMesActual = 0;
+                int intTransAndroidMesActual = 0;
+                int intTrans = 0;
+               // DateTime time1 = DateTime.Now;
+                DataTable table = new DataTable("IngresosXMes");
+                DataColumn column;
+                DataRow row;
+
+                // Create first column and add to the DataTable.
+                column = new DataColumn();
+                column.DataType = System.Type.GetType("System.String");
+                column.ColumnName = "Mes";
+                column.ReadOnly = false;
+                table.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = System.Type.GetType("System.Decimal");
+                column.ColumnName = "flt_total";
+                column.ReadOnly = false;
+                table.Columns.Add(column);
+
+                double dblIngresosMesActual = 0;
+
+                int mes = time1.Month;
+                int mesF = time1.Month;
+                mesF++;
+                string strMes = "";
+
+                for (int i = 1; i < mesF; i++)
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            strMes = "January";
+                            break;
+                        case 2:
+                            strMes = "February";
+                            break;
+                        case 3:
+                            strMes = "March";
+                            break;
+                        case 4:
+                            strMes = "April";
+                            break;
+                        case 5:
+                            strMes = "May";
+                            break;
+                        case 6:
+                            strMes = "June";
+                            break;
+                        case 7:
+                            strMes = "July";
+                            break;
+                        case 8:
+                            strMes = "August";
+                            break;
+                        case 9:
+                            strMes = "September";
+                            break;
+                        case 10:
+                            strMes = "October";
+                            break;
+                        case 11:
+                            strMes = "November";
+                            break;
+                        case 12:
+                            strMes = "December";
+                            break;
+                    }
+
+           
+
+                    if (i == mes)
+                    {
+                        ActionResult<DataTable> dtMesActual = await mtdObteneringresosMesActual();
+
+                        foreach (DataRow rows in dtMesActual.Value.Rows)
+                        {
+                            dblIngresosMesActual += Convert.ToInt32(rows["flt_total"]);
+                        }
+                        row = table.NewRow();
+                        row["Mes"] = strMes;
+                        row["flt_total"] = dblIngresosMesActual;
+                        table.Rows.Add(row);
+
+                    }
+
+                    else {
+                        var resumenMensual = await context.tbresumenmensual.Where(x => x.str_mes == strMes).FirstOrDefaultAsync();
+
+                        if (resumenMensual != null)
+                        {
+
+
+                            row = table.NewRow();
+                            row["Mes"] = strMes;
+                            row["flt_total"] = resumenMensual.dec_mes_total;
+
+                            table.Rows.Add(row);
+
+                        }
+                        else
+                        {
+                            row = table.NewRow();
+                            row["Mes"] = strMes;
+                            row["flt_total"] = 0;
+                            table.Rows.Add(row);
+                        }
+
+                    }
+
+                }
 
 
                 foreach (DataRow rows in table.Rows)
                 {
 
-                    dblSumaMesActualTotal += Convert.ToDouble(rows["flt_monto"]);
+                    dblSumaMesActualTotal += Convert.ToDouble(rows["flt_total"]);
 
                 }
 
+                DateTime[] array = new DateTime[6];
+                var selectedDates = new ArrayList();
+                DateTime fecha1 = new DateTime(time1.Year, time1.Month, 1);
+
+                for (var datos = fecha1; datos <= dtmFechaFin; datos = datos.AddDays(1))
+                {
+                    selectedDates.Add(datos);
+                }
+
                 DateTime fechaFin = time1.AddMonths(-1);
-                DateTime fechaIni = fecha1.AddMonths(-1);
-                string strMes = "";
+               DateTime fechaIni = fecha1.AddMonths(-1);
+                string strMesT = "";
+
                 switch (fechaIni.Month)
                 {
                     case 1:
@@ -5760,13 +6209,12 @@ namespace WebApiParquimetros.Controllers
                         strMes = "December";
                         break;
                 }
-
                 var mesAntResponse = await context.tbresumenmensual.Where(x => x.str_mes == strMes).ToListAsync();
                 Double Porc = 0;
                 double conteoIngresosMesAnterior = 0;
                 int conteoTransMesAnterior = 0;
 
-                if (mesAntResponse != null)
+                if (mesAntResponse.Count !=0)
                 {
                     foreach (var item in mesAntResponse)
                     {
@@ -5779,7 +6227,7 @@ namespace WebApiParquimetros.Controllers
                     dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
                     Porc = dblPorcentajeIngresos * 100;
 
-                  
+
 
                     intSumaMesAnteriorTransTotal = conteoTransMesAnterior;
                 }
@@ -5789,30 +6237,44 @@ namespace WebApiParquimetros.Controllers
                     dblPorcentajeIngresos = 0.00;
                     intSumaMesAnteriorTransTotal = 0;
 
-
-                    Porc = 100;
-
-                }
-
-                ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEFAdmin(fecha1, dtmFechaFin);
-                ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEFAdmin(fecha1, dtmFechaFin);
-
-
-
-                foreach (DataRow rows in dtTransIOS.Value.Rows)
-                {
-
-                    mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
-
-                }
-                foreach (DataRow rows in dtTransAndroid.Value.Rows)
-                {
-
-                    mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
+                    if (dblSumaMesActualTotal>0)
+                    {
+                        Porc = 100;
+                    }
+                   
 
                 }
 
-                intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
+                //DateTime[] array = new DateTime[6];
+                //var selectedDates = new ArrayList();
+                //DateTime dtmFechaFin = time1.AddDays(-1);
+
+                //DateTime fecha1 = new DateTime(time1.Year, time1.Month, 1);
+
+                //for (var datos = fecha1; datos <= dtmFechaFin; datos = datos.AddDays(1))
+                //{
+                //    selectedDates.Add(datos);
+                //}
+
+                //ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEFAdmin(fecha1, dtmFechaFin);
+                //ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEFAdmin(fecha1, dtmFechaFin);
+
+
+
+                //foreach (DataRow rows in dtTransIOS.Value.Rows)
+                //{
+
+                //    mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
+
+                //}
+                //foreach (DataRow rows in dtTransAndroid.Value.Rows)
+                //{
+
+                //    mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
+
+                //}
+
+                //intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
 
 
                 ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEFAdmin(fecha1, time1);
@@ -5872,6 +6334,7 @@ namespace WebApiParquimetros.Controllers
 
                 }
 
+
                 var data = new ResumenIngresosMensual()
                 {
                     dtFechas = table,
@@ -5880,14 +6343,16 @@ namespace WebApiParquimetros.Controllers
                     intPorcentajeTransacciones = intPorcentajeTransacciones
                 };
                 return data;
-            }
+                
 
+            }
 
             catch (Exception ex)
             {
                 return Json(new { token = ex.Message });
             }
         }
+
 
         [HttpGet("mtdObtenerIngresosSemAndroidEF")]
         //[NonAction]
@@ -6037,6 +6502,7 @@ namespace WebApiParquimetros.Controllers
                 return Json(new { token = ex.Message });
             }
         }
+
 
         [HttpGet("mtdObtenerTransAndroidEF")]
         //[NonAction]
