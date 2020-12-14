@@ -4766,11 +4766,11 @@ namespace WebApiParquimetros.Controllers
             try
             {
 
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
-                //DateTime time = time1.Value;
-                DateTime time = DateTime.Now;
+                DateTime time = time1.Value;
+                // DateTime time = DateTime.Now;
 
                 DateTime dia = time;
                 DateTime diaAnt = dia.AddDays(-1);
