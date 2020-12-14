@@ -6209,7 +6209,7 @@ namespace WebApiParquimetros.Controllers
                         strMes = "December";
                         break;
                 }
-                var mesAntResponse = await context.tbresumenmensual.Where(x => x.str_mes == strMes).ToListAsync();
+                var mesAntResponse = await context.tbresumenmensual.Where(x => x.str_mes == strMes && x.int_anio == anio).ToListAsync();
                 Double Porc = 0;
                 double conteoIngresosMesAnterior = 0;
                 int conteoTransMesAnterior = 0;
@@ -6591,10 +6591,10 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                //ParametrosController par = new ParametrosController(context);
+                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time1 = time2.Value;
+                //DateTime time1 = time2.Value;
                 //DateTime time1 = DateTime.Now;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
@@ -6625,7 +6625,7 @@ namespace WebApiParquimetros.Controllers
 
 
 
-                DateTime time = time1;
+               // DateTime time = time1;
                 DateTime[] array = new DateTime[6];
                 var selectedDates = new ArrayList();
                 for (var datos = dtmFechaInicio; datos <= dtmFechaFin; datos = datos.AddDays(1))
@@ -6757,11 +6757,11 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+               // ParametrosController par = new ParametrosController(context);
+               // ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time1 = time2.Value;
-               // DateTime time1 = DateTime.Now;
+               // DateTime time1 = time2.Value;
+               //// DateTime time1 = DateTime.Now;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
 
@@ -6791,7 +6791,7 @@ namespace WebApiParquimetros.Controllers
 
 
 
-                DateTime time = time1;
+                //DateTime time = time1;
                 DateTime[] array = new DateTime[6];
                 var selectedDates = new ArrayList();
                 for (var datos = dtmFechaInicio; datos <= dtmFechaFin; datos = datos.AddDays(1))
@@ -7046,7 +7046,7 @@ namespace WebApiParquimetros.Controllers
             };
         }
 
-       
+
 
 
         [HttpGet("mtdObtenerIngresosMensualesXConcesion")]
