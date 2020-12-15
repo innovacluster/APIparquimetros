@@ -6027,15 +6027,7 @@ namespace WebApiParquimetros.Controllers
                 int intSumaMesAnteriorTransTotal = 0;
                 Double dblPorcentajeIngresos = 0;
                 int intPorcentajeTransacciones = 0;
-
-
-
-                Double mesAntIOS = 0;
-                int mesAntTransIOS = 0;
-                int intDiaTransIOS = 0;
-                int intDiaTransAndroid = 0;
-                Double mesAntAndroid = 0;
-                int mesAntTransAndroid = 0;
+               
                 int intTransIOSMesActual = 0;
                 int intTransAndroidMesActual = 0;
                 int intTrans = 0;
