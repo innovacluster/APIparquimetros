@@ -7,6 +7,7 @@ namespace WebApiParquimetros.Controllers
 {
     public class ConsultarUsuariosWeb
     {
+        public string id { get; set; }
         public string strNombre { get; set; }
         public string strApellidos { get; set; }
         public string userName { get; set; }

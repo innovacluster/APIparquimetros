@@ -695,7 +695,7 @@ namespace WebApiParquimetros.Controllers
 
                     var element = new ConsultarUsuariosWeb()
                     {
-                        
+                        id = item.Id,
                         strNombre = item.strNombre,
                         strApellidos = item.strApellidos,
                         userName = item.UserName,
