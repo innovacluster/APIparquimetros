@@ -37,10 +37,10 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
-            ParametrosController par = new ParametrosController(dbContext);
-            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            DateTime time = time1.Value;
-            //DateTime time = DateTime.Now;
+            //ParametrosController par = new ParametrosController(dbContext);
+            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            //DateTime time = time1.Value;
+            DateTime time = DateTime.Now;
 
             try
             {
@@ -60,7 +60,7 @@ namespace WebApiParquimetros.Services
                 Double dec_porc_ios = 0;
                 int int_porc_andriod = 0;
                 Double dec_porc_andriod = 0;
-                int int_por_ant_total = 0;
+                Double int_por_ant_total = 0;
                 Double dec_por_ant_total = 0;
 
                 ///////
@@ -170,6 +170,7 @@ namespace WebApiParquimetros.Services
                         if (intAutosDiaAnteriorAndroid != 0)
                         {
                             int_porc_andriod = ((intTransAndriod / intAutosDiaAnteriorAndroid) - 1);
+                            int_porc_andriod = int_porc_andriod * 100;
                         }
                         else
                         {
@@ -194,7 +195,7 @@ namespace WebApiParquimetros.Services
 
                         if (autosDiaAnteriorIos.int_total != 0)
                         {
-                            int_por_ant_total = (((intSumTransacciones / autosDiaAnteriorIos.int_total) - 1));
+                            int_por_ant_total = ((intSumTransacciones / autosDiaAnteriorIos.int_total) - 1);
                             int_por_ant_total = int_por_ant_total * 100;
                         }
                         else
@@ -205,9 +206,9 @@ namespace WebApiParquimetros.Services
                             }
                         }
 
-                        if (autosDiaAnteriorIos.int_total != 0)
+                        if (autosDiaAnteriorIos.dec_total != 0)
                         {
-                            dec_por_ant_total = ((totalDia / autosDiaAnteriorIos.int_total) - 1);
+                            dec_por_ant_total = ((totalDia / autosDiaAnteriorIos.dec_total) - 1);
 
                             dec_por_ant_total = dec_por_ant_total * 100;
                         }
@@ -266,7 +267,7 @@ namespace WebApiParquimetros.Services
                                         dec_por_andriod = dec_porc_andriod,
                                         int_total = intTransIos + intTransAndriod,
                                         int_total_ant = autosDiaAnteriorIos.int_andriod + autosDiaAnteriorIos.int_ios,
-                                        int_por_ant_total = int_por_ant_total,
+                                       // int_por_ant_total = int_por_ant_total,
                                         dec_total = dblTotalXDiaIos + dblTotalXDiaAndriod,
                                         dec_total_ant = autosDiaAnteriorIos.dec_ios + autosDiaAnteriorIos.dec_andriod,
                                         dec_por_ant_total = dec_por_ant_total,
@@ -477,19 +478,19 @@ namespace WebApiParquimetros.Services
 
                 }
 
-               
+                int_porc_ios = 0;
+                dec_porc_ios = 0;
+                int_porc_andriod = 0;
+                dec_porc_andriod = 0;
+                int_por_ant_total = 0;
+                dec_por_ant_total = 0;
+                int_autos_por_andriod = 0;
+                int_autos_por_ios = 0;
             }
             catch (Exception ex)
             {
                 throw;
             }
-
-
-
-
-
-        
-
 
             return Task.CompletedTask;
 
