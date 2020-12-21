@@ -5354,584 +5354,584 @@ namespace WebApiParquimetros.Controllers
         /// </summary>
         /// <param name="intIdConcesion"></param>
         /// <returns></returns>
+        //[HttpGet("mtdObtenerResumenIngresosMensual")]
+        ////[NonAction]
+        //public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensual(int intIdConcesion)
+        //{
+        //    try
+        //    {
+        //        ParametrosController par = new ParametrosController(context);
+        //        ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+
+        //         DateTime time1 = time2.Value;
+        //        //DateTime time1 = DateTime.Now; ;
+        //        DateTime dtmFechaFin = time1.AddDays(-1);
+        //        DateTime dtDiaAnt = DateTime.MinValue;
+
+        //        string strresult = "";
+        //        //DateTime date;
+        //        //date = DateTime.Today.AddDays(-5);
+
+        //        //DateTime date;
+        //        //DateTime time = DateTime.Now;
+
+        //        DataTable table = new DataTable("Transsacciones");
+        //        DataColumn column;
+        //        DataRow row;
+        //        Double dblSumaMesActualTotal = 0;
+        //        Double dblSumaMesAnteriorTotal = 0;
+        //        int intSumaMesAnteriorTransTotal = 0;
+        //        Double dblPorcentajeIngresos = 0;
+        //        int intPorcentajeTransacciones = 0;
+
+
+
+        //        Double mesAntIOS = 0;
+        //        int mesAntTransIOS = 0;
+        //        int intDiaTransIOS = 0;
+        //        int intDiaTransAndroid = 0;
+        //        Double mesAntAndroid = 0;
+        //        int mesAntTransAndroid = 0;
+        //        int intTransIOSMesActual = 0;
+        //        int intTransAndroidMesActual = 0;
+        //        int intTrans = 0;
+        //        // Create first column and add to the DataTable.
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.DateTime");
+        //        column.ColumnName = "fecha";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.Double");
+        //        column.ColumnName = "flt_monto";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        DateTime[] array = new DateTime[6];
+        //        var selectedDates = new ArrayList();
+
+
+        //        DateTime fecha1 = new DateTime(time1.Year, time1.Month, 1);
+
+        //        for (var datos = fecha1; datos <= dtmFechaFin; datos = datos.AddDays(1))
+        //        {
+        //            selectedDates.Add(datos);
+        //        }
+
+        //        for (int i = 0; i < selectedDates.Count; i++)
+        //        {
+
+        //            DateTime dia1 = DateTime.Parse(selectedDates[i].ToString());
+
+
+        //            var responseDiario = await context.tbresumendiario.FirstOrDefaultAsync(x => x.dtm_fecha.Date == dia1.Date && x.int_id_consecion == intIdConcesion);
+
+        //            if (responseDiario != null)
+        //            {
+        //                row = table.NewRow();
+        //                row["fecha"] = responseDiario.dtm_fecha;
+        //                row["flt_monto"] = responseDiario.dec_total;
+
+        //                table.Rows.Add(row);
+        //            }
+        //            else
+        //            {
+        //                row = table.NewRow();
+        //                row["fecha"] = dia1;
+        //                row["flt_monto"] = 0;
+        //                table.Rows.Add(row);
+        //            }
+        //        }
+
+
+
+        //        var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
+        //        var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
+
+        //        Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
+
+        //        row = table.NewRow();
+        //        row["fecha"] = time1;
+        //        row["flt_monto"] = dbltotal;
+        //        table.Rows.Add(row);
+
+
+        //        foreach (DataRow rows in table.Rows)
+        //        {
+
+        //            dblSumaMesActualTotal += Convert.ToDouble(rows["flt_monto"]);
+
+        //        }
+
+        //        DateTime fechaFin = time1.AddMonths(-1);
+        //        DateTime fechaIni = fecha1.AddMonths(-1);
+        //        string strMes = "";
+        //        switch (fechaIni.Month)
+        //        {
+        //            case 1:
+        //                strMes = "January";
+        //                break;
+        //            case 2:
+        //                strMes = "February";
+        //                break;
+        //            case 3:
+        //                strMes = "March";
+        //                break;
+        //            case 4:
+        //                strMes = "April";
+        //                break;
+        //            case 5:
+        //                strMes = "May";
+        //                break;
+        //            case 6:
+        //                strMes = "June";
+        //                break;
+        //            case 7:
+        //                strMes = "July";
+        //                break;
+        //            case 8:
+        //                strMes = "August";
+        //                break;
+        //            case 9:
+        //                strMes = "September";
+        //                break;
+        //            case 10:
+        //                strMes = "October";
+        //                break;
+        //            case 11:
+        //                strMes = "November";
+        //                break;
+        //            case 12:
+        //                strMes = "December";
+        //                break;
+        //        }
+               
+        //        var mesAntResponse = await context.tbresumenmensual.FirstOrDefaultAsync(x => x.int_id_consecion == intIdConcesion && x.str_mes == strMes);
+        //        Double Porc = 0;
+
+        //        if (mesAntResponse != null)
+        //        {
+        //            dblSumaMesAnteriorTotal = mesAntResponse.dec_mes_total;
+
+        //            dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
+        //             Porc = dblPorcentajeIngresos * 100;
+
+        //            intSumaMesAnteriorTransTotal = mesAntResponse.int_mes_total;
+        //        }
+        //        else
+        //        {
+        //            dblSumaMesAnteriorTotal = 0.00;
+        //            dblPorcentajeIngresos = 0.00;
+        //            intSumaMesAnteriorTransTotal = 0;
+
+                   
+        //                Porc = 100;
+                    
+        //        }
+
+        //        ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEF(fecha1, dtmFechaFin, intIdConcesion);
+        //        ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEF(fecha1, dtmFechaFin, intIdConcesion);
+
+
+
+        //        foreach (DataRow rows in dtTransIOS.Value.Rows)
+        //        {
+
+        //            mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+        //        foreach (DataRow rows in dtTransAndroid.Value.Rows)
+        //        {
+
+        //            mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+
+        //        intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
+
+
+        //        ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEF(fecha1, time1, intIdConcesion);
+        //        ActionResult<DataTable> dtTransAndroidDia = await mtdObtenerTransSemAndroidEF(fecha1, time1, intIdConcesion);
+
+
+        //        foreach (DataRow rows in dtTransIOSDia.Value.Rows)
+        //        {
+
+        //            intTransIOSMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+        //        foreach (DataRow rows in dtTransAndroidDia.Value.Rows)
+        //        {
+
+        //            intTransAndroidMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        }
+
+        //        int intMesActual = intTransIOSMesActual + intTransAndroidMesActual;
+
+        //        var response = await (from det in context.tbdetallemovimientos
+        //                              join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
+        //                              where det.dtm_horaInicio.Date == time1.Date && mov.intidconcesion_id == intIdConcesion
+        //                              select new DetalleIngresos()
+        //                              {
+        //                                  id = det.id,
+        //                                  int_idmovimiento = det.int_idmovimiento,
+        //                                  dt_hora_inicio = det.dtm_horaInicio,
+        //                                  ftl_importe = det.flt_importe,
+        //                                  flt_descuentos = det.flt_descuentos,
+        //                                  str_so = mov.str_so,
+        //                                  str_observaciones = det.str_observaciones,
+
+
+        //                              }).ToListAsync();
+
+        //        foreach (var item in response)
+        //        {
+        //            if (item.str_observaciones != "DESAPARCADO")
+        //            {
+        //                intTrans++;
+        //            }
+
+        //        }
+
+        //        int intTotalTransMesActual = intMesActual + intTrans;
+
+        //        if (intSumaMesAnteriorTransTotal != 0)
+        //        {
+
+        //            intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
+        //        }
+        //        else if (intTotalTransMesActual > 0)
+        //        {
+        //            intPorcentajeTransacciones = 100;
+
+        //        }
+              
+        //        var data = new ResumenIngresosMensual()
+        //        {
+        //            dtFechas = table,
+        //            dblMontoMensual = dblSumaMesActualTotal,
+        //            dblPorcentajeIngresos = Porc,
+        //            intPorcentajeTransacciones = intPorcentajeTransacciones
+        //        };
+        //        return data;
+        //    }
+
+
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { token = ex.Message });
+        //    }
+        //}
+
+        //[HttpGet("mtdObtenerResumenIngresosMensual2Pruebas")]
+        ////[NonAction]
+        //public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensual2Pruebas(int intIdConcesion)
+        //{
+        //    try
+        //    {
+        //        //ParametrosController par = new ParametrosController(context);
+        //        //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+
+        //        //DateTime time1 = time2.Value;
+        //        DateTime time1 = DateTime.Now; ;
+        //        DateTime dtmFechaFin = time1.AddDays(-1);
+        //        DateTime dtDiaAnt = DateTime.MinValue;
+
+        //        string strresult = "";
+        //        DayOfWeek weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
+        //        DateTime startingDate = DateTime.Today;
+        //        DateTime previousWeekStart = DateTime.MinValue;
+        //        DateTime previousWeekEnd = DateTime.MinValue;
+        //        //DateTime date;
+        //        //date = DateTime.Today.AddDays(-5);
+
+        //        //DateTime date;
+        //        //DateTime time = DateTime.Now;
+
+        //        DataTable table = new DataTable("ResumenMensual");
+        //        DataColumn column;
+        //        DataRow row;
+        //        double totalSemanasAnte = 0;
+        //        Double dblSumaMesActualTotal = 0;
+        //        Double dblSumaMesAnteriorTotal = 0;
+        //        int intSumaMesAnteriorTransTotal = 0;
+        //        Double dblPorcentajeIngresos = 0;
+        //        int intPorcentajeTransacciones = 0;
+        //        int intNoSemana = 0;
+
+
+        //        Double mesAntIOS = 0;
+        //        int mesAntTransIOS = 0;
+        //        int intDiaTransIOS = 0;
+        //        int intDiaTransAndroid = 0;
+        //        Double mesAntAndroid = 0;
+        //        int mesAntTransAndroid = 0;
+        //        int intTransIOSMesActual = 0;
+        //        int intTransAndroidMesActual = 0;
+        //        int intTrans = 0;
+        //        // Create first column and add to the DataTable.
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.DateTime");
+        //        column.ColumnName = "fecha_inicial";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.DateTime");
+        //        column.ColumnName = "fecha_final";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.Int32");
+        //        column.ColumnName = "Semana";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //        column = new DataColumn();
+        //        column.DataType = System.Type.GetType("System.Double");
+        //        column.ColumnName = "flt_monto";
+        //        column.ReadOnly = false;
+        //        table.Columns.Add(column);
+
+        //       var responseSemanal = await context.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date.Month == time1.Date.Month && x.int_id_consecion == intIdConcesion).ToListAsync();
+
+        //        if (responseSemanal != null)
+        //        {
+        //            foreach (var item in responseSemanal)
+        //            {
+        //                row = table.NewRow();
+        //                row["fecha_inicial"] = item.dtm_fecha_inicio;
+        //                row["fecha_final"] = item.dtm_fecha_fin;
+        //                row["Semana"] = item.int_semana;
+        //                row["flt_monto"] = item.dec_sem_total;
+        //                table.Rows.Add(row);
+
+        //                intNoSemana = item.int_semana;
+        //                totalSemanasAnte += item.dec_sem_total;
+        //            }
+        //        }
+
+        //        System.Globalization.CultureInfo norwCulture = System.Globalization.CultureInfo.CreateSpecificCulture("es");
+        //        System.Globalization.Calendar cal = norwCulture.Calendar;
+        //        int intNoSemanaActual = cal.GetWeekOfYear(time1, norwCulture.DateTimeFormat.CalendarWeekRule, norwCulture.DateTimeFormat.FirstDayOfWeek);
+                
+
+        //        if (intNoSemanaActual != intNoSemana)
+        //        {
+        //            switch (time1.DayOfWeek.ToString())
+        //            {
+        //                case "Tuesday":
+        //                    dtDiaAnt = DateTime.Now.AddDays(-1);
+        //                    break;
+        //                case "Wednesday":
+        //                    dtDiaAnt = DateTime.Now.AddDays(-2);
+        //                    break;
+        //                case "Thursday":
+        //                    dtDiaAnt = DateTime.Now.AddDays(-3);
+        //                    break;
+        //                case "Friday":
+        //                    dtDiaAnt = DateTime.Now.AddDays(-4);
+        //                    break;
+        //                case "Saturday":
+        //                    dtDiaAnt = DateTime.Now.AddDays(-5);
+        //                    break;
+
+        //            }
+        //            weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
+        //            startingDate = DateTime.Today;
+        //            previousWeekStart = startingDate.AddDays(-7);
+                   
+        //            //resumenSemanal = await context.tbresumensemanal.FirstOrDefaultAsync(x => x.dtm_fecha_inicio.Date == previousWeekStart.Date && x.dtm_fecha_fin.Date == previousWeekEnd.Date);
+        //            ActionResult<DataTable> dttotalDeSemanaActual = await mtdObtenerIngresosSemAndIosEF(time1.DayOfWeek.ToString(), intIdConcesion);
+
+
+        //            var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
+        //            var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
+
+        //            Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
+        //            //double total_semana = dttotalDeSemanaActual[0].Value + dbltotal;
+
+        //            //dblSumaMesActualTotal = total_semana + totalSemanasAnte;
+
+        //            //dblSumaMesActualTotal = totalDeSemanaActual.Value;
+
+        //            //row = table.NewRow();
+        //            //row["fecha_inicial"] = dtDiaAnt;
+        //            //row["fecha_final"] = startingDate;
+        //            //row["Semana"] =intNoSemanaActual;
+        //            //row["flt_monto"] = total_semana;
+        //            //table.Rows.Add(row);
+        //        }
+
+
+
+        //        DateTime fechaFin = time1.AddMonths(-1);
+        //      //  DateTime fechaIni = fecha1.AddMonths(-1);
+        //        string strMes = "";
+        //        //switch (fechaIni.Month)
+        //        //{
+        //        //    case 1:
+        //        //        strMes = "January";
+        //        //        break;
+        //        //    case 2:
+        //        //        strMes = "February";
+        //        //        break;
+        //        //    case 3:
+        //        //        strMes = "March";
+        //        //        break;
+        //        //    case 4:
+        //        //        strMes = "April";
+        //        //        break;
+        //        //    case 5:
+        //        //        strMes = "May";
+        //        //        break;
+        //        //    case 6:
+        //        //        strMes = "June";
+        //        //        break;
+        //        //    case 7:
+        //        //        strMes = "July";
+        //        //        break;
+        //        //    case 8:
+        //        //        strMes = "August";
+        //        //        break;
+        //        //    case 9:
+        //        //        strMes = "September";
+        //        //        break;
+        //        //    case 10:
+        //        //        strMes = "October";
+        //        //        break;
+        //        //    case 11:
+        //        //        strMes = "November";
+        //        //        break;
+        //        //    case 12:
+        //        //        strMes = "December";
+        //        //        break;
+        //        //}
+
+        //        var mesAntResponse = await context.tbresumenmensual.FirstOrDefaultAsync(x => x.int_id_consecion == intIdConcesion && x.str_mes == strMes);
+        //        Double Porc = 0;
+
+        //        if (mesAntResponse != null)
+        //        {
+        //            dblSumaMesAnteriorTotal = mesAntResponse.dec_mes_total;
+
+        //            dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
+        //            Porc = dblPorcentajeIngresos * 100;
+
+        //            intSumaMesAnteriorTransTotal = mesAntResponse.int_mes_total;
+        //        }
+        //        else
+        //        {
+        //            dblSumaMesAnteriorTotal = 0.00;
+        //            dblPorcentajeIngresos = 0.00;
+        //            intSumaMesAnteriorTransTotal = 0;
+
+
+        //            Porc = 100;
+
+        //        }
+
+        //        //ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEF(fecha1, dtmFechaFin, intIdConcesion);
+        //        //ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEF(fecha1, dtmFechaFin, intIdConcesion);
+
+
+
+        //        //foreach (DataRow rows in dtTransIOS.Value.Rows)
+        //        //{
+
+        //        //    mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        //}
+        //        //foreach (DataRow rows in dtTransAndroid.Value.Rows)
+        //        //{
+
+        //        //    mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        //}
+
+        //        //intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
+
+
+        //        //ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEF(fecha1, time1, intIdConcesion);
+        //        //ActionResult<DataTable> dtTransAndroidDia = await mtdObtenerTransSemAndroidEF(fecha1, time1, intIdConcesion);
+
+
+        //        //foreach (DataRow rows in dtTransIOSDia.Value.Rows)
+        //        //{
+
+        //        //    intTransIOSMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        //}
+        //        //foreach (DataRow rows in dtTransAndroidDia.Value.Rows)
+        //        //{
+
+        //        //    intTransAndroidMesActual += Convert.ToInt32(rows["int_transacciones"]);
+
+        //        //}
+
+        //        int intMesActual = intTransIOSMesActual + intTransAndroidMesActual;
+
+        //        var response = await (from det in context.tbdetallemovimientos
+        //                              join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
+        //                              where det.dtm_horaInicio.Date == time1.Date && mov.intidconcesion_id == intIdConcesion
+        //                              select new DetalleIngresos()
+        //                              {
+        //                                  id = det.id,
+        //                                  int_idmovimiento = det.int_idmovimiento,
+        //                                  dt_hora_inicio = det.dtm_horaInicio,
+        //                                  ftl_importe = det.flt_importe,
+        //                                  flt_descuentos = det.flt_descuentos,
+        //                                  str_so = mov.str_so,
+        //                                  str_observaciones = det.str_observaciones,
+
+
+        //                              }).ToListAsync();
+
+        //        foreach (var item in response)
+        //        {
+        //            if (item.str_observaciones != "DESAPARCADO")
+        //            {
+        //                intTrans++;
+        //            }
+
+        //        }
+
+        //        int intTotalTransMesActual = intMesActual + intTrans;
+
+        //        if (intSumaMesAnteriorTransTotal != 0)
+        //        {
+
+        //            intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
+        //        }
+        //        else if (intTotalTransMesActual > 0)
+        //        {
+        //            intPorcentajeTransacciones = 100;
+
+        //        }
+
+        //        var data = new ResumenIngresosMensual()
+        //        {
+        //            dtFechas = table,
+        //            dblMontoMensual = dblSumaMesActualTotal,
+        //            dblPorcentajeIngresos = Porc,
+        //            intPorcentajeTransacciones = intPorcentajeTransacciones
+        //        };
+        //        return data;
+        //    }
+
+
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { token = ex.Message });
+        //    }
+        //}
+
         [HttpGet("mtdObtenerResumenIngresosMensual")]
         //[NonAction]
         public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensual(int intIdConcesion)
-        {
-            try
-            {
-                ParametrosController par = new ParametrosController(context);
-                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
-
-                 DateTime time1 = time2.Value;
-                //DateTime time1 = DateTime.Now; ;
-                DateTime dtmFechaFin = time1.AddDays(-1);
-                DateTime dtDiaAnt = DateTime.MinValue;
-
-                string strresult = "";
-                //DateTime date;
-                //date = DateTime.Today.AddDays(-5);
-
-                //DateTime date;
-                //DateTime time = DateTime.Now;
-
-                DataTable table = new DataTable("Transsacciones");
-                DataColumn column;
-                DataRow row;
-                Double dblSumaMesActualTotal = 0;
-                Double dblSumaMesAnteriorTotal = 0;
-                int intSumaMesAnteriorTransTotal = 0;
-                Double dblPorcentajeIngresos = 0;
-                int intPorcentajeTransacciones = 0;
-
-
-
-                Double mesAntIOS = 0;
-                int mesAntTransIOS = 0;
-                int intDiaTransIOS = 0;
-                int intDiaTransAndroid = 0;
-                Double mesAntAndroid = 0;
-                int mesAntTransAndroid = 0;
-                int intTransIOSMesActual = 0;
-                int intTransAndroidMesActual = 0;
-                int intTrans = 0;
-                // Create first column and add to the DataTable.
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.DateTime");
-                column.ColumnName = "fecha";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Double");
-                column.ColumnName = "flt_monto";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-                DateTime[] array = new DateTime[6];
-                var selectedDates = new ArrayList();
-
-
-                DateTime fecha1 = new DateTime(time1.Year, time1.Month, 1);
-
-                for (var datos = fecha1; datos <= dtmFechaFin; datos = datos.AddDays(1))
-                {
-                    selectedDates.Add(datos);
-                }
-
-                for (int i = 0; i < selectedDates.Count; i++)
-                {
-
-                    DateTime dia1 = DateTime.Parse(selectedDates[i].ToString());
-
-
-                    var responseDiario = await context.tbresumendiario.FirstOrDefaultAsync(x => x.dtm_fecha.Date == dia1.Date && x.int_id_consecion == intIdConcesion);
-
-                    if (responseDiario != null)
-                    {
-                        row = table.NewRow();
-                        row["fecha"] = responseDiario.dtm_fecha;
-                        row["flt_monto"] = responseDiario.dec_total;
-
-                        table.Rows.Add(row);
-                    }
-                    else
-                    {
-                        row = table.NewRow();
-                        row["fecha"] = dia1;
-                        row["flt_monto"] = 0;
-                        table.Rows.Add(row);
-                    }
-                }
-
-
-
-                var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
-                var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
-
-                Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
-
-                row = table.NewRow();
-                row["fecha"] = time1;
-                row["flt_monto"] = dbltotal;
-                table.Rows.Add(row);
-
-
-                foreach (DataRow rows in table.Rows)
-                {
-
-                    dblSumaMesActualTotal += Convert.ToDouble(rows["flt_monto"]);
-
-                }
-
-                DateTime fechaFin = time1.AddMonths(-1);
-                DateTime fechaIni = fecha1.AddMonths(-1);
-                string strMes = "";
-                switch (fechaIni.Month)
-                {
-                    case 1:
-                        strMes = "January";
-                        break;
-                    case 2:
-                        strMes = "February";
-                        break;
-                    case 3:
-                        strMes = "March";
-                        break;
-                    case 4:
-                        strMes = "April";
-                        break;
-                    case 5:
-                        strMes = "May";
-                        break;
-                    case 6:
-                        strMes = "June";
-                        break;
-                    case 7:
-                        strMes = "July";
-                        break;
-                    case 8:
-                        strMes = "August";
-                        break;
-                    case 9:
-                        strMes = "September";
-                        break;
-                    case 10:
-                        strMes = "October";
-                        break;
-                    case 11:
-                        strMes = "November";
-                        break;
-                    case 12:
-                        strMes = "December";
-                        break;
-                }
-               
-                var mesAntResponse = await context.tbresumenmensual.FirstOrDefaultAsync(x => x.int_id_consecion == intIdConcesion && x.str_mes == strMes);
-                Double Porc = 0;
-
-                if (mesAntResponse != null)
-                {
-                    dblSumaMesAnteriorTotal = mesAntResponse.dec_mes_total;
-
-                    dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
-                     Porc = dblPorcentajeIngresos * 100;
-
-                    intSumaMesAnteriorTransTotal = mesAntResponse.int_mes_total;
-                }
-                else
-                {
-                    dblSumaMesAnteriorTotal = 0.00;
-                    dblPorcentajeIngresos = 0.00;
-                    intSumaMesAnteriorTransTotal = 0;
-
-                   
-                        Porc = 100;
-                    
-                }
-
-                ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEF(fecha1, dtmFechaFin, intIdConcesion);
-                ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEF(fecha1, dtmFechaFin, intIdConcesion);
-
-
-
-                foreach (DataRow rows in dtTransIOS.Value.Rows)
-                {
-
-                    mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
-
-                }
-                foreach (DataRow rows in dtTransAndroid.Value.Rows)
-                {
-
-                    mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
-
-                }
-
-                intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
-
-
-                ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEF(fecha1, time1, intIdConcesion);
-                ActionResult<DataTable> dtTransAndroidDia = await mtdObtenerTransSemAndroidEF(fecha1, time1, intIdConcesion);
-
-
-                foreach (DataRow rows in dtTransIOSDia.Value.Rows)
-                {
-
-                    intTransIOSMesActual += Convert.ToInt32(rows["int_transacciones"]);
-
-                }
-                foreach (DataRow rows in dtTransAndroidDia.Value.Rows)
-                {
-
-                    intTransAndroidMesActual += Convert.ToInt32(rows["int_transacciones"]);
-
-                }
-
-                int intMesActual = intTransIOSMesActual + intTransAndroidMesActual;
-
-                var response = await (from det in context.tbdetallemovimientos
-                                      join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
-                                      where det.dtm_horaInicio.Date == time1.Date && mov.intidconcesion_id == intIdConcesion
-                                      select new DetalleIngresos()
-                                      {
-                                          id = det.id,
-                                          int_idmovimiento = det.int_idmovimiento,
-                                          dt_hora_inicio = det.dtm_horaInicio,
-                                          ftl_importe = det.flt_importe,
-                                          flt_descuentos = det.flt_descuentos,
-                                          str_so = mov.str_so,
-                                          str_observaciones = det.str_observaciones,
-
-
-                                      }).ToListAsync();
-
-                foreach (var item in response)
-                {
-                    if (item.str_observaciones != "DESAPARCADO")
-                    {
-                        intTrans++;
-                    }
-
-                }
-
-                int intTotalTransMesActual = intMesActual + intTrans;
-
-                if (intSumaMesAnteriorTransTotal != 0)
-                {
-
-                    intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
-                }
-                else if (intTotalTransMesActual > 0)
-                {
-                    intPorcentajeTransacciones = 100;
-
-                }
-              
-                var data = new ResumenIngresosMensual()
-                {
-                    dtFechas = table,
-                    dblMontoMensual = dblSumaMesActualTotal,
-                    dblPorcentajeIngresos = Porc,
-                    intPorcentajeTransacciones = intPorcentajeTransacciones
-                };
-                return data;
-            }
-
-
-            catch (Exception ex)
-            {
-                return Json(new { token = ex.Message });
-            }
-        }
-
-        [HttpGet("mtdObtenerResumenIngresosMensual2Pruebas")]
-        //[NonAction]
-        public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensual2Pruebas(int intIdConcesion)
-        {
-            try
-            {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
-
-                //DateTime time1 = time2.Value;
-                DateTime time1 = DateTime.Now; ;
-                DateTime dtmFechaFin = time1.AddDays(-1);
-                DateTime dtDiaAnt = DateTime.MinValue;
-
-                string strresult = "";
-                DayOfWeek weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
-                DateTime startingDate = DateTime.Today;
-                DateTime previousWeekStart = DateTime.MinValue;
-                DateTime previousWeekEnd = DateTime.MinValue;
-                //DateTime date;
-                //date = DateTime.Today.AddDays(-5);
-
-                //DateTime date;
-                //DateTime time = DateTime.Now;
-
-                DataTable table = new DataTable("ResumenMensual");
-                DataColumn column;
-                DataRow row;
-                double totalSemanasAnte = 0;
-                Double dblSumaMesActualTotal = 0;
-                Double dblSumaMesAnteriorTotal = 0;
-                int intSumaMesAnteriorTransTotal = 0;
-                Double dblPorcentajeIngresos = 0;
-                int intPorcentajeTransacciones = 0;
-                int intNoSemana = 0;
-
-
-                Double mesAntIOS = 0;
-                int mesAntTransIOS = 0;
-                int intDiaTransIOS = 0;
-                int intDiaTransAndroid = 0;
-                Double mesAntAndroid = 0;
-                int mesAntTransAndroid = 0;
-                int intTransIOSMesActual = 0;
-                int intTransAndroidMesActual = 0;
-                int intTrans = 0;
-                // Create first column and add to the DataTable.
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.DateTime");
-                column.ColumnName = "fecha_inicial";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.DateTime");
-                column.ColumnName = "fecha_final";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Int32");
-                column.ColumnName = "Semana";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Double");
-                column.ColumnName = "flt_monto";
-                column.ReadOnly = false;
-                table.Columns.Add(column);
-
-               var responseSemanal = await context.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date.Month == time1.Date.Month && x.int_id_consecion == intIdConcesion).ToListAsync();
-
-                if (responseSemanal != null)
-                {
-                    foreach (var item in responseSemanal)
-                    {
-                        row = table.NewRow();
-                        row["fecha_inicial"] = item.dtm_fecha_inicio;
-                        row["fecha_final"] = item.dtm_fecha_fin;
-                        row["Semana"] = item.int_semana;
-                        row["flt_monto"] = item.dec_sem_total;
-                        table.Rows.Add(row);
-
-                        intNoSemana = item.int_semana;
-                        totalSemanasAnte += item.dec_sem_total;
-                    }
-                }
-
-                System.Globalization.CultureInfo norwCulture = System.Globalization.CultureInfo.CreateSpecificCulture("es");
-                System.Globalization.Calendar cal = norwCulture.Calendar;
-                int intNoSemanaActual = cal.GetWeekOfYear(time1, norwCulture.DateTimeFormat.CalendarWeekRule, norwCulture.DateTimeFormat.FirstDayOfWeek);
-                
-
-                if (intNoSemanaActual != intNoSemana)
-                {
-                    switch (time1.DayOfWeek.ToString())
-                    {
-                        case "Tuesday":
-                            dtDiaAnt = DateTime.Now.AddDays(-1);
-                            break;
-                        case "Wednesday":
-                            dtDiaAnt = DateTime.Now.AddDays(-2);
-                            break;
-                        case "Thursday":
-                            dtDiaAnt = DateTime.Now.AddDays(-3);
-                            break;
-                        case "Friday":
-                            dtDiaAnt = DateTime.Now.AddDays(-4);
-                            break;
-                        case "Saturday":
-                            dtDiaAnt = DateTime.Now.AddDays(-5);
-                            break;
-
-                    }
-                    weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
-                    startingDate = DateTime.Today;
-                    previousWeekStart = startingDate.AddDays(-7);
-                   
-                    //resumenSemanal = await context.tbresumensemanal.FirstOrDefaultAsync(x => x.dtm_fecha_inicio.Date == previousWeekStart.Date && x.dtm_fecha_fin.Date == previousWeekEnd.Date);
-                    ActionResult<DataTable> dttotalDeSemanaActual = await mtdObtenerIngresosSemAndIosEF(time1.DayOfWeek.ToString(), intIdConcesion);
-
-
-                    var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
-                    var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
-
-                    Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
-                    //double total_semana = dttotalDeSemanaActual[0].Value + dbltotal;
-
-                    //dblSumaMesActualTotal = total_semana + totalSemanasAnte;
-
-                    //dblSumaMesActualTotal = totalDeSemanaActual.Value;
-
-                    //row = table.NewRow();
-                    //row["fecha_inicial"] = dtDiaAnt;
-                    //row["fecha_final"] = startingDate;
-                    //row["Semana"] =intNoSemanaActual;
-                    //row["flt_monto"] = total_semana;
-                    //table.Rows.Add(row);
-                }
-
-
-
-                DateTime fechaFin = time1.AddMonths(-1);
-              //  DateTime fechaIni = fecha1.AddMonths(-1);
-                string strMes = "";
-                //switch (fechaIni.Month)
-                //{
-                //    case 1:
-                //        strMes = "January";
-                //        break;
-                //    case 2:
-                //        strMes = "February";
-                //        break;
-                //    case 3:
-                //        strMes = "March";
-                //        break;
-                //    case 4:
-                //        strMes = "April";
-                //        break;
-                //    case 5:
-                //        strMes = "May";
-                //        break;
-                //    case 6:
-                //        strMes = "June";
-                //        break;
-                //    case 7:
-                //        strMes = "July";
-                //        break;
-                //    case 8:
-                //        strMes = "August";
-                //        break;
-                //    case 9:
-                //        strMes = "September";
-                //        break;
-                //    case 10:
-                //        strMes = "October";
-                //        break;
-                //    case 11:
-                //        strMes = "November";
-                //        break;
-                //    case 12:
-                //        strMes = "December";
-                //        break;
-                //}
-
-                var mesAntResponse = await context.tbresumenmensual.FirstOrDefaultAsync(x => x.int_id_consecion == intIdConcesion && x.str_mes == strMes);
-                Double Porc = 0;
-
-                if (mesAntResponse != null)
-                {
-                    dblSumaMesAnteriorTotal = mesAntResponse.dec_mes_total;
-
-                    dblPorcentajeIngresos = ((dblSumaMesActualTotal / dblSumaMesAnteriorTotal) - 1);
-                    Porc = dblPorcentajeIngresos * 100;
-
-                    intSumaMesAnteriorTransTotal = mesAntResponse.int_mes_total;
-                }
-                else
-                {
-                    dblSumaMesAnteriorTotal = 0.00;
-                    dblPorcentajeIngresos = 0.00;
-                    intSumaMesAnteriorTransTotal = 0;
-
-
-                    Porc = 100;
-
-                }
-
-                //ActionResult<DataTable> dtTransIOS = await mtdObtenerTransIOSEF(fecha1, dtmFechaFin, intIdConcesion);
-                //ActionResult<DataTable> dtTransAndroid = await mtdObtenerTransSemAndroidEF(fecha1, dtmFechaFin, intIdConcesion);
-
-
-
-                //foreach (DataRow rows in dtTransIOS.Value.Rows)
-                //{
-
-                //    mesAntTransIOS += Convert.ToInt32(rows["int_transacciones"]);
-
-                //}
-                //foreach (DataRow rows in dtTransAndroid.Value.Rows)
-                //{
-
-                //    mesAntTransAndroid += Convert.ToInt32(rows["int_transacciones"]);
-
-                //}
-
-                //intSumaMesAnteriorTransTotal = mesAntTransIOS + mesAntTransAndroid;
-
-
-                //ActionResult<DataTable> dtTransIOSDia = await mtdObtenerTransIOSEF(fecha1, time1, intIdConcesion);
-                //ActionResult<DataTable> dtTransAndroidDia = await mtdObtenerTransSemAndroidEF(fecha1, time1, intIdConcesion);
-
-
-                //foreach (DataRow rows in dtTransIOSDia.Value.Rows)
-                //{
-
-                //    intTransIOSMesActual += Convert.ToInt32(rows["int_transacciones"]);
-
-                //}
-                //foreach (DataRow rows in dtTransAndroidDia.Value.Rows)
-                //{
-
-                //    intTransAndroidMesActual += Convert.ToInt32(rows["int_transacciones"]);
-
-                //}
-
-                int intMesActual = intTransIOSMesActual + intTransAndroidMesActual;
-
-                var response = await (from det in context.tbdetallemovimientos
-                                      join mov in context.tbmovimientos on det.int_idmovimiento equals mov.id
-                                      where det.dtm_horaInicio.Date == time1.Date && mov.intidconcesion_id == intIdConcesion
-                                      select new DetalleIngresos()
-                                      {
-                                          id = det.id,
-                                          int_idmovimiento = det.int_idmovimiento,
-                                          dt_hora_inicio = det.dtm_horaInicio,
-                                          ftl_importe = det.flt_importe,
-                                          flt_descuentos = det.flt_descuentos,
-                                          str_so = mov.str_so,
-                                          str_observaciones = det.str_observaciones,
-
-
-                                      }).ToListAsync();
-
-                foreach (var item in response)
-                {
-                    if (item.str_observaciones != "DESAPARCADO")
-                    {
-                        intTrans++;
-                    }
-
-                }
-
-                int intTotalTransMesActual = intMesActual + intTrans;
-
-                if (intSumaMesAnteriorTransTotal != 0)
-                {
-
-                    intPorcentajeTransacciones = ((intTotalTransMesActual / intSumaMesAnteriorTransTotal) - 1);
-                }
-                else if (intTotalTransMesActual > 0)
-                {
-                    intPorcentajeTransacciones = 100;
-
-                }
-
-                var data = new ResumenIngresosMensual()
-                {
-                    dtFechas = table,
-                    dblMontoMensual = dblSumaMesActualTotal,
-                    dblPorcentajeIngresos = Porc,
-                    intPorcentajeTransacciones = intPorcentajeTransacciones
-                };
-                return data;
-            }
-
-
-            catch (Exception ex)
-            {
-                return Json(new { token = ex.Message });
-            }
-        }
-
-        [HttpGet("mtdObtenerResumenIngresosMensual3Pruebas")]
-        //[NonAction]
-        public async Task<ActionResult<ResumenIngresosMensual>> mtdObtenerResumenIngresosMensual3Pruebas(int intIdConcesion)
         {
             try
             {
