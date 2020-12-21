@@ -371,6 +371,8 @@ namespace WebApiParquimetros.Models
         public int intTransIos { get; set; }
         public Double dblingresosIOS { get; set; }
     }
+
+ 
     public class IngresosXDiaAndroid
     {
         public int intTransAndroid { get; set; }

@@ -284,8 +284,25 @@ namespace WebApiParquimetros.Services
 
                                     throw;
                                 }
+                               
+                                dblTotalXDiaIos = 0;
+                                dblTotalXDiaAndriod = 0;
+                                intTransIos = 0;
+                                intTransAndriod = 0;
                                 intAutosSemAnteriorIos = 0;
                                 intAutosSemAnteriorAndroid = 0;
+                                totalIngresos = 0;
+                                intNoSemanaActual = 0;
+                                dia = time;
+                                //----------------------
+                                int_mes_por_ios = 0;
+                                int_mes_autos_por_ios = 0;
+                                dec_mes_por_ios = 0;
+                                int_mes_por_andriod = 0;
+                                int_mes_autos_por_andriod = 0;
+                                dec_mes_por_andriod = 0;
+                                int_mes_por_total = 0;
+                                dec_mes_por_total = 0;
                             }
                         });
 
@@ -414,26 +431,28 @@ namespace WebApiParquimetros.Services
 
                     }
 
+                    dblTotalXDiaIos = 0;
+                    dblTotalXDiaAndriod = 0;
+                    intTransIos = 0;
+                    intTransAndriod = 0;
+                    intAutosSemAnteriorIos = 0;
+                    intAutosSemAnteriorAndroid = 0;
+                    totalIngresos = 0;
+                    intNoSemanaActual = 0;
+                    dia = time;
+                    //----------------------
+                    int_mes_por_ios = 0;
+                    int_mes_autos_por_ios = 0;
+                    dec_mes_por_ios = 0;
+                    int_mes_por_andriod = 0;
+                    int_mes_autos_por_andriod = 0;
+                    dec_mes_por_andriod = 0;
+                    int_mes_por_total = 0;
+                    dec_mes_por_total = 0;
+
                 }
 
-                 dblTotalXDiaIos = 0;
-                 dblTotalXDiaAndriod = 0;
-                 intTransIos = 0;
-                 intTransAndriod = 0;
-                 intAutosSemAnteriorIos = 0;
-                 intAutosSemAnteriorAndroid = 0;
-                 totalIngresos = 0;
-                 intNoSemanaActual = 0;
-                 dia = time;
-                //----------------------
-                 int_mes_por_ios = 0;
-                 int_mes_autos_por_ios = 0;
-                 dec_mes_por_ios = 0;
-                 int_mes_por_andriod = 0;
-                 int_mes_autos_por_andriod = 0;
-                 dec_mes_por_andriod = 0;
-                 int_mes_por_total = 0;
-                 dec_mes_por_total = 0;
+                
 
 
             }

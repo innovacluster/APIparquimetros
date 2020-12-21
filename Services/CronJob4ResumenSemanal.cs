@@ -246,10 +246,23 @@ namespace WebApiParquimetros.Services
                             }
                         });
 
-
-                       
+                        dblTotalXDiaIos = 0;
+                        dblTotalXDiaAndriod = 0;
+                        intTransIos = 0;
+                        intTransAndriod = 0;
                         intAutosSemAnteriorIos = 0;
                         intAutosSemAnteriorAndroid = 0;
+                        totalIngresos = 0;
+                        intNoSemanaActual = 0;
+                        /////////////
+                        int_sem_por_ios = 0;
+                        int_sem_autos_por_ios = 0;
+                        dec_sem_por_ios = 0;
+                        int_sem_por_andriod = 0;
+                        int_sem_autos_por_andriod = 0;
+                        dec_sem_por_andriod = 0;
+                        int_sem_por_ant = 0;
+                        dec_sem_por_total = 0;
                     }
                     else
                     {
@@ -370,31 +383,30 @@ namespace WebApiParquimetros.Services
                             }
                         });
 
-                        
+
+                        dblTotalXDiaIos = 0;
+                        dblTotalXDiaAndriod = 0;
+                        intTransIos = 0;
+                        intTransAndriod = 0;
                         intAutosSemAnteriorIos = 0;
                         intAutosSemAnteriorAndroid = 0;
+                        totalIngresos = 0;
+                        intNoSemanaActual = 0;
+                        /////////////
+                        int_sem_por_ios = 0;
+                        int_sem_autos_por_ios = 0;
+                        dec_sem_por_ios = 0;
+                        int_sem_por_andriod = 0;
+                        int_sem_autos_por_andriod = 0;
+                        dec_sem_por_andriod = 0;
+                        int_sem_por_ant = 0;
+                        dec_sem_por_total = 0;
 
                     }
 
                 }
 
-                 dblTotalXDiaIos = 0;
-                 dblTotalXDiaAndriod = 0;
-                 intTransIos = 0;
-                 intTransAndriod = 0;
-                 intAutosSemAnteriorIos = 0;
-                 intAutosSemAnteriorAndroid = 0;
-                 totalIngresos = 0;
-                 intNoSemanaActual = 0;
-                /////////////
-                 int_sem_por_ios = 0;
-                 int_sem_autos_por_ios = 0;
-                 dec_sem_por_ios = 0;
-                 int_sem_por_andriod = 0;
-                 int_sem_autos_por_andriod = 0;
-                 dec_sem_por_andriod = 0;
-                 int_sem_por_ant = 0;
-                 dec_sem_por_total = 0;
+                
 
             }
             catch (Exception ex)

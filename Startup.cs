@@ -52,19 +52,19 @@ namespace WebApiParquimetros
             //});
             services.AddCronJob<CronJob2MultaDP10>(c =>
             {
-             c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-                // c.TimeZoneInfo = TimeZoneInfo.Local;
+            // c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+               c.TimeZoneInfo = TimeZoneInfo.Local;
                 c.CronExpression = @" 0 22  *  * MON-SAT";
             });
             services.AddCronJob<CronJob3ResumenDiario>(c =>
             {
              c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-            //   c.TimeZoneInfo = TimeZoneInfo.Local;
+             //c.TimeZoneInfo = TimeZoneInfo.Local;
               // c.CronExpression = @" 0 23  *  * MON-SAT";
 
                 c.CronExpression = @" 0 23  *  * MON-SAT";
 
-               // c.CronExpression = @" 31 16  *  * MON-SAT";
+                //c.CronExpression = @" 05 15  *  * MON-SAT";
                 // c.CronExpression = @" 9 11  *  * MON-SAT";
             });
 

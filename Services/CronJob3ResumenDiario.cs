@@ -290,6 +290,16 @@ namespace WebApiParquimetros.Services
                             }
                         });
 
+                        int_porc_ios = 0;
+                        dec_porc_ios = 0;
+                        int_porc_andriod = 0;
+                        dec_porc_andriod = 0;
+                        int_por_ant_total = 0;
+                        dec_por_ant_total = 0;
+                        int_autos_por_andriod = 0;
+                        int_autos_por_ios = 0;
+                        dblTotalXDiaIos = 0;
+                        dblTotalXDiaAndriod = 0;
 
                     }
                     else
@@ -475,17 +485,22 @@ namespace WebApiParquimetros.Services
 
 
                     }
+                    int_porc_ios = 0;
+                    dec_porc_ios = 0;
+                    int_porc_andriod = 0;
+                    dec_porc_andriod = 0;
+                    int_por_ant_total = 0;
+                    dec_por_ant_total = 0;
+                    int_autos_por_andriod = 0;
+                    int_autos_por_ios = 0;
+                    dblTotalXDiaIos = 0;
+                    dblTotalXDiaAndriod = 0;
+
+
 
                 }
 
-                int_porc_ios = 0;
-                dec_porc_ios = 0;
-                int_porc_andriod = 0;
-                dec_porc_andriod = 0;
-                int_por_ant_total = 0;
-                dec_por_ant_total = 0;
-                int_autos_por_andriod = 0;
-                int_autos_por_ios = 0;
+               
             }
             catch (Exception ex)
             {
