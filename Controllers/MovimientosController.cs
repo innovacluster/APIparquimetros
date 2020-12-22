@@ -3256,7 +3256,7 @@ namespace WebApiParquimetros.Controllers
             {
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> fechaMexico = par.mtdObtenerFechaMexico();
-               DateTime time = fechaMexico.Value;
+                DateTime time = fechaMexico.Value;
                 int intTransIos = 0;
 
                   //DateTime time = DateTime.Now;
@@ -3473,8 +3473,9 @@ namespace WebApiParquimetros.Controllers
             {
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-                //DateTime time = DateTime.Now;
                 DateTime time1 = time.Value;
+                //DateTime time1 = DateTime.Now;
+               
 
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
@@ -4048,9 +4049,9 @@ namespace WebApiParquimetros.Controllers
             {
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
-
-                //DateTime time2 = DateTime.Now;
                 DateTime time1 = time2.Value;
+                //DateTime time1 = DateTime.Now;
+
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
                 {
@@ -4324,6 +4325,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
                 DateTime time1 = time2.Value;
+                //DateTime time1 = DateTime.Now;
                 DateTime dtDiaAnt = DateTime.MinValue;
 
                 string strresult = "";
@@ -4776,7 +4778,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
                 DateTime time = time1.Value;
-               // DateTime time = DateTime.Now;
+                //DateTime time = DateTime.Now;
 
                 DateTime dia = time;
                 DateTime diaAnt = dia.AddDays(-1);
