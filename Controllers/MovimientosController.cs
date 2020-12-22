@@ -3053,6 +3053,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
                 DateTime timeDate = time.Value;
+               // DateTime timeDate = DateTime.Now;
                 double dblTotalXDiaAndriod = 0;
                 int intTransAndroid = 0;
 
@@ -3118,8 +3119,8 @@ namespace WebApiParquimetros.Controllers
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
 
-                // DateTime timeDate = time.Value;
-                DateTime timeDate = DateTime.Now;
+                DateTime timeDate = time.Value;
+                //DateTime timeDate = DateTime.Now;
 
 
                 double dblTotalXDiaAndriod = 0;
@@ -3188,12 +3189,12 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime>fechaMexico = par.mtdObtenerFechaMexico();
-                //DateTime time = fechaMexico.Value;
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> fechaMexico = par.mtdObtenerFechaMexico();
+                DateTime time = fechaMexico.Value;
                 int intTransIos = 0;
             
-               DateTime time = DateTime.Now;
+               //DateTime time = DateTime.Now;
                 double dblTotalXDiaIos = 0;
 
                 var response = await (from det in context.tbdetallemovimientos
@@ -3255,10 +3256,10 @@ namespace WebApiParquimetros.Controllers
             {
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> fechaMexico = par.mtdObtenerFechaMexico();
-               // DateTime time = fechaMexico.Value;
+               DateTime time = fechaMexico.Value;
                 int intTransIos = 0;
 
-                  DateTime time = DateTime.Now;
+                  //DateTime time = DateTime.Now;
                 double dblTotalXDiaIos = 0;
 
                 var response = await (from det in context.tbdetallemovimientos
@@ -3321,28 +3322,28 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-                DateTime time = DateTime.Now;
-                DateTime time1 = time;
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+                //DateTime time = DateTime.Now;
+                DateTime time1 = time.Value;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
                 {
                     case "Tuesday":
-                         dtDiaAnt = DateTime.Now.AddDays(-1);
+                         dtDiaAnt = time1.AddDays(-1);
                         break;
                     case "Wednesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-2);
+                        dtDiaAnt = time1.AddDays(-2);
                         break;
                     case "Thursday":
-                        dtDiaAnt = DateTime.Now.AddDays(-3);
+                        dtDiaAnt = time1.AddDays(-3);
                         break;
                     case "Friday":
-                        dtDiaAnt = DateTime.Now.AddDays(-4);
+                        dtDiaAnt = time1.AddDays(-4);
                         break;
                     case "Saturday":
-                        dtDiaAnt = DateTime.Now.AddDays(-5);
+                        dtDiaAnt = time1.AddDays(-5);
                         break;
                      
                 }
@@ -3379,7 +3380,7 @@ namespace WebApiParquimetros.Controllers
                 //DateTime time = time1;
                 DateTime[] array = new DateTime[6];
                 var selectedDates = new ArrayList();
-                for (var datos = dtDiaAnt; datos <= time; datos = datos.AddDays(1))
+                for (var datos = dtDiaAnt; datos <= time1; datos = datos.AddDays(1))
                 {
                     selectedDates.Add(datos);
                 }
@@ -3470,28 +3471,28 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
-                DateTime time = DateTime.Now;
-                DateTime time1 = time;
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+                //DateTime time = DateTime.Now;
+                DateTime time1 = time.Value;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
                 {
                     case "Tuesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-1);
+                        dtDiaAnt = time1.AddDays(-1);
                         break;
                     case "Wednesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-2);
+                        dtDiaAnt = time1.AddDays(-2);
                         break;
                     case "Thursday":
-                        dtDiaAnt = DateTime.Now.AddDays(-3);
+                        dtDiaAnt = time1.AddDays(-3);
                         break;
                     case "Friday":
-                        dtDiaAnt = DateTime.Now.AddDays(-4);
+                        dtDiaAnt = time1.AddDays(-4);
                         break;
                     case "Saturday":
-                        dtDiaAnt = DateTime.Now.AddDays(-5);
+                        dtDiaAnt = time1.AddDays(-5);
                         break;
 
                 }
@@ -3528,7 +3529,7 @@ namespace WebApiParquimetros.Controllers
                 //DateTime time = time1;
                 DateTime[] array = new DateTime[6];
                 var selectedDates = new ArrayList();
-                for (var datos = dtDiaAnt; datos <= time; datos = datos.AddDays(1))
+                for (var datos = dtDiaAnt; datos <= time1; datos = datos.AddDays(1))
                 {
                     selectedDates.Add(datos);
                 }
@@ -3755,12 +3756,12 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                //DateTime time1 = time2.Value;
+                DateTime time1 = time2.Value;
 
-                DateTime time1 = DateTime.Now;
+                //DateTime time1 = DateTime.Now;
 
                 DateTime dtDiaAnt = DateTime.MinValue;
 
@@ -3894,28 +3895,28 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time2 = DateTime.Now;
-                DateTime time1 = time2;
+                //DateTime time2 = DateTime.Now;
+                DateTime time1 = time2.Value;
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
                 {
                     case "Tuesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-1);
+                        dtDiaAnt = time1.AddDays(-1);
                         break;
                     case "Wednesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-2);
+                        dtDiaAnt = time1.AddDays(-2);
                         break;
                     case "Thursday":
-                        dtDiaAnt = DateTime.Now.AddDays(-3);
+                        dtDiaAnt = time1.AddDays(-3);
                         break;
                     case "Friday":
-                        dtDiaAnt = DateTime.Now.AddDays(-4);
+                        dtDiaAnt = time1.AddDays(-4);
                         break;
                     case "Saturday":
-                        dtDiaAnt = DateTime.Now.AddDays(-5);
+                        dtDiaAnt = time1.AddDays(-5);
                         break;
 
                 }
@@ -4045,28 +4046,28 @@ namespace WebApiParquimetros.Controllers
         {
             try
             {
-                //ParametrosController par = new ParametrosController(context);
-                //ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
+                ParametrosController par = new ParametrosController(context);
+                ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
-                DateTime time2 = DateTime.Now;
-                DateTime time1 = time2;
+                //DateTime time2 = DateTime.Now;
+                DateTime time1 = time2.Value;
                 DateTime dtDiaAnt = DateTime.MinValue;
                 switch (dia)
                 {
                     case "Tuesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-1);
+                        dtDiaAnt = time1.AddDays(-1);
                         break;
                     case "Wednesday":
-                        dtDiaAnt = DateTime.Now.AddDays(-2);
+                        dtDiaAnt = time1.AddDays(-2);
                         break;
                     case "Thursday":
-                        dtDiaAnt = DateTime.Now.AddDays(-3);
+                        dtDiaAnt = time1.AddDays(-3);
                         break;
                     case "Friday":
-                        dtDiaAnt = DateTime.Now.AddDays(-4);
+                        dtDiaAnt = time1.AddDays(-4);
                         break;
                     case "Saturday":
-                        dtDiaAnt = DateTime.Now.AddDays(-5);
+                        dtDiaAnt = time1.AddDays(-5);
                         break;
 
                 }
@@ -4451,7 +4452,7 @@ namespace WebApiParquimetros.Controllers
                 DateTime dia = time.Value;
                 DateTime diaAnt = dia.AddDays(-1);
                 DateTime date;
-                date = DateTime.Today.AddDays(-5);
+                date = dia.AddDays(-5);
                 int intmesActual = dia.Month;
                 int intmesAnt = intmesActual - 1;
                 Double dbl_porc_semana = 0;
@@ -4775,7 +4776,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
                 DateTime time = time1.Value;
-                // DateTime time = DateTime.Now;
+               // DateTime time = DateTime.Now;
 
                 DateTime dia = time;
                 DateTime diaAnt = dia.AddDays(-1);
@@ -4786,12 +4787,11 @@ namespace WebApiParquimetros.Controllers
                 Double dbl_porc_semana = 0;
                 Boolean bolLunes = false;
                 ResumenSemanal resumenSemanal = null;
-                ResumenSemanalAct resumenSemActual = null;
+              
                 Double dblSumaTotalAndroid = 0;
                 int dblSumaAutosAndroid = 0;
                 Double dblSumaTotalIos = 0;
                 int dblSumaAutosIos = 0;
-                Double dbl_por_dia_ios = 0;
                 Double dbl_por_trans_ios = 0;
                 Double dblC_cant_ios = 0;
                 Double dbl_por_trans_android = 0;
@@ -4806,7 +4806,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DataTable> dtIos = null;
              
                 DayOfWeek weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
-                DateTime startingDate = DateTime.Today;
+                DateTime startingDate = time;
                 DateTime previousWeekStart = DateTime.MinValue;
                 DateTime previousWeekEnd = DateTime.MinValue;
 
@@ -4928,7 +4928,7 @@ namespace WebApiParquimetros.Controllers
                     weekStart = DayOfWeek.Monday; // or Sunday, or whenever 
                     startingDate = DateTime.Today;
                     //DateTime previousWeekEnd = DateTime.MinValue;
-                    Double dec_por_sem = 0;
+                   
                     while (startingDate.DayOfWeek != weekStart)
                         startingDate = startingDate.AddDays(-1);
 
@@ -5054,9 +5054,9 @@ namespace WebApiParquimetros.Controllers
                     {
                         dbl_porc_semana = 100;
                     }
-                    else {
-                        dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
-                    }
+                    //else {
+                    //    dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                    //}
                 }
 
                 //dblC_cant_android = 100;
@@ -5123,8 +5123,6 @@ namespace WebApiParquimetros.Controllers
 
 
                 };
-
-
 
                 return datos;
                 //return Json(new { dblDiaIOS,dblDiaAndriod,dblC_cant_ios, dblC_cant_android, resumendiario, resumenSemanal, resumenMensual });
@@ -5939,7 +5937,7 @@ namespace WebApiParquimetros.Controllers
                 ActionResult<DateTime> time2 = par.mtdObtenerFechaMexico();
 
                 DateTime time1 = time2.Value;
-               // DateTime time1 = DateTime.Now; ;
+                //DateTime time1 = DateTime.Now; ;
                 DateTime dtmFechaFin = time1.AddDays(-1);
                 DateTime dtDiaAnt = DateTime.MinValue;
 
@@ -5968,15 +5966,7 @@ namespace WebApiParquimetros.Controllers
                 int intDiasAgregar = 0;
                 int NoSemPrimeraDelMes = 0;
 
-                Double mesAntIOS = 0;
-                int mesAntTransIOS = 0;
-                int intDiaTransIOS = 0;
-                int intDiaTransAndroid = 0;
-                Double mesAntAndroid = 0;
-                int mesAntTransAndroid = 0;
-                int intTransIOSMesActual = 0;
-                int intTransAndroidMesActual = 0;
-                int intTrans = 0;
+               
 
                 double total_semana = 0;
                 int total_semana_trans = 0;
@@ -6044,7 +6034,7 @@ namespace WebApiParquimetros.Controllers
                 columnR.ReadOnly = false;
                 ResumenM.Columns.Add(columnR);
 
-                DateTime date = DateTime.Now;
+                DateTime date =time1;
 
                 //Asi obtenemos el primer dia del mes actual
 
@@ -6197,16 +6187,16 @@ namespace WebApiParquimetros.Controllers
                             ActionResult<DataTable> totalDeSemanaActual = await mtdObtenerIngresosSemAndIosEF(time1.DayOfWeek.ToString(), intIdConcesion);
 
 
-                            var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
-                            var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
+                            //var datosIOS = await mtdIngresosXDiaIos(intIdConcesion);
+                            //var datosDiaAndriod = await mtdIngresosXDiaAndroid(intIdConcesion);
 
-                            Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
-                            int dbltotalT = datosIOS.intTransIos + datosDiaAndriod.intTransAndroid;
+                            //Double dbltotal = datosIOS.dblingresosIOS + datosDiaAndriod.dblingresosAndroid;
+                            //int dbltotalT = datosIOS.intTransIos + datosDiaAndriod.intTransAndroid;
 
                             foreach (DataRow totSemAct in totalDeSemanaActual.Value.Rows)
                             {
-                                total_semana += Convert.ToDouble(totSemAct["total"]) + dbltotal;
-                                total_semana_trans += Convert.ToInt32(totSemAct["transacciones"]) + dbltotalT;
+                                total_semana += Convert.ToDouble(totSemAct["total"]) /*+ dbltotal*/;
+                                total_semana_trans += Convert.ToInt32(totSemAct["transacciones"])/* + dbltotalT*/;
                             }
 
                             intSumaTransActualTotal = total_semana_trans + totalTransaccionesAnte;
@@ -6220,7 +6210,7 @@ namespace WebApiParquimetros.Controllers
                             rowR["fecha_final"] = rowRecor["fecha_final"].ToString(); ;
                             rowR["Semana"] = sem;
                             rowR["flt_monto"] = total_semana;
-                            rowR["intTransacciones"] = 0;
+                            rowR["intTransacciones"] = total_semana_trans;
                             ResumenM.Rows.Add(rowR);
                         }
                         else if (sem == NoSemPrimeraDelMes)

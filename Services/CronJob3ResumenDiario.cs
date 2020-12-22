@@ -37,10 +37,10 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            //DateTime time = time1.Value;
-            DateTime time = DateTime.Now;
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+            //DateTime time = DateTime.Now;
 
             try
             {
