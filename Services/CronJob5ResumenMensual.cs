@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,6 +44,8 @@ namespace WebApiParquimetros.Services
             ParametrosController par = new ParametrosController(dbContext);
             ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
             DateTime time = time1.Value;
+            //DateTime time = DateTime.Now;
+            string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(time.Month);
 
             try
             {
@@ -65,76 +68,99 @@ namespace WebApiParquimetros.Services
                 int int_mes_por_total = 0;
                 Double dec_mes_por_total = 0;
 
+                string mesInsertar = "";
 
+                int sumaTransMesIos = 0;
+                int sumaTransMesAndroid = 0;
+                int sumaAutosIos = 0;
+                int sumaAutosAndriod = 0;
+                double dblingrMesIOs = 0;
+                double dblingrMesAndroid = 0;
+
+                int intMesAnt = dia.Month - 1;
+
+                string strMes = "";
+                switch (intMesAnt)
+                {
+                    case 1:
+                        strMes = "January";
+                        break;
+                    case 2:
+                        strMes = "February";
+                        break;
+                    case 3:
+                        strMes = "March";
+                        break;
+                    case 4:
+                        strMes = "April";
+                        break;
+                    case 5:
+                        strMes = "May";
+                        break;
+                    case 6:
+                        strMes = "June";
+                        break;
+                    case 7:
+                        strMes = "July";
+                        break;
+                    case 8:
+                        strMes = "August";
+                        break;
+                    case 9:
+                        strMes = "September";
+                        break;
+                    case 10:
+                        strMes = "October";
+                        break;
+                    case 11:
+                        strMes = "November";
+                        break;
+                    case 12:
+                        strMes = "December";
+                        break;
+                }
+
+
+               
+
+                intMesAnt += 1;
+                //Asi obtenemos el primer dia del mes actual
+                DateTime oPrimerDiaDelMes = new DateTime(dia.Year, intMesAnt, 1);
+
+                DateTime oPrimerDiaDelMesInserta = oPrimerDiaDelMes;
+                //Y de la siguiente forma obtenemos el ultimo dia del mes
+                //agregamos 1 mes al objeto anterior y restamos 1 día.
+                //oPrimerDiaDelMes = oPrimerDiaDelMes.AddMonths(1).AddDays(-1);
+                DateTime oUltimoDiaDelMes = oPrimerDiaDelMes.AddMonths(1).AddDays(-1);
                 var concesiones = dbContext.tbconcesiones.ToList();
 
                 foreach (var concns in concesiones)
                 {
-                    int intMesAnt = dia.Month - 1;
-
-                    string strMes = "";
-                    switch (intMesAnt)
-                    {
-                        case 1:
-                            strMes = "January";
-                            break;
-                        case 2:
-                            strMes = "February";
-                            break;
-                        case 3:
-                            strMes = "March";
-                            break;
-                        case 4:
-                            strMes = "April";
-                            break;
-                        case 5:
-                            strMes = "May";
-                            break;
-                        case 6:
-                            strMes = "June";
-                            break;
-                        case 7:
-                            strMes = "July";
-                            break;
-                        case 8:
-                            strMes = "August";
-                            break;
-                        case 9:
-                            strMes = "September";
-                            break;
-                        case 10:
-                            strMes = "October";
-                            break;
-                        case 11:
-                            strMes = "November";
-                            break;
-                        case 12:
-                            strMes = "December";
-                            break;
-                    }
-                    //Asi obtenemos el primer dia del mes actual
-                    DateTime oPrimerDiaDelMes = new DateTime(dia.Year, intMesAnt, 1);
-
-                    //Y de la siguiente forma obtenemos el ultimo dia del mes
-                    //agregamos 1 mes al objeto anterior y restamos 1 día.
-                    DateTime oUltimoDiaDelMes = oPrimerDiaDelMes.AddMonths(1).AddDays(-1);
-
-                    var resumenMesAnterior =  dbContext.tbresumenmensual.FirstOrDefault(x => x.str_mes == strMes && x.int_id_consecion == concns.id);
-
+                    var resumenMesAnterior = dbContext.tbresumenmensual.FirstOrDefault(x => x.str_mes == strMes && x.int_id_consecion == concns.id);
 
                     if (resumenMesAnterior != null)
                     {
                         intAutosSemAnteriorIos = resumenMesAnterior.int_mes_autos_ios;
                         intAutosSemAnteriorAndroid = resumenMesAnterior.int_mes_autos_andriod;
 
+
+
+                        int dias = oUltimoDiaDelMes.Date.Date.Day;
+                        dias += 1;
+
+                        for (int i = 1; i < dias; i++)
+                        {
+                             sumaTransMesIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_ios);
+                             sumaTransMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.int_andriod);
+                             sumaAutosIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_ios);
+                             sumaAutosAndriod += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_andriod);
+                             dblingrMesIOs += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.dec_ios);
+                             dblingrMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_andriod);
+                            oPrimerDiaDelMes=  oPrimerDiaDelMes.AddDays(1);
+                        }
+
                         //var registrosDeMes = await context.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).SumAsync(i => i.int_ios);
 
-                        int sumaTransMesIos =  dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_ios);
-                        int sumaTransMesAndroid =  dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_andriod);
-                        int sumaAutosIos = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_autos_ios);
-                        int sumaAutosAndriod = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_autos_andriod);
-                        double dblingrMesIOs = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.dec_sem_ios);
-                        double dblingrMesAndroid = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.dec_sem_andriod);
 
 
                         int totalAutos = sumaAutosAndriod + sumaAutosIos;
@@ -246,7 +272,7 @@ namespace WebApiParquimetros.Services
                                         int_id_consecion = concns.id,
                                         dtm_fecha_inicio = oPrimerDiaDelMes,
                                         dtm_fecha_fin = oUltimoDiaDelMes,
-                                        str_mes = strMes,
+                                        str_mes = monthName,
                                         int_anio = time.Year,
                                         //dtm_mes_anterior =
                                         int_mes_ios = sumaTransMesIos,
@@ -303,6 +329,15 @@ namespace WebApiParquimetros.Services
                                 dec_mes_por_andriod = 0;
                                 int_mes_por_total = 0;
                                 dec_mes_por_total = 0;
+
+
+                                 sumaTransMesIos = 0;
+                                 sumaTransMesAndroid = 0;
+                                 sumaAutosIos = 0;
+                                 sumaAutosAndriod = 0;
+                                 dblingrMesIOs = 0;
+                                 dblingrMesAndroid = 0;
+
                             }
                         });
 
@@ -316,13 +351,20 @@ namespace WebApiParquimetros.Services
 
                         //var registrosDeMes = await context.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).SumAsync(i => i.int_ios);
 
-                        int sumaTransMesIos = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_ios);
-                        int sumaTransMesAndroid = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_andriod);
-                        int sumaAutosIos = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_autos_ios);
-                        int sumaAutosAndriod = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.int_sem_autos_andriod);
-                        double dblingrMesIOs = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.dec_sem_ios);
-                        double dblingrMesAndroid = dbContext.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(i => i.dec_sem_andriod);
 
+                        int dias = oUltimoDiaDelMes.Date.Day;
+                        dias += 1;
+
+                        for (int i = 1; i < dias; i++)
+                        {
+                            sumaTransMesIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_ios);
+                            sumaTransMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_andriod);
+                            sumaAutosIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_ios);
+                            sumaAutosAndriod += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_andriod);
+                            dblingrMesIOs += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_ios);
+                            dblingrMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_andriod);
+                            oPrimerDiaDelMes = oPrimerDiaDelMes.AddDays(1);
+                        }
 
                         int totalAutos = sumaAutosAndriod + sumaAutosIos;
                         int transTotales = sumaTransMesIos + sumaTransMesAndroid;
@@ -385,7 +427,7 @@ namespace WebApiParquimetros.Services
                                         int_id_consecion = concns.id,
                                         dtm_fecha_inicio = oPrimerDiaDelMes,
                                         dtm_fecha_fin = oUltimoDiaDelMes,
-                                        str_mes = strMes,
+                                        str_mes = monthName,
                                         int_anio = time.Year,
                                         //dtm_mes_anterior =
                                         int_mes_ios = sumaTransMesIos,
@@ -449,6 +491,12 @@ namespace WebApiParquimetros.Services
                     dec_mes_por_andriod = 0;
                     int_mes_por_total = 0;
                     dec_mes_por_total = 0;
+                    sumaTransMesIos = 0;
+                    sumaTransMesAndroid = 0;
+                    sumaAutosIos = 0;
+                    sumaAutosAndriod = 0;
+                    dblingrMesIOs = 0;
+                    dblingrMesAndroid = 0;
 
                 }
 

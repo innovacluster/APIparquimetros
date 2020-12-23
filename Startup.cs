@@ -59,7 +59,7 @@ namespace WebApiParquimetros
             services.AddCronJob<CronJob3ResumenDiario>(c =>
             {
              c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
-            // c.TimeZoneInfo = TimeZoneInfo.Local;
+            //c.TimeZoneInfo = TimeZoneInfo.Local;
               // c.CronExpression = @" 0 23  *  * MON-SAT";
 
                 c.CronExpression = @" 0 23  *  * MON-SAT";
@@ -82,7 +82,10 @@ namespace WebApiParquimetros
             {
                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
               // c.TimeZoneInfo = TimeZoneInfo.Local;
-                c.CronExpression = @" 35 23  L  * ? ";
+                //c.CronExpression = @" 35 23  L  * ? ";
+
+                c.CronExpression = @"45 23  L  * ? ";
+
                 //c.CronExpression = @" 47 11  *  * *";
             });
 
@@ -94,8 +97,8 @@ namespace WebApiParquimetros
             //Aqui se debe cambiar a cada segundo cuando ya esté en produccion
             //Linea funcional falta modificar
             // services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
-            //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
-            services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.Local));
+            services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
+            //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.Local));
            // services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(ResumenMensualJob), "Resumen Mensual", " 0 35 23  L  * ? ", TimeZoneInfo.Local));
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT"));
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaDP10Job), "Multa Despues de las 10", "59 * * * * ?"));
