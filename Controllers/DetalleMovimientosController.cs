@@ -186,6 +186,7 @@ namespace WebApiParquimetros.Controllers
                 int_duracion = reader["int_duracion"] == DBNull.Value ? Convert.ToInt32(0) : (int)reader["int_duracion"],
                 dt_hora_inicio = reader["dt_hora_inicio"] == DBNull.Value ? Convert.ToDateTime(null) : (DateTime)reader["dt_hora_inicio"],
                 dt_hora_fin = reader["dt_hora_fin"] == DBNull.Value ? Convert.ToDateTime(null) : (DateTime)reader["dt_hora_fin"],
+                dtm_fecha = reader["dt_hora_inicio"] == DBNull.Value ? Convert.ToDateTime(null) : (DateTime)reader["dt_hora_inicio"],
                 ftl_importe = reader["flt_importe"] == DBNull.Value ? Convert.ToDouble(0) : (double)reader["flt_importe"],
                 flt_descuentos = reader["flt_descuentos"] == DBNull.Value ? Convert.ToDouble(0) : (double)reader["flt_descuentos"]
                

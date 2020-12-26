@@ -52,6 +52,7 @@ namespace WebApiParquimetros.Models
         public int int_duracion { get; set; }
         public DateTime dt_hora_inicio { get; set; }
         public DateTime dt_hora_fin { get; set; }
+        public DateTime dtm_fecha { get; set; }
         public Double ftl_importe { get; set; }
         public Double flt_descuentos { get; set; }
 

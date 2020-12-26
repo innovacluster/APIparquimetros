@@ -704,6 +704,13 @@ namespace WebApiParquimetros.Controllers
                         int_id_concesion = idConcesion,
                         str_nombre_cliente = str_nombrecliente,
                         strTipoUsuario = item.tbtiposusuarios.strTipoUsuario,
+                        phoneNumber = item.PhoneNumber,
+                        intidciudad = item.intidciudad.Value,
+                        intIdTipoUsuario = item.intIdTipoUsuario,
+                        str_rfc = item.str_rfc,
+                        str_direccion = item.str_direccion,
+                        str_cp = item.str_cp,
+                        str_razon_social = item.str_razon_social
 
                     };
 

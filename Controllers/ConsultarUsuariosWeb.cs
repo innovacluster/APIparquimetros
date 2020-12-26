@@ -16,6 +16,13 @@ namespace WebApiParquimetros.Controllers
         public int int_id_concesion { get; set; }
        public string str_nombre_cliente { get; set; }
         public string strTipoUsuario { get; set; }
+        public string phoneNumber { get; set; }
+        public int intidciudad { get; set; }
+        public int intIdTipoUsuario { get; set; }
+        public string str_rfc { get; set; }
+        public string str_direccion { get; set; }
+        public string str_cp { get; set; }
+        public string str_razon_social { get; set; }
 
     }
 }
