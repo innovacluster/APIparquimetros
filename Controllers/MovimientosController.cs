@@ -874,8 +874,10 @@ namespace WebApiParquimetros.Controllers
         [NonAction]
         private MovimientosJoin MapToValueMovimientosse(NpgsqlDataReader reader)
         {
+
             return new MovimientosJoin()
             {
+              
                 id = reader["id"] == DBNull.Value ? Convert.ToInt32(0) : (int)reader["id"],
                 str_status = "",
                 str_placa = reader["str_placa"].ToString(),
@@ -1229,7 +1231,7 @@ namespace WebApiParquimetros.Controllers
                         movimientos.str_nombre_concesion = concesion.str_nombre_cliente;
 
                         movimientos.flt_monto_inicial = movimientos.flt_monto;
-                        movimientos.flt_monto_real = movimientos.flt_monto_real;
+                        movimientos.flt_monto_real = dbl_total_con_comision;
                         movimientos.created_date = time.Value;
                         // movimientos.last_modified_date = DateTime.Now;
                         movimientos.last_modified_by = movimientos.created_by;
@@ -1416,7 +1418,7 @@ namespace WebApiParquimetros.Controllers
                     movimientos.int_tiempo_comprado = movimientos.int_tiempo;
                     movimientos.str_nombre_concesion = concesion.str_nombre_cliente;
                     movimientos.flt_monto_inicial = movimientos.flt_monto;
-                    movimientos.flt_monto_real = movimientos.flt_monto_real;
+                    movimientos.flt_monto_real = dbl_total_con_comision;
                     movimientos.created_date = time;
                     movimientos.last_modified_by = movimientos.created_by;
                     movimientos.dt_hora_inicio = time;
@@ -2575,7 +2577,7 @@ namespace WebApiParquimetros.Controllers
                             response.flt_porcentaje_comision = db_porc_comision;
                             response.flt_monto_porcentaje = response.flt_monto_porcentaje +  dbl_comision_cobrada;
                             response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
-
+                            response.flt_monto_real = response.flt_monto_real + dbl_total_con_comision;
                             response.last_modified_date = time;
                             response.last_modified_by = movimientos.last_modified_by;
                             DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);
@@ -2720,7 +2722,7 @@ namespace WebApiParquimetros.Controllers
                         response.flt_porcentaje_comision = db_porc_comision;
                         response.flt_monto_porcentaje = response.flt_monto_porcentaje + dbl_comision_cobrada;
                         response.flt_total_con_comision = response.flt_total_con_comision + dbl_total_con_comision;
-
+                        response.flt_monto_real = response.flt_monto_real + dbl_total_con_comision;
                         response.last_modified_date = time;
                         response.last_modified_by = movimientos.last_modified_by;
                         DateTime horafin = response.dtm_hora_fin.AddMinutes(movimientos.int_tiempo);

@@ -97,7 +97,7 @@ namespace WebApiParquimetros
             //Aqui se debe cambiar a cada segundo cuando ya esté en produccion
             //Linea funcional falta modificar
             // services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
-            services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
+            services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 * 8-22 ? *  MON-SAT", TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City")));
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 1 8-22 ? *  MON-SAT", TimeZoneInfo.Local));
            // services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(ResumenMensualJob), "Resumen Mensual", " 0 35 23  L  * ? ", TimeZoneInfo.Local));
             //services.AddSingleton(new JobMetadata(Guid.NewGuid(), typeof(MultaJob), "Multa Automatica", " 0 5/1 8-22 ? *  MON-SAT"));
