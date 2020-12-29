@@ -101,7 +101,7 @@ namespace WebApiParquimetros.Controllers
             {
                 if (dtmFechaFin == null)
                 {
-                    var response = await context.tbmultas.Where(x => x.dtm_fecha.Date == dtmFechaInicio.Date && x.intidconcesion_id == intIdConcesion).ToListAsync();
+                    var response = await context.tbmultas.Where(x => x.dtm_fecha.Date == dtmFechaInicio.Date && x.intidconcesion_id == intIdConcesion).OrderBy(x => x.dtm_fecha).ToListAsync();
                     if (response == null)
                     {
                         return NotFound();
@@ -110,7 +110,7 @@ namespace WebApiParquimetros.Controllers
                 }
                 else {
 
-                    var response = await context.tbmultas.Where(x => x.dtm_fecha >= dtmFechaInicio.Date && x.dtm_fecha.Date <= dtmFechaFin.Value.Date && x.intidconcesion_id == intIdConcesion).ToListAsync();
+                    var response = await context.tbmultas.Where(x => x.dtm_fecha >= dtmFechaInicio.Date && x.dtm_fecha.Date <= dtmFechaFin.Value.Date && x.intidconcesion_id == intIdConcesion).OrderBy(x=> x.dtm_fecha).ToListAsync();
                     if (response == null)
                     {
                         return NotFound();

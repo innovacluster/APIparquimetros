@@ -771,7 +771,24 @@ namespace WebApiParquimetros.Controllers
 
                 if (model.intidconcesion_id == 0)
                 {
-
+                    if (model.intidciudad ==0 )
+                    {
+                        user.UserName = model.UserName;
+                        user.Email = model.Email;
+                        user.strNombre = model.strNombre;
+                        user.strApellidos = model.strApellidos;
+                        user.PhoneNumber = model.PhoneNumber;
+                        user.last_modified_by = model.last_modified_by;
+                        user.intidconcesion_id = model.intidconcesion_id;
+                        user.last_modified_date = horadeTransaccion.Value;
+                        user.created_by = model.created_by;
+                        user.str_rfc = model.str_rfc;
+                        user.str_direccion = model.str_direccion;
+                        user.str_cp = model.str_cp;
+                        user.str_razon_social = model.str_razon_social;
+                        user.intidciudad = null;
+                        user.intidconcesion_id = null;
+                    }
 
                     user.UserName = model.UserName;
                     user.Email = model.Email;
@@ -786,7 +803,7 @@ namespace WebApiParquimetros.Controllers
                     user.str_direccion = model.str_direccion;
                     user.str_cp = model.str_cp;
                     user.str_razon_social = model.str_razon_social;
-                    user.intidciudad = null;
+                    user.intidciudad = model.intidciudad;
                     user.intidconcesion_id = null;
 
                 }

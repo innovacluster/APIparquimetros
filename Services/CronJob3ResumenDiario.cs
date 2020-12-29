@@ -37,10 +37,10 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
-            ParametrosController par = new ParametrosController(dbContext);
-            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            DateTime time = time1.Value;
-            //DateTime time = DateTime.Now;
+            //ParametrosController par = new ParametrosController(dbContext);
+            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            //DateTime time = time1.Value;
+            DateTime time = DateTime.Now;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WebApiParquimetros.Services
 
                 int int_porc_ios = 0;
                 Double dec_porc_ios = 0;
-                int int_porc_andriod = 0;
+                Double int_porc_andriod = 0;
                 Double dec_porc_andriod = 0;
                 Double int_por_ant_total = 0;
                 Double dec_por_ant_total = 0;
@@ -169,7 +169,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (intAutosDiaAnteriorAndroid != 0)
                         {
-                            int_porc_andriod = ((intTransAndriod / intAutosDiaAnteriorAndroid) - 1);
+                            int_porc_andriod = (((double)intTransAndriod / (double)intAutosDiaAnteriorAndroid) - 1);
                             int_porc_andriod = int_porc_andriod * 100;
                         }
                         else
@@ -452,7 +452,7 @@ namespace WebApiParquimetros.Services
                                         int_andriod = intTransAndriod,
                                         int_ant_andriod = 0,
                                         //*
-                                        int_por_andriod = int_porc_andriod,
+                                        //int_por_andriod = int_porc_andriod,
                                         int_autos_por_andriod = int_autos_por_andriod,
                                         int_total_autos = movTansacciones.Count + movTansaccionesAndriod.Count,
                                         int_autos_andriod = movTansaccionesAndriod.Count,

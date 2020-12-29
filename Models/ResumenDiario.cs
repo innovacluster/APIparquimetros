@@ -34,7 +34,7 @@ namespace WebApiParquimetros.Models
         public Double dec_por_ios { get; set; }
         public int int_andriod { get; set; }
         public int int_ant_andriod { get; set; }
-        public int int_por_andriod { get; set; }
+        public Double int_por_andriod { get; set; }
         public int int_autos_andriod { get; set; }
         public int int_autos_ant_andriod { get; set; }
         public int int_autos_por_andriod { get; set; }
