@@ -46,19 +46,19 @@ namespace WebApiParquimetros
             services.AddCronJob<CronJob1MultaAutomatica>(c =>
             {
                 //c.TimeZoneInfo = TimeZoneInfo.Local;
-                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City");
                 c.CronExpression = @"0 * * * * MON-SAT";
             });
 
             services.AddCronJob<CronJob2MultaDP10>(c =>
             {
-                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City");
                 //c.TimeZoneInfo = TimeZoneInfo.Local;
                 c.CronExpression = @"0 0 22  *  * MON-SAT";
             });
             services.AddCronJob<CronJob3ResumenDiario>(c =>
             {
-                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City");
                 //c.TimeZoneInfo = TimeZoneInfo.Local;
                 // c.CronExpression = @" 0 23  *  * MON-SAT";
 
@@ -70,7 +70,7 @@ namespace WebApiParquimetros
 
             services.AddCronJob<CronJob4ResumenSemanal>(c =>
             {
-                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City"); ;
+                c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City");
                 //c.TimeZoneInfo = TimeZoneInfo.Local;
                 // c.CronExpression = @" 30 23  *  * SAT";
                 // c.CronExpression = @" 30 23  *  * SAT";

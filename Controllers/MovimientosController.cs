@@ -1387,7 +1387,7 @@ namespace WebApiParquimetros.Controllers
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
                 DateTime time = time1.Value;
-                //DateTime time = DateTime.Now; 
+                //DateTime time = DateTime.Now;
 
 
                 var usuario = await context.NetUsers.FirstOrDefaultAsync(x => x.Id == movimientos.int_id_usuario_id);
