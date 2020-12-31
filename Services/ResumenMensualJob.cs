@@ -41,9 +41,9 @@ namespace WebApiParquimetros.Services
 
             ParametrosController par = new ParametrosController(dbContext);
             ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            //DateTime time = time1.Value;
-            DateTime time = DateTime.Now;
-            
+            DateTime time = time1.Value;
+            //DateTime time = DateTime.Now;
+
             string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(time.Month);
 
             try

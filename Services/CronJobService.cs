@@ -16,7 +16,7 @@ namespace WebApiParquimetros.Services
 
     protected CronJobService(string cronExpression, TimeZoneInfo timeZoneInfo)
     {
-        _expression = CronExpression.Parse(cronExpression/*, CronFormat.IncludeSeconds*/);
+        _expression = CronExpression.Parse(cronExpression, CronFormat.IncludeSeconds);
         _timeZoneInfo = timeZoneInfo;
     }
 
@@ -58,7 +58,7 @@ namespace WebApiParquimetros.Services
 
     public virtual async Task DoWork(CancellationToken cancellationToken)
     {
-        await Task.Delay(3600000, cancellationToken);  // do the work
+        await Task.Delay(300000, cancellationToken);  // do the work
     }
 
     public virtual async Task StopAsync(CancellationToken cancellationToken)

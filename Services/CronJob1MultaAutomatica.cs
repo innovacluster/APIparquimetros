@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
+using WebApiParquimetros.Controllers;
 using WebApiParquimetros.Models;
 
 namespace WebApiParquimetros.Services
@@ -30,20 +32,23 @@ namespace WebApiParquimetros.Services
             return base.StartAsync(cancellationToken);
         }
 
-        public  override Task DoWork(CancellationToken cancellationToken)
+        public  override  Task DoWork(CancellationToken cancellationToken)
         {
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
 
 
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time = par.mtdObtenerFechaMexico();
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
-            DateTime time = DateTime.Now;
+            DateTime time = time1.Value;
+            //DateTime time = DateTime.Now;
 
 
             var movimientos =  dbContext.tbmovimientos.Where(x => x.dtm_hora_fin.Date == time.Date && x.bit_status == true).ToList();
+            var tipoUsuario =  dbContext.tbtiposusuarios.FirstOrDefault(x => x.strTipoUsuario == "AGENTE VIAL");
+            var agente =  dbContext.NetUsers.FirstOrDefault(x => x.intIdTipoUsuario == tipoUsuario.id);
 
             if (movimientos.Count != 0)
             {
@@ -55,92 +60,94 @@ namespace WebApiParquimetros.Services
                         {
                             if (item.int_id_espacio == null)
                             {
+                                var vehiculo = dbContext.tbvehiculos.FirstOrDefault(x => x.id == item.int_id_vehiculo_id);
+
+
                                 var strategy = dbContext.Database.CreateExecutionStrategy();
 
-                                 strategy.Execute( () =>
+                                using (IDbContextTransaction transaction = dbContext.Database.BeginTransaction())
                                 {
-
-                                    using (IDbContextTransaction transaction = dbContext.Database.BeginTransaction())
+                                    try
                                     {
-                                        try
+                                        var multa = new Multas()
                                         {
-                                            var multa = new Multas()
-                                            {
-                                                created_by = "Api Automatica",
-                                                bit_status = true,
-                                                dtm_fecha = time,
-                                                flt_monto = 0.0,
-                                                str_motivo = "Tiempo vencido",
-                                                str_tipo_multa = "MULTA AUTOMATICA",
-                                                str_documento_garantia = "SIN GARANTÍA",
-                                                str_folio_multa = "N/A",
-                                                str_placa = item.str_placa,
-                                                str_clave_candado = "N/A",
-                                                //Falta modelo
-                                                //Falta marca
-                                                str_id_agente_id = "3766f6fd-ebd5-4ad9-a27c-80255557d959",
-                                                int_id_movimiento_id = item.id,
-                                                //int_id_saldo_id = item.int_id_saldo_id,
-                                                int_id_vehiculo_id = item.int_id_vehiculo_id,
-                                                intidconcesion_id = item.intidconcesion_id
-                                            };
-                                            dbContext.tbmultas.Add(multa);
-                                            dbContext.SaveChanges();
-                                            intIdMulta = multa.id;
+                                            created_by = "Api Automatica",
+                                            bit_status = true,
+                                            dtm_fecha = time,
+                                            flt_monto = 0.00,
+                                            str_motivo = "Tiempo vencido",
+                                            str_tipo_multa = "MULTA AUTOMATICA",
+                                            str_documento_garantia = "SIN GARANTÍA",
+                                            str_folio_multa = "N/A",
+                                            str_placa = item.str_placa,
+                                            str_clave_candado = "N/A",
+                                            str_modelo = vehiculo.str_modelo,
+                                            str_marca = vehiculo.str_marca,
+                                            str_color = vehiculo.str_color,
+                                            str_id_agente_id = agente.Id.ToString(),
+                                            int_id_movimiento_id = item.id,
+                                            //int_id_saldo_id = item.int_id_saldo_id,
+                                            int_id_vehiculo_id = item.int_id_vehiculo_id,
+                                            intidconcesion_id = item.intidconcesion_id
+                                        };
+                                        dbContext.tbmultas.Add(multa);
+                                        dbContext.SaveChanges();
+                                        intIdMulta = multa.id;
 
-                                            var response =  dbContext.tbmovimientos.FirstOrDefault(x => x.id == item.id);
-                                            response.str_comentarios = "MULTA";
-                                            response.boolean_multa = true;
-                                            response.int_id_multa = intIdMulta;
-                                            dbContext.SaveChanges();
+                                        var response = dbContext.tbmovimientos.FirstOrDefault(x => x.id == item.id);
+                                        response.str_comentarios = "MULTA";
+                                        response.boolean_multa = true;
+                                        response.int_id_multa = intIdMulta;
+                                        dbContext.SaveChanges();
 
-                                            var usuario =  dbContext.NetUsers.FirstOrDefault(x => x.Id == item.int_id_usuario_id);
+                                        var usuario = dbContext.NetUsers.FirstOrDefault(x => x.Id == item.int_id_usuario_id);
 
-                                            dbContext.tbdetallemulta.Add(new DetalleMulta()
-                                            {
-                                                int_id_multa = intIdMulta,
-                                                bit_status = true,
-                                                dtmFecha = time,
-                                                str_usuario = usuario.strNombre + " " + usuario.strApellidos,
-                                                flt_monto = 0,
-                                                str_comentarios = "MULTA AUTOMÁTICA"
-                                            });
-                                            dbContext.SaveChanges();
-
-                                            var espacio =  dbContext.tbespacios.FirstOrDefault(x => x.id == item.int_id_espacio);
-
-                                            dbContext.tbdetallemovimientos.Add(new DetalleMovimientos()
-                                            {
-                                                int_idmovimiento = item.id,
-                                                int_id_usuario_id = response.int_id_usuario_id,
-                                                int_duracion = 0,
-                                                dtm_horaInicio = time,
-                                                dtm_horaFin = time,
-                                                flt_importe = 0.0,
-                                                flt_saldo_anterior = 0.0,
-                                                flt_saldo_fin = 0.0,
-                                                str_observaciones = response.str_comentarios
-
-                                            });
-
-                                            dbContext.SaveChanges();
-                                            transaction.Commit();
-                                        }
-
-                                        catch (Exception ex)
+                                        dbContext.tbdetallemulta.Add(new DetalleMulta()
                                         {
-                                            transaction.Rollback();
+                                            int_id_multa = intIdMulta,
+                                            bit_status = true,
+                                            dtmFecha = time,
+                                            str_usuario = usuario.strNombre + " " + usuario.strApellidos,
+                                            flt_monto = 0,
+                                            str_comentarios = "MULTA AUTOMÁTICA"
+                                        });
+                                        dbContext.SaveChanges();
 
+                                        var espacio = dbContext.tbespacios.FirstOrDefault(x => x.id == item.int_id_espacio);
 
-                                        }
+                                        dbContext.tbdetallemovimientos.Add(new DetalleMovimientos()
+                                        {
+                                            int_idmovimiento = item.id,
+                                            int_id_usuario_id = response.int_id_usuario_id,
+                                            int_duracion = 0,
+                                            dtm_horaInicio = time,
+                                            dtm_horaFin = time,
+                                            flt_importe = 0.00,
+                                            flt_saldo_anterior = 0.00,
+                                            flt_saldo_fin = 0.00,
+                                            str_observaciones = response.str_comentarios
+
+                                        });
+
+                                        dbContext.SaveChanges();
+                                        transaction.Commit();
                                     }
-                                });
+
+                                    catch (Exception ex)
+                                    {
+                                        transaction.Rollback();
+
+
+                                    }
+                                }
+
                             }
                             else
                             {
                                 var strategy = dbContext.Database.CreateExecutionStrategy();
-                                 strategy.Execute(() =>
+
                                 {
+                                    var vehiculo = dbContext.tbvehiculos.FirstOrDefault(x => x.id == item.int_id_vehiculo_id);
 
                                     using (IDbContextTransaction transaction = dbContext.Database.BeginTransaction())
                                     {
@@ -151,16 +158,17 @@ namespace WebApiParquimetros.Services
                                                 created_by = "Api Automatica",
                                                 bit_status = true,
                                                 dtm_fecha = time,
-                                                flt_monto = 0.0,
+                                                flt_monto = 0.00,
                                                 str_motivo = "Tiempo vencido",
                                                 str_tipo_multa = "MULTA AUTOMATICA",
                                                 str_documento_garantia = "SIN GARANTÍA",
                                                 str_folio_multa = "N/A",
                                                 str_placa = item.str_placa,
                                                 str_clave_candado = "N/A",
-                                                //Falta modelo
-                                                //Falta marca
-                                                str_id_agente_id = "98f5553e-5fd9-4ade-bd51-66d6dc2fa9d3",
+                                                str_modelo = vehiculo.str_modelo,
+                                                str_marca = vehiculo.str_marca,
+                                                str_color = vehiculo.str_color,
+                                                str_id_agente_id = agente.Id.ToString(),
                                                 int_id_movimiento_id = item.id,
                                                 //int_id_saldo_id = item.int_id_saldo_id,
                                                 int_id_vehiculo_id = item.int_id_vehiculo_id,
@@ -170,13 +178,13 @@ namespace WebApiParquimetros.Services
                                             dbContext.SaveChanges();
                                             intIdMulta = multa.id;
 
-                                            var response =  dbContext.tbmovimientos.FirstOrDefault(x => x.id == item.id);
+                                            var response = dbContext.tbmovimientos.FirstOrDefault(x => x.id == item.id);
                                             response.str_comentarios = "MULTA";
                                             response.boolean_multa = true;
                                             response.int_id_multa = intIdMulta;
                                             dbContext.SaveChanges();
 
-                                            var usuario =  dbContext.NetUsers.FirstOrDefault(x => x.Id == item.int_id_usuario_id);
+                                            var usuario = dbContext.NetUsers.FirstOrDefault(x => x.Id == item.int_id_usuario_id);
 
                                             dbContext.tbdetallemulta.Add(new DetalleMulta()
                                             {
@@ -184,12 +192,12 @@ namespace WebApiParquimetros.Services
                                                 bit_status = true,
                                                 dtmFecha = time,
                                                 str_usuario = usuario.strNombre + " " + usuario.strApellidos,
-                                                flt_monto = 0,
+                                                flt_monto = 0.00,
                                                 str_comentarios = "MULTA AUTOMÁTICA"
                                             });
                                             dbContext.SaveChanges();
 
-                                            var espacio =  dbContext.tbespacios.FirstOrDefault(x => x.id == item.int_id_espacio);
+                                            var espacio = dbContext.tbespacios.FirstOrDefault(x => x.id == item.int_id_espacio);
 
                                             dbContext.tbdetallemovimientos.Add(new DetalleMovimientos()
                                             {
@@ -200,9 +208,9 @@ namespace WebApiParquimetros.Services
                                                 int_duracion = 0,
                                                 dtm_horaInicio = time,
                                                 dtm_horaFin = time,
-                                                flt_importe = 0.0,
-                                                flt_saldo_anterior = 0.0,
-                                                flt_saldo_fin = 0.0,
+                                                flt_importe = 0.00,
+                                                flt_saldo_anterior = 0.00,
+                                                flt_saldo_fin = 0.00,
                                                 str_observaciones = response.str_comentarios
 
                                             });
@@ -217,14 +225,14 @@ namespace WebApiParquimetros.Services
 
                                         }
                                     }
-                                });
+
+                                }
 
                             }
-
                         }
                     }
-                }
 
+                }
             }
             return Task.CompletedTask;
 
