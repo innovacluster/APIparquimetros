@@ -968,7 +968,7 @@ namespace WebApiParquimetros.Controllers
                             NpgsqlDataReader drd = cmd.ExecuteReader();
                             while (await drd.ReadAsync())
                             {
-                                response.Add(MapToValueMovimientos2se(drd));
+                                response.Add(MapToValueMovimientosse(drd));
                             }
                             return response;
 

@@ -130,7 +130,6 @@ C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.xml
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.dll
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
-C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs

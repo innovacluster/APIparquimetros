@@ -23,26 +23,26 @@ namespace WebApiParquimetros.Models
         public DateTime dtm_mes_anterior { get; set; }
         public int int_mes_ios { get; set; }
         public int int_mes_ant_ios { get; set; }
-        public int int_mes_por_ios { get; set; }
+        public Double int_mes_por_ios { get; set; }
         public int int_mes_autos_ios { get; set; }
         public int int_mes_autos_ant_ios { get; set; }
-        public int int_mes_autos_por_ios { get; set; }
+        public Double int_mes_autos_por_ios { get; set; }
         public Double dec_mes_ios { get; set; }
         public Double dec_mes_ant_ios { get; set; }
         public Double dec_mes_por_ios { get; set; }
         public int int_mes_andriod { get; set; }
         public int int_mes_ant_andriod { get; set; }
-        public int int_mes_por_andriod { get; set; }
+        public Double int_mes_por_andriod { get; set; }
         public int int_mes_autos_andriod { get; set; }
         public int int_mes_autos_ant_andriod { get; set; }
-        public int int_mes_autos_por_andriod { get; set; }
+        public Double int_mes_autos_por_andriod { get; set; }
         public int int_mes_total_autos { get; set; }
         public Double dec_mes_andriod { get; set; }
         public Double dec_mes_ant_andriod { get; set; }
         public Double dec_mes_por_andriod { get; set; }
         public int int_mes_total { get; set; }
         public int int_mes_total_ant { get; set; }
-        public int int_mes_por_total { get; set; }
+        public Double int_mes_por_total { get; set; }
 
         public Double dec_mes_total { get; set; }
         public Double dec_mes_total_ant { get; set; }

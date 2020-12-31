@@ -25,10 +25,10 @@ namespace WebApiParquimetros.Models
         public string str_dia_sem_ant { get; set; }
         public int int_ios { get; set; }
         public int int_ant_ios { get; set; }
-        public int int_por_ios { get; set; }
+        public Double int_por_ios { get; set; }
         public int int_autos_ios { get; set;  }
         public int int_autos_ant_ios { get; set; }
-        public int int_autos_por_ios { get; set; }
+        public Double int_autos_por_ios { get; set; }
         public Double dec_ios { get; set; }
         public Double dec_ant_ios { get; set; }
         public Double dec_por_ios { get; set; }
@@ -37,14 +37,14 @@ namespace WebApiParquimetros.Models
         public Double int_por_andriod { get; set; }
         public int int_autos_andriod { get; set; }
         public int int_autos_ant_andriod { get; set; }
-        public int int_autos_por_andriod { get; set; }
+        public Double int_autos_por_andriod { get; set; }
         public int int_total_autos { get; set; }
         public Double dec_andriod { get; set; }
         public Double dec_ant_andriod { get; set; }
         public Double dec_por_andriod { get; set; }
         public int int_total { get; set; }
         public int int_total_ant { get; set; }
-        public int int_por_ant_total {get; set;}
+        public Double int_por_ant_total {get; set;}
         public Double dec_total { get; set; }
         public Double dec_total_ant { get; set; }
         public Double dec_por_ant_total { get; set; }

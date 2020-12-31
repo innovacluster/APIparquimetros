@@ -715,6 +715,7 @@ namespace WebApiParquimetros.Controllers
                     };
 
                     lstItems.Add(element);
+                    idConcesion = 0;
                 }
                 return lstItems;
             

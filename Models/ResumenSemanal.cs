@@ -23,26 +23,26 @@ namespace WebApiParquimetros.Models
         public int int_semana_ant { get; set; }
         public int int_sem_ios { get; set; }
         public int int_sem_ant_ios { get; set; }
-        public int int_sem_por_ios { get; set; }
+        public Double int_sem_por_ios { get; set; }
         public int int_sem_autos_ios { get; set; }
         public int int_sem_autos_ant_ios { get; set; }
-        public int int_sem_autos_por_ios { get; set; }
+        public Double int_sem_autos_por_ios { get; set; }
         public Double dec_sem_ios { get; set; }
         public Double dec_sem_ant_ios { get; set; }
         public Double dec_sem_por_ios { get; set; }
         public int int_sem_andriod { get; set; }
         public int int_sem_ant_andriod { get; set; }
-        public int int_sem_por_andriod { get; set; }
+        public Double int_sem_por_andriod { get; set; }
         public int int_sem_autos_andriod { get; set; }
         public int int_sem_autos_ant_andriod { get; set; }
-        public int int_sem_autos_por_andriod { get; set; }
+        public Double int_sem_autos_por_andriod { get; set; }
         public int int_sem_total_autos { get; set; }
         public Double dec_sem_andriod { get; set; }
         public Double dec_sem_ant_andriod { get; set; }
         public Double dec_sem_por_andriod { get; set; }
         public int int_sem_total { get; set; }
         public int int_sem_total_ant { get; set; }
-        public int int_sem_por_ant { get; set; }
+        public Double int_sem_por_ant { get; set; }
         public Double dec_sem_total { get; set; }
         public Double dec_sem_total_ant { get; set; }
         public Double dec_sem_por_total { get; set; }
@@ -66,7 +66,7 @@ namespace WebApiParquimetros.Models
         public int int_sem_por_ios { get; set; }
         public int int_sem_autos_ios { get; set; }
         public int int_sem_autos_ant_ios { get; set; }
-        public int int_sem_autos_por_ios { get; set; }
+        public Double int_sem_autos_por_ios { get; set; }
         public Double dec_sem_ios { get; set; }
         public Double dec_sem_ant_ios { get; set; }
         public Double dec_sem_por_ios { get; set; }
@@ -75,7 +75,7 @@ namespace WebApiParquimetros.Models
         public int int_sem_por_andriod { get; set; }
         public int int_sem_autos_andriod { get; set; }
         public int int_sem_autos_ant_andriod { get; set; }
-        public int int_sem_autos_por_andriod { get; set; }
+        public Double int_sem_autos_por_andriod { get; set; }
         public int int_sem_total_autos { get; set; }
         public Double dec_sem_andriod { get; set; }
         public Double dec_sem_ant_andriod { get; set; }

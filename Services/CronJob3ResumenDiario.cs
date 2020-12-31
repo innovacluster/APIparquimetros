@@ -37,10 +37,10 @@ namespace WebApiParquimetros.Services
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
-            //ParametrosController par = new ParametrosController(dbContext);
-            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            //DateTime time = time1.Value;
-            DateTime time = DateTime.Now;
+            ParametrosController par = new ParametrosController(dbContext);
+            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            DateTime time = time1.Value;
+            //DateTime time = DateTime.Now;
 
             try
             {
@@ -52,11 +52,11 @@ namespace WebApiParquimetros.Services
                 int intAutosDiaAnteriorIos = 0;
                 int intAutosDiaAnteriorAndroid = 0;
                 double totalIngresos = 0;
-               // DateTime dia = DateTime.Now;
+                // DateTime dia = DateTime.Now;
 
                 ///////////////////
 
-                int int_porc_ios = 0;
+                Double int_porc_ios = 0;
                 Double dec_porc_ios = 0;
                 Double int_porc_andriod = 0;
                 Double dec_porc_andriod = 0;
@@ -64,8 +64,8 @@ namespace WebApiParquimetros.Services
                 Double dec_por_ant_total = 0;
 
                 ///////
-                int int_autos_por_andriod = 0;
-                int int_autos_por_ios = 0;
+                Double int_autos_por_andriod = 0;
+                Double int_autos_por_ios = 0;
 
 
                 var concesiones = dbContext.tbconcesiones.ToList();
@@ -144,7 +144,7 @@ namespace WebApiParquimetros.Services
 
                         if (intAutosDiaAnteriorIos != 0)
                         {
-                            int_porc_ios = ((intTransIos / intAutosDiaAnteriorIos) - 1);
+                            int_porc_ios = (((double)intTransIos / (double)intAutosDiaAnteriorIos) - 1);
                             int_porc_ios = int_porc_ios * 100;
                         }
                         else
@@ -195,7 +195,7 @@ namespace WebApiParquimetros.Services
 
                         if (autosDiaAnteriorIos.int_total != 0)
                         {
-                            int_por_ant_total = ((intSumTransacciones / autosDiaAnteriorIos.int_total) - 1);
+                            int_por_ant_total = (((double)intSumTransacciones / (double)autosDiaAnteriorIos.int_total) - 1);
                             int_por_ant_total = int_por_ant_total * 100;
                         }
                         else
@@ -221,12 +221,12 @@ namespace WebApiParquimetros.Services
                         }
                         if (autosDiaAnteriorIos.int_autos_andriod != 0)
                         {
-                            int_autos_por_andriod = ((movTansaccionesAndriod.Count / autosDiaAnteriorIos.int_autos_andriod) - 1);
+                            int_autos_por_andriod = (((double)movTansaccionesAndriod.Count / (double)autosDiaAnteriorIos.int_autos_andriod) - 1);
                             int_autos_por_andriod = int_autos_por_andriod * 100;
                         }
                         if (autosDiaAnteriorIos.int_autos_ios != 0)
                         {
-                            int_autos_por_ios = ((movTansacciones.Count / autosDiaAnteriorIos.int_autos_ios) - 1);
+                            int_autos_por_ios = (((double)movTansacciones.Count / (double)autosDiaAnteriorIos.int_autos_ios) - 1);
                             int_autos_por_ios = int_autos_por_ios * 100;
                         }
 
@@ -267,7 +267,7 @@ namespace WebApiParquimetros.Services
                                         dec_por_andriod = dec_porc_andriod,
                                         int_total = intTransIos + intTransAndriod,
                                         int_total_ant = autosDiaAnteriorIos.int_andriod + autosDiaAnteriorIos.int_ios,
-                                       // int_por_ant_total = int_por_ant_total,
+                                        int_por_ant_total = int_por_ant_total,
                                         dec_total = dblTotalXDiaIos + dblTotalXDiaAndriod,
                                         dec_total_ant = autosDiaAnteriorIos.dec_ios + autosDiaAnteriorIos.dec_andriod,
                                         dec_por_ant_total = dec_por_ant_total,
@@ -452,7 +452,7 @@ namespace WebApiParquimetros.Services
                                         int_andriod = intTransAndriod,
                                         int_ant_andriod = 0,
                                         //*
-                                        //int_por_andriod = int_porc_andriod,
+                                        int_por_andriod = int_porc_andriod,
                                         int_autos_por_andriod = int_autos_por_andriod,
                                         int_total_autos = movTansacciones.Count + movTansaccionesAndriod.Count,
                                         int_autos_andriod = movTansaccionesAndriod.Count,

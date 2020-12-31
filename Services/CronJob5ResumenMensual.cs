@@ -34,7 +34,7 @@ namespace WebApiParquimetros.Services
             return base.StartAsync(cancellationToken);
         }
 
-        public override Task DoWork(CancellationToken cancellationToken)
+        public override  Task DoWork(CancellationToken cancellationToken)
         {
             var scope = scopeFactory.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -59,13 +59,13 @@ namespace WebApiParquimetros.Services
                 int intNoSemanaActual = 0;
                 DateTime dia = time;
                 //----------------------
-                int int_mes_por_ios = 0;
-                int int_mes_autos_por_ios = 0;
+                Double int_mes_por_ios = 0;
+                Double int_mes_autos_por_ios = 0;
                 Double dec_mes_por_ios = 0;
-                int int_mes_por_andriod = 0;
-                int int_mes_autos_por_andriod = 0;
+                Double int_mes_por_andriod = 0;
+                Double int_mes_autos_por_andriod = 0;
                 Double dec_mes_por_andriod = 0;
-                int int_mes_por_total = 0;
+                Double int_mes_por_total = 0;
                 Double dec_mes_por_total = 0;
 
                 string mesInsertar = "";
@@ -150,18 +150,18 @@ namespace WebApiParquimetros.Services
 
                         for (int i = 1; i < dias; i++)
                         {
-                             sumaTransMesIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_ios);
-                             sumaTransMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.int_andriod);
-                             sumaAutosIos += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_ios);
-                             sumaAutosAndriod += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_andriod);
-                             dblingrMesIOs += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.dec_ios);
-                             dblingrMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_andriod);
+                             sumaTransMesIos +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_ios);
+                             sumaTransMesAndroid +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.int_andriod);
+                             sumaAutosIos +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_ios);
+                             sumaAutosAndriod +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.int_autos_andriod);
+                             dblingrMesIOs +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date  && x.int_id_consecion == concns.id).Sum(t => t.dec_ios);
+                             dblingrMesAndroid +=  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_andriod);
                             oPrimerDiaDelMes=  oPrimerDiaDelMes.AddDays(1);
                         }
 
                         //var registrosDeMes = await context.tbresumensemanal.Where(x => x.dtm_fecha_inicio.Date >= oPrimerDiaDelMes.Date && x.dtm_fecha_fin.Date <= oUltimoDiaDelMes.Date && x.int_id_consecion == concns.id).SumAsync(i => i.int_ios);
 
-
+                        oPrimerDiaDelMes = oPrimerDiaDelMes.AddDays(-31);
 
                         int totalAutos = sumaAutosAndriod + sumaAutosIos;
                         int transTotales = sumaTransMesIos + sumaTransMesAndroid;
@@ -169,7 +169,7 @@ namespace WebApiParquimetros.Services
 
                         if (resumenMesAnterior.int_mes_ios != 0)
                         {
-                            int_mes_por_ios = ((sumaTransMesIos / resumenMesAnterior.int_mes_ios) - 1);
+                            int_mes_por_ios = (((double)sumaTransMesIos / (double)resumenMesAnterior.int_mes_ios) - 1);
                             int_mes_por_ios = int_mes_por_ios * 100;
                         }
                         else {
@@ -180,7 +180,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenMesAnterior.int_mes_autos_ios != 0)
                         {
-                            int_mes_autos_por_ios = ((sumaAutosIos / resumenMesAnterior.int_mes_autos_ios) - 1);
+                            int_mes_autos_por_ios = (((double)sumaAutosIos / (double)resumenMesAnterior.int_mes_autos_ios) - 1);
                             int_mes_autos_por_ios = int_mes_autos_por_ios * 100;
                         }
                         else {
@@ -202,7 +202,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenMesAnterior.int_mes_andriod != 0)
                         {
-                            int_mes_por_andriod = ((sumaTransMesAndroid / resumenMesAnterior.int_mes_andriod) - 1);
+                            int_mes_por_andriod = (((double)sumaTransMesAndroid / (double)resumenMesAnterior.int_mes_andriod) - 1);
                             int_mes_por_andriod = int_mes_por_andriod * 100;
                         }
                         else {
@@ -213,7 +213,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenMesAnterior.int_mes_autos_andriod != 0)
                         {
-                            int_mes_autos_por_andriod = ((sumaAutosAndriod / resumenMesAnterior.int_mes_autos_andriod) - 1);
+                            int_mes_autos_por_andriod = (((double)sumaAutosAndriod / (double)resumenMesAnterior.int_mes_autos_andriod) - 1);
                             int_mes_autos_por_andriod = int_mes_autos_por_andriod * 100;
                         }
                         else {
@@ -237,7 +237,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenMesAnterior.int_mes_total != 0)
                         {
-                            int_mes_por_total = ((transTotales / resumenMesAnterior.int_mes_total) - 1);
+                            int_mes_por_total = (((double)transTotales / (double)resumenMesAnterior.int_mes_total) - 1);
                             int_mes_por_total = int_mes_por_total * 100;
                         }
                         else {
@@ -365,6 +365,8 @@ namespace WebApiParquimetros.Services
                             dblingrMesAndroid += dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date == oPrimerDiaDelMes.Date && x.int_id_consecion == concns.id).Sum(t => t.dec_andriod);
                             oPrimerDiaDelMes = oPrimerDiaDelMes.AddDays(1);
                         }
+
+                        oPrimerDiaDelMes = oPrimerDiaDelMes.AddDays(-31);
 
                         int totalAutos = sumaAutosAndriod + sumaAutosIos;
                         int transTotales = sumaTransMesIos + sumaTransMesAndroid;
@@ -499,9 +501,6 @@ namespace WebApiParquimetros.Services
                     dblingrMesAndroid = 0;
 
                 }
-
-                
-
 
             }
             catch (Exception ex)

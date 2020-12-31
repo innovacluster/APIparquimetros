@@ -38,11 +38,11 @@ namespace WebApiParquimetros.Services
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             int intIdMulta = 0;
 
-            ParametrosController par = new ParametrosController(dbContext);
-            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
-            DateTime time = time1.Value;
+            //ParametrosController par = new ParametrosController(dbContext);
+            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            //DateTime time = time1.Value;
 
-            //DateTime time = DateTime.Now;
+            DateTime time = DateTime.Now;
 
             try
             {
@@ -55,13 +55,13 @@ namespace WebApiParquimetros.Services
                 double totalIngresos = 0;
                 int intNoSemanaActual = 0;
                 /////////////
-                int int_sem_por_ios = 0;
-                int int_sem_autos_por_ios = 0;
+                Double int_sem_por_ios = 0;
+                Double int_sem_autos_por_ios = 0;
                 Double dec_sem_por_ios = 0;
-                int int_sem_por_andriod = 0;
-                int int_sem_autos_por_andriod = 0;
+                Double int_sem_por_andriod = 0;
+                Double int_sem_autos_por_andriod = 0;
                 Double dec_sem_por_andriod = 0;
-                int int_sem_por_ant = 0;
+                Double int_sem_por_ant = 0;
                 Double dec_sem_por_total = 0;
                 /////////
                // Double dec_sem_por_total = 0;
@@ -112,7 +112,7 @@ namespace WebApiParquimetros.Services
                         double dblIngTotales = dblingrSemaIOs + dblingrSemaAndroid;
                         if (resumenSemAnterior.int_sem_ios != 0)
                         {
-                            int_sem_por_ios = ((sumaTransSemIos / resumenSemAnterior.int_sem_ios) - 1);
+                            int_sem_por_ios = (((double)sumaTransSemIos / (double)resumenSemAnterior.int_sem_ios) - 1);
                             int_sem_por_ios = int_sem_por_ios * 100;
                         }
                         else {
@@ -124,7 +124,7 @@ namespace WebApiParquimetros.Services
 
                         if (resumenSemAnterior.int_sem_autos_ios != 0)
                         {
-                            int_sem_autos_por_ios = ((sumaAutosIos / resumenSemAnterior.int_sem_autos_ios) - 1);
+                            int_sem_autos_por_ios = (((double)sumaAutosIos / (double)resumenSemAnterior.int_sem_autos_ios) - 1);
                             int_sem_autos_por_ios = int_sem_autos_por_ios * 100;
                         }
                         else {
@@ -147,11 +147,11 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenSemAnterior.int_sem_andriod != 0)
                         {
-                            int_sem_por_andriod = ((sumaTransSemAndroid / resumenSemAnterior.int_sem_andriod) - 1);
+                            int_sem_por_andriod = (((double)sumaTransSemAndroid / (double)resumenSemAnterior.int_sem_andriod) - 1);
                             int_sem_por_andriod = int_sem_por_andriod * 100;
                         }
                         else {
-                            int_sem_autos_por_andriod = ((sumaAutosIos / resumenSemAnterior.int_sem_autos_andriod) - 1);
+                            int_sem_autos_por_andriod = (((double)sumaAutosIos / (double)resumenSemAnterior.int_sem_autos_andriod) - 1);
                             int_sem_autos_por_andriod = int_sem_autos_por_andriod * 100;
                         }
                         if (resumenSemAnterior.dec_sem_andriod != 0)
@@ -168,7 +168,7 @@ namespace WebApiParquimetros.Services
                         }
                         if (resumenSemAnterior.int_sem_total != 0)
                         {
-                            int_sem_por_ant = ((transTotales / resumenSemAnterior.int_sem_total) - 1);
+                            int_sem_por_ant = (((double)transTotales / (double)resumenSemAnterior.int_sem_total) - 1);
                             int_sem_por_ant = int_sem_por_ant * 100;
                         }
                         else {
