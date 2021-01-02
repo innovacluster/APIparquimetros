@@ -95,7 +95,7 @@ namespace WebApiParquimetros.Services
                                         intIdMulta = multa.id;
 
                                         var response = dbContext.tbmovimientos.FirstOrDefault(x => x.id == item.id);
-                                        response.str_comentarios = "MULTA PRUEBA DE VERSION";
+                                        response.str_comentarios = "MULTA";
                                         response.boolean_multa = true;
                                         response.int_id_multa = intIdMulta;
                                         dbContext.SaveChanges();

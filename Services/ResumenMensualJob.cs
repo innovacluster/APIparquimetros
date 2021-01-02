@@ -506,6 +506,7 @@ namespace WebApiParquimetros.Services
                     sumaAutosAndriod = 0;
                     dblingrMesIOs = 0;
                     dblingrMesAndroid = 0;
+                 
 
                 }
 
