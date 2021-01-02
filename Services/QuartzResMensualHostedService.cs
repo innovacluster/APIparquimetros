@@ -44,6 +44,7 @@ namespace WebApiParquimetros.Services
             .WithIdentity(jobMetadata.JobId.ToString())
             .WithCronSchedule(jobMetadata.CronExpression)
             .WithDescription($"{jobMetadata.JobName}")
+            .WithDailyTimeIntervalSchedule(s => s.InTimeZone(jobMetadata.TimeZoneInfo))
             .Build();
         }
         private IJobDetail CreateJob(JobMetadata jobMetadata)
