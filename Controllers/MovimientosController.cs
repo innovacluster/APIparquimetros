@@ -5066,19 +5066,23 @@ namespace WebApiParquimetros.Controllers
                 //dblC_cant_android = 100;
                 if (bolLunes)
                 {
-                    dbl_total_semanal = resumenSemanal.dec_sem_total;
-                    dec_sem_andriod = 0;
-                    dec_sem_ios = 0;
-                    dbl_dferencia_cant_semanal = dbl_total - resumenSemanal.dec_sem_total;
-                    if (resumenSemanal.dec_sem_total != 0)
+                    if (resumenSemanal != null)
                     {
-                        dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                        dbl_total_semanal = resumenSemanal.dec_sem_total;
+                        dec_sem_andriod = 0;
+                        dec_sem_ios = 0;
+                        dbl_dferencia_cant_semanal = dbl_total - resumenSemanal.dec_sem_total;
+                        if (resumenSemanal.dec_sem_total != 0)
+                        {
+                            dbl_porc_semana = ((dbl_total / resumenSemanal.dec_sem_total) - 1);
+                        }
+                        else if (dbl_total > 0)
+                        {
+                            dbl_porc_semana = 100;
+                        }
+
                     }
-                    else if (dbl_total > 0)
-                    {
-                        dbl_porc_semana = 100;
-                    }
-                    
+
 
                 }
                 else

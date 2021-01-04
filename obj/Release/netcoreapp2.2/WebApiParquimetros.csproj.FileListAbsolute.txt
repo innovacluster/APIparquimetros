@@ -156,3 +156,4 @@ C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.pdb
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache

@@ -97,7 +97,7 @@ namespace WebApiParquimetros.Services
                         intAutosSemAnteriorIos = resumenSemAnterior.int_sem_autos_ios;
                         intAutosSemAnteriorAndroid = resumenSemAnterior.int_sem_autos_andriod;
 
-                        var registrosDeSem =  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= previousWeekStart.Date && x.dtm_fecha.Date <= previousWeekEnd.Date && x.int_id_consecion == concns.id).SumAsync(i => i.int_ios);
+                        var registrosDeSem =  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= previousWeekStart.Date && x.dtm_fecha.Date <= previousWeekEnd.Date && x.int_id_consecion == concns.id).Sum(i => i.int_ios);
 
                         int sumaTransSemIos =  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= previousWeekStart.Date && x.dtm_fecha.Date <= previousWeekEnd.Date && x.int_id_consecion == concns.id).Sum(i => i.int_ios);
                         int sumaTransSemAndroid =  dbContext.tbresumendiario.Where(x => x.dtm_fecha.Date >= previousWeekStart.Date && x.dtm_fecha.Date <= previousWeekEnd.Date && x.int_id_consecion == concns.id).Sum(i => i.int_andriod);
