@@ -39,19 +39,20 @@ namespace WebApiParquimetros.Services
             int intIdMulta = 0;
 
 
-            ParametrosController par = new ParametrosController(dbContext);
-            ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
+            //ParametrosController par = new ParametrosController(dbContext);
+            //ActionResult<DateTime> time1 = par.mtdObtenerFechaMexico();
 
-            DateTime time = time1.Value;
-            //DateTime time = DateTime.Now;
+            //DateTime time = time1.Value;
+            DateTime time = DateTime.Now;
 
 
             var movimientos =  dbContext.tbmovimientos.Where(x => x.dtm_hora_fin.Date == time.Date && x.bit_status == true).ToList();
-            var tipoUsuario =  dbContext.tbtiposusuarios.FirstOrDefault(x => x.strTipoUsuario == "AGENTE VIAL");
-            var agente =  dbContext.NetUsers.FirstOrDefault(x => x.intIdTipoUsuario == tipoUsuario.id);
+            
 
             if (movimientos.Count != 0)
             {
+                var tipoUsuario = dbContext.tbtiposusuarios.FirstOrDefault(x => x.strTipoUsuario == "AGENTE VIAL");
+                var agente = dbContext.NetUsers.FirstOrDefault(x => x.intIdTipoUsuario == tipoUsuario.id);
                 foreach (var item in movimientos)
                 {
                     if (item.str_comentarios == "APARCADO" || item.str_comentarios.Contains("EXTENSIÓN DE TIEMPO"))

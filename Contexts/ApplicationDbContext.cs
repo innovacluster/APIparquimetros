@@ -52,7 +52,6 @@ namespace WebApiParquimetros.Contexts
         public DbSet<CatCiudades> tbcatciudades{ get; set; }
         public DbSet<UsuariosConcesiones> tbusersconcesiones { get; set; }
 
-
     }
 
 

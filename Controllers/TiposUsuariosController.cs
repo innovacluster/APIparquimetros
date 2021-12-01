@@ -13,7 +13,7 @@ namespace WebApiParquimetros.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TiposUsuariosController: Controller
     {
         public readonly ApplicationDbContext context;

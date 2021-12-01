@@ -23,6 +23,19 @@ namespace WebApiParquimetros.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbcatciudades",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    str_ciudad = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbcatciudades", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbcatopciones",
                 columns: table => new
                 {
@@ -34,26 +47,6 @@ namespace WebApiParquimetros.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbcatopciones", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbciudades",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    created_by = table.Column<string>(maxLength: 250, nullable: true),
-                    created_date = table.Column<DateTime>(nullable: false),
-                    last_modified_by = table.Column<string>(maxLength: 250, nullable: true),
-                    last_modified_date = table.Column<DateTime>(nullable: false),
-                    bit_status = table.Column<bool>(nullable: false),
-                    str_ciudad = table.Column<string>(maxLength: 200, nullable: true),
-                    str_latitud = table.Column<string>(maxLength: 50, nullable: true),
-                    str_longitud = table.Column<string>(maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbciudades", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,11 +65,15 @@ namespace WebApiParquimetros.Migrations
                     str_notas = table.Column<string>(nullable: true),
                     str_poligono = table.Column<string>(nullable: true),
                     int_licencias = table.Column<int>(nullable: false),
+                    str_latitud = table.Column<string>(nullable: true),
+                    str_longitud = table.Column<string>(nullable: true),
                     dbl_costo_licencia = table.Column<double>(nullable: false),
                     dtm_fecha_ingreso = table.Column<DateTime>(nullable: false),
                     dtm_fecha_activacion_licencia = table.Column<DateTime>(nullable: false),
                     str_tipo = table.Column<string>(nullable: true),
                     intidciudad = table.Column<int>(nullable: false),
+                    intidciudad_cat = table.Column<int>(nullable: false),
+                    str_ciudad = table.Column<string>(nullable: true),
                     bit_status = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -117,22 +114,6 @@ namespace WebApiParquimetros.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbtarifas",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    fltTarifa = table.Column<double>(nullable: false),
-                    fltIVA = table.Column<double>(nullable: false),
-                    fltImpuestos = table.Column<double>(nullable: false),
-                    dtmVigencia = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbtarifas", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tbtiposusuarios",
                 columns: table => new
                 {
@@ -144,6 +125,28 @@ namespace WebApiParquimetros.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbtiposusuarios", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbvehiculos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    created_by = table.Column<string>(maxLength: 225, nullable: true),
+                    created_date = table.Column<DateTime>(nullable: false),
+                    last_modified_by = table.Column<string>(maxLength: 255, nullable: true),
+                    last_modified_date = table.Column<DateTime>(nullable: false),
+                    bit_status = table.Column<bool>(nullable: false),
+                    str_color = table.Column<string>(maxLength: 50, nullable: true),
+                    str_modelo = table.Column<string>(maxLength: 200, nullable: true),
+                    str_marca = table.Column<string>(maxLength: 20, nullable: true),
+                    str_placas = table.Column<string>(nullable: false),
+                    int_id_usuario_id = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbvehiculos", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,6 +168,34 @@ namespace WebApiParquimetros.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbciudades",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    created_by = table.Column<string>(maxLength: 250, nullable: true),
+                    created_date = table.Column<DateTime>(nullable: false),
+                    last_modified_by = table.Column<string>(maxLength: 250, nullable: true),
+                    last_modified_date = table.Column<DateTime>(nullable: false),
+                    bit_status = table.Column<bool>(nullable: false),
+                    str_ciudad = table.Column<string>(maxLength: 200, nullable: true),
+                    str_latitud = table.Column<string>(maxLength: 50, nullable: true),
+                    str_longitud = table.Column<string>(maxLength: 50, nullable: true),
+                    str_desc_ciudad = table.Column<string>(nullable: true),
+                    int_id_ciudad = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbciudades", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_tbciudades_tbcatciudades_int_id_ciudad",
+                        column: x => x.int_id_ciudad,
+                        principalTable: "tbcatciudades",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,10 +236,11 @@ namespace WebApiParquimetros.Migrations
                     created_by = table.Column<string>(maxLength: 250, nullable: true),
                     created_date = table.Column<DateTime>(nullable: false),
                     last_modified_by = table.Column<string>(maxLength: 250, nullable: true),
-                    last_modified_date = table.Column<DateTime>(nullable: false),
+                    last_modified_date = table.Column<DateTime>(nullable: true),
                     bit_status = table.Column<bool>(nullable: false),
                     dcm_porcentaje = table.Column<double>(nullable: false),
                     dcm_valor_fijo = table.Column<double>(nullable: false),
+                    str_tipo = table.Column<string>(nullable: true),
                     intidconcesion_id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -230,12 +262,14 @@ namespace WebApiParquimetros.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     bolUsarNomenclaturaCajones = table.Column<bool>(nullable: false),
                     intTimepoAviso = table.Column<int>(nullable: false),
+                    PorcentajeComisionRecarga = table.Column<double>(nullable: false),
                     flt_Tarifa_minima = table.Column<double>(nullable: false),
                     flt_intervalo_tarifa = table.Column<double>(nullable: false),
                     int_intervalo_estacionamiento = table.Column<int>(nullable: false),
                     int_minimo_estacionamiento = table.Column<int>(nullable: false),
                     int_maximo_estacionamiento = table.Column<int>(nullable: false),
-                    intidconcesion_id = table.Column<int>(nullable: true)
+                    intidconcesion_id = table.Column<int>(nullable: true),
+                    str_descrip_us_admin = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -290,22 +324,29 @@ namespace WebApiParquimetros.Migrations
                     str_dia_sem_ant = table.Column<string>(nullable: true),
                     int_ios = table.Column<int>(nullable: false),
                     int_ant_ios = table.Column<int>(nullable: false),
-                    int_por_ios = table.Column<int>(nullable: false),
-                    dec_ios = table.Column<decimal>(nullable: false),
-                    dec_ant_ios = table.Column<decimal>(nullable: false),
-                    dec_por_ios = table.Column<decimal>(nullable: false),
+                    int_por_ios = table.Column<double>(nullable: false),
+                    int_autos_ios = table.Column<int>(nullable: false),
+                    int_autos_ant_ios = table.Column<int>(nullable: false),
+                    int_autos_por_ios = table.Column<double>(nullable: false),
+                    dec_ios = table.Column<double>(nullable: false),
+                    dec_ant_ios = table.Column<double>(nullable: false),
+                    dec_por_ios = table.Column<double>(nullable: false),
                     int_andriod = table.Column<int>(nullable: false),
                     int_ant_andriod = table.Column<int>(nullable: false),
-                    int_por_andriod = table.Column<int>(nullable: false),
-                    dec_andriod = table.Column<decimal>(nullable: false),
-                    dec_ant_andriod = table.Column<decimal>(nullable: false),
-                    dec_por_andriod = table.Column<decimal>(nullable: false),
+                    int_por_andriod = table.Column<double>(nullable: false),
+                    int_autos_andriod = table.Column<int>(nullable: false),
+                    int_autos_ant_andriod = table.Column<int>(nullable: false),
+                    int_autos_por_andriod = table.Column<double>(nullable: false),
+                    int_total_autos = table.Column<int>(nullable: false),
+                    dec_andriod = table.Column<double>(nullable: false),
+                    dec_ant_andriod = table.Column<double>(nullable: false),
+                    dec_por_andriod = table.Column<double>(nullable: false),
                     int_total = table.Column<int>(nullable: false),
                     int_total_ant = table.Column<int>(nullable: false),
-                    int_por_ant_total = table.Column<int>(nullable: false),
-                    dec_total = table.Column<decimal>(nullable: false),
-                    dec_total_ant = table.Column<decimal>(nullable: false),
-                    dec_por_ent_total = table.Column<decimal>(nullable: false)
+                    int_por_ant_total = table.Column<double>(nullable: false),
+                    dec_total = table.Column<double>(nullable: false),
+                    dec_total_ant = table.Column<double>(nullable: false),
+                    dec_por_ant_total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -332,22 +373,29 @@ namespace WebApiParquimetros.Migrations
                     dtm_mes_anterior = table.Column<DateTime>(nullable: false),
                     int_mes_ios = table.Column<int>(nullable: false),
                     int_mes_ant_ios = table.Column<int>(nullable: false),
-                    int_mes_por_ios = table.Column<int>(nullable: false),
-                    dec_mes_ios = table.Column<decimal>(nullable: false),
-                    dec_mes_ant_ios = table.Column<decimal>(nullable: false),
-                    dec_mes_por_ios = table.Column<decimal>(nullable: false),
+                    int_mes_por_ios = table.Column<double>(nullable: false),
+                    int_mes_autos_ios = table.Column<int>(nullable: false),
+                    int_mes_autos_ant_ios = table.Column<int>(nullable: false),
+                    int_mes_autos_por_ios = table.Column<double>(nullable: false),
+                    dec_mes_ios = table.Column<double>(nullable: false),
+                    dec_mes_ant_ios = table.Column<double>(nullable: false),
+                    dec_mes_por_ios = table.Column<double>(nullable: false),
                     int_mes_andriod = table.Column<int>(nullable: false),
                     int_mes_ant_andriod = table.Column<int>(nullable: false),
-                    int_mes_por_andriod = table.Column<int>(nullable: false),
-                    dec_mes_andriod = table.Column<decimal>(nullable: false),
-                    dec_mes_ant_andriod = table.Column<decimal>(nullable: false),
-                    dec_mes_por_andriod = table.Column<decimal>(nullable: false),
+                    int_mes_por_andriod = table.Column<double>(nullable: false),
+                    int_mes_autos_andriod = table.Column<int>(nullable: false),
+                    int_mes_autos_ant_andriod = table.Column<int>(nullable: false),
+                    int_mes_autos_por_andriod = table.Column<double>(nullable: false),
+                    int_mes_total_autos = table.Column<int>(nullable: false),
+                    dec_mes_andriod = table.Column<double>(nullable: false),
+                    dec_mes_ant_andriod = table.Column<double>(nullable: false),
+                    dec_mes_por_andriod = table.Column<double>(nullable: false),
                     int_mes_total = table.Column<int>(nullable: false),
                     int_mes_total_ant = table.Column<int>(nullable: false),
-                    int_mes_por_total = table.Column<int>(nullable: false),
-                    dec_mes_total = table.Column<decimal>(nullable: false),
-                    dec_mes_total_ant = table.Column<decimal>(nullable: false),
-                    dec_mes_por_total = table.Column<decimal>(nullable: false)
+                    int_mes_por_total = table.Column<double>(nullable: false),
+                    dec_mes_total = table.Column<double>(nullable: false),
+                    dec_mes_total_ant = table.Column<double>(nullable: false),
+                    dec_mes_por_total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -374,22 +422,29 @@ namespace WebApiParquimetros.Migrations
                     int_semana_ant = table.Column<int>(nullable: false),
                     int_sem_ios = table.Column<int>(nullable: false),
                     int_sem_ant_ios = table.Column<int>(nullable: false),
-                    int_sem_por_ios = table.Column<int>(nullable: false),
-                    dec_sem_ios = table.Column<decimal>(nullable: false),
-                    dec_sem_ant_ios = table.Column<decimal>(nullable: false),
-                    dec_sem_por_ios = table.Column<decimal>(nullable: false),
+                    int_sem_por_ios = table.Column<double>(nullable: false),
+                    int_sem_autos_ios = table.Column<int>(nullable: false),
+                    int_sem_autos_ant_ios = table.Column<int>(nullable: false),
+                    int_sem_autos_por_ios = table.Column<double>(nullable: false),
+                    dec_sem_ios = table.Column<double>(nullable: false),
+                    dec_sem_ant_ios = table.Column<double>(nullable: false),
+                    dec_sem_por_ios = table.Column<double>(nullable: false),
                     int_sem_andriod = table.Column<int>(nullable: false),
                     int_sem_ant_andriod = table.Column<int>(nullable: false),
-                    int_sem_por_andriod = table.Column<int>(nullable: false),
-                    dec_sem_andriod = table.Column<decimal>(nullable: false),
-                    dec_sem_ant_andriod = table.Column<decimal>(nullable: false),
-                    dec_sem_por_andriod = table.Column<decimal>(nullable: false),
+                    int_sem_por_andriod = table.Column<double>(nullable: false),
+                    int_sem_autos_andriod = table.Column<int>(nullable: false),
+                    int_sem_autos_ant_andriod = table.Column<int>(nullable: false),
+                    int_sem_autos_por_andriod = table.Column<double>(nullable: false),
+                    int_sem_total_autos = table.Column<int>(nullable: false),
+                    dec_sem_andriod = table.Column<double>(nullable: false),
+                    dec_sem_ant_andriod = table.Column<double>(nullable: false),
+                    dec_sem_por_andriod = table.Column<double>(nullable: false),
                     int_sem_total = table.Column<int>(nullable: false),
                     int_sem_total_ant = table.Column<int>(nullable: false),
-                    int_sem_por_ant = table.Column<int>(nullable: false),
-                    dec_sem_total = table.Column<decimal>(nullable: false),
-                    dec_sem_total_ant = table.Column<decimal>(nullable: false),
-                    dec_sem_por_total = table.Column<decimal>(nullable: false)
+                    int_sem_por_ant = table.Column<double>(nullable: false),
+                    dec_sem_total = table.Column<double>(nullable: false),
+                    dec_sem_total_ant = table.Column<double>(nullable: false),
+                    dec_sem_por_total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -397,6 +452,32 @@ namespace WebApiParquimetros.Migrations
                     table.ForeignKey(
                         name: "FK_tbresumensemanal_tbconcesiones_int_id_consecion",
                         column: x => x.int_id_consecion,
+                        principalTable: "tbconcesiones",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbtarifas",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    flt_tarifa_min = table.Column<double>(nullable: false),
+                    int_tiempo_minimo = table.Column<int>(nullable: false),
+                    flt_tarifa_max = table.Column<double>(nullable: false),
+                    int_tiempo_maximo = table.Column<int>(nullable: false),
+                    flt_tarifa_intervalo = table.Column<double>(nullable: false),
+                    int_intervalo_minutos = table.Column<int>(nullable: false),
+                    bool_cobro_fraccion = table.Column<bool>(nullable: false),
+                    intidconcesion_id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbtarifas", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_tbtarifas_tbconcesiones_intidconcesion_id",
+                        column: x => x.intidconcesion_id,
                         principalTable: "tbconcesiones",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -419,6 +500,32 @@ namespace WebApiParquimetros.Migrations
                         name: "FK_tbusersconcesiones_tbconcesiones_int_id_concesion",
                         column: x => x.int_id_concesion,
                         principalTable: "tbconcesiones",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbpermisos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    id_rol = table.Column<int>(nullable: false),
+                    id_opcion = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbpermisos", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_tbpermisos_tbopciones_id_opcion",
+                        column: x => x.id_opcion,
+                        principalTable: "tbopciones",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tbpermisos_tbtiposusuarios_id_rol",
+                        column: x => x.id_rol,
+                        principalTable: "tbtiposusuarios",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -460,32 +567,6 @@ namespace WebApiParquimetros.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbpermisos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    id_rol = table.Column<int>(nullable: false),
-                    id_opcion = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbpermisos", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_tbpermisos_tbopciones_id_opcion",
-                        column: x => x.id_opcion,
-                        principalTable: "tbopciones",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_tbpermisos_tbtiposusuarios_id_rol",
-                        column: x => x.id_rol,
-                        principalTable: "tbtiposusuarios",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -515,6 +596,8 @@ namespace WebApiParquimetros.Migrations
                     str_razon_social = table.Column<string>(nullable: true),
                     str_direccion = table.Column<string>(nullable: true),
                     str_cp = table.Column<string>(nullable: true),
+                    dbl_saldo_actual = table.Column<double>(nullable: false),
+                    dbl_saldo_anterior = table.Column<double>(nullable: false),
                     intidconcesion_id = table.Column<int>(nullable: true),
                     intIdTipoUsuario = table.Column<int>(nullable: false),
                     intidciudad = table.Column<int>(nullable: true),
@@ -755,10 +838,13 @@ namespace WebApiParquimetros.Migrations
                     last_modified_date = table.Column<DateTime>(nullable: false),
                     bit_status = table.Column<bool>(nullable: false),
                     dtmfecha = table.Column<DateTime>(nullable: false),
+                    flt_monto = table.Column<double>(nullable: false),
                     flt_monto_final = table.Column<double>(nullable: false),
                     flt_monto_inicial = table.Column<double>(nullable: false),
-                    str_forma_pago = table.Column<string>(maxLength: 50, nullable: false),
+                    str_forma_pago = table.Column<string>(maxLength: 50, nullable: true),
                     str_tipo_recarga = table.Column<string>(maxLength: 20, nullable: true),
+                    flt_porcentaje_comision = table.Column<double>(nullable: false),
+                    flt_total_con_comision = table.Column<double>(nullable: false),
                     int_id_usuario_id = table.Column<string>(nullable: true),
                     int_id_usuario_trans = table.Column<string>(nullable: true),
                     intidconcesion_id = table.Column<int>(nullable: true)
@@ -798,7 +884,7 @@ namespace WebApiParquimetros.Migrations
                     str_tarjeta = table.Column<string>(maxLength: 50, nullable: true),
                     str_titular = table.Column<string>(maxLength: 200, nullable: true),
                     int_id_usuario_id = table.Column<string>(nullable: true),
-                    intidconcesion_id = table.Column<int>(nullable: false)
+                    intidconcesion_id = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -814,41 +900,7 @@ namespace WebApiParquimetros.Migrations
                         column: x => x.intidconcesion_id,
                         principalTable: "tbconcesiones",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbvehiculos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    created_by = table.Column<string>(maxLength: 225, nullable: true),
-                    created_date = table.Column<DateTime>(nullable: false),
-                    last_modified_by = table.Column<string>(maxLength: 255, nullable: true),
-                    last_modified_date = table.Column<DateTime>(nullable: false),
-                    bit_status = table.Column<bool>(nullable: false),
-                    str_color = table.Column<string>(maxLength: 50, nullable: true),
-                    str_modelo = table.Column<string>(maxLength: 200, nullable: true),
-                    str_placas = table.Column<string>(maxLength: 20, nullable: false),
-                    int_id_usuario_id = table.Column<string>(nullable: true),
-                    intidconcesion_id = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbvehiculos", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_tbvehiculos_AspNetUsers_int_id_usuario_id",
-                        column: x => x.int_id_usuario_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_tbvehiculos_tbconcesiones_intidconcesion_id",
-                        column: x => x.intidconcesion_id,
-                        principalTable: "tbconcesiones",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -901,9 +953,21 @@ namespace WebApiParquimetros.Migrations
                     dtm_fecha_insercion_descuento = table.Column<DateTime>(nullable: true),
                     dtm_fecha_descuento = table.Column<DateTime>(nullable: true),
                     dtm_hora_fin = table.Column<DateTime>(nullable: false),
+                    int_tiempo_comprado = table.Column<int>(nullable: false),
                     int_tiempo = table.Column<int>(nullable: false),
                     flt_moneda_saldo_previo_descuento = table.Column<double>(nullable: false),
                     flt_monto = table.Column<double>(nullable: false),
+                    flt_monto_inicial = table.Column<double>(nullable: false),
+                    flt_porcentaje_comision = table.Column<double>(nullable: false),
+                    flt_monto_porcentaje = table.Column<double>(nullable: false),
+                    flt_total_con_comision = table.Column<double>(nullable: false),
+                    str_nombre_concesion = table.Column<string>(nullable: true),
+                    flt_saldo_anterior = table.Column<double>(nullable: false),
+                    int_tiempo_devuelto = table.Column<int>(nullable: false),
+                    flt_monto_devolucion = table.Column<double>(nullable: false),
+                    flt_monto_porc_devolucion = table.Column<double>(nullable: false),
+                    flt_total_dev_con_comision = table.Column<double>(nullable: false),
+                    flt_monto_real = table.Column<double>(nullable: false),
                     flt_saldo_previo_descuento = table.Column<double>(nullable: true),
                     flt_valor_descuento = table.Column<double>(nullable: true),
                     flt_valor_devuelto = table.Column<double>(nullable: true),
@@ -921,11 +985,58 @@ namespace WebApiParquimetros.Migrations
                     str_tipo = table.Column<string>(maxLength: 50, nullable: true),
                     str_versionapp = table.Column<string>(maxLength: 50, nullable: true),
                     int_id_espacio = table.Column<int>(nullable: true),
-                    int_id_saldo_id = table.Column<int>(nullable: false),
+                    int_id_saldo_id = table.Column<int>(nullable: true),
                     int_id_usuario_id = table.Column<string>(nullable: true),
                     int_id_vehiculo_id = table.Column<int>(nullable: false),
                     intidconcesion_id = table.Column<int>(nullable: false),
-                    int_id_multa = table.Column<int>(nullable: true)
+                    int_id_multa = table.Column<int>(nullable: true),
+                    InsDescription = table.Column<string>(nullable: true),
+                    InsShortdesc = table.Column<string>(nullable: true),
+                    BalanceBefore = table.Column<double>(nullable: false),
+                    TicketNumber = table.Column<int>(nullable: false),
+                    Sector = table.Column<string>(nullable: true),
+                    Tariff = table.Column<string>(nullable: true),
+                    DiscountAmountCurrencyId = table.Column<double>(nullable: false),
+                    DiscountBalanceCurrencyId = table.Column<double>(nullable: false),
+                    DiscountBalanceBefore = table.Column<double>(nullable: false),
+                    ServiceChargeTypeId = table.Column<int>(nullable: false),
+                    CardReference = table.Column<string>(nullable: true),
+                    CardScheme = table.Column<string>(nullable: true),
+                    MaskedCardNumber = table.Column<string>(nullable: true),
+                    CardExpirationDate = table.Column<DateTime>(nullable: false),
+                    ExternalId1 = table.Column<int>(nullable: false),
+                    ExternalId2 = table.Column<int>(nullable: false),
+                    ExternalId3 = table.Column<int>(nullable: false),
+                    PercVat1 = table.Column<double>(nullable: false),
+                    PercVat2 = table.Column<double>(nullable: false),
+                    PartialVat1 = table.Column<double>(nullable: false),
+                    PercFee = table.Column<double>(nullable: false),
+                    PercFeeTopped = table.Column<double>(nullable: false),
+                    PartialPercFee = table.Column<double>(nullable: false),
+                    FixedFee = table.Column<double>(nullable: false),
+                    PartialFixedFee = table.Column<double>(nullable: false),
+                    TotalAmount = table.Column<double>(nullable: false),
+                    CuspmrPagateliaNewBalance = table.Column<double>(nullable: false),
+                    CuspmrType = table.Column<string>(nullable: true),
+                    ShopkeeperOp = table.Column<bool>(nullable: false),
+                    ShopkeeperAmount = table.Column<double>(nullable: false),
+                    ShopkeeperProfit = table.Column<double>(nullable: false),
+                    Plate2 = table.Column<string>(nullable: true),
+                    Plate3 = table.Column<string>(nullable: true),
+                    Plate4 = table.Column<string>(nullable: true),
+                    Plate5 = table.Column<string>(nullable: true),
+                    Plate6 = table.Column<string>(nullable: true),
+                    Plate7 = table.Column<string>(nullable: true),
+                    Plate8 = table.Column<string>(nullable: true),
+                    Plate9 = table.Column<string>(nullable: true),
+                    Plate10 = table.Column<string>(nullable: true),
+                    PermitAutoRenew = table.Column<bool>(nullable: false),
+                    PermitExpiration = table.Column<bool>(nullable: false),
+                    TransStatus = table.Column<bool>(nullable: false),
+                    RefundAmount = table.Column<double>(nullable: false),
+                    valor_sin_bonificar = table.Column<double>(nullable: false),
+                    bonificacion = table.Column<double>(nullable: false),
+                    tipo_vehiculo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -941,12 +1052,6 @@ namespace WebApiParquimetros.Migrations
                         column: x => x.int_id_saldo_id,
                         principalTable: "tbsaldo",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_tbmovimientos_AspNetUsers_int_id_usuario_id",
-                        column: x => x.int_id_usuario_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_tbmovimientos_tbvehiculos_int_id_vehiculo_id",
@@ -976,6 +1081,9 @@ namespace WebApiParquimetros.Migrations
                     dtm_horaInicio = table.Column<DateTime>(nullable: false),
                     dtm_horaFin = table.Column<DateTime>(nullable: false),
                     flt_importe = table.Column<double>(nullable: false),
+                    flt_porcentaje_comision = table.Column<double>(nullable: false),
+                    flt_monto_porcentaje = table.Column<double>(nullable: false),
+                    flt_total_con_comision = table.Column<double>(nullable: false),
                     flt_descuentos = table.Column<double>(nullable: false),
                     flt_saldo_anterior = table.Column<double>(nullable: false),
                     flt_saldo_fin = table.Column<double>(nullable: false),
@@ -1045,7 +1153,6 @@ namespace WebApiParquimetros.Migrations
                     str_no_parquimetro = table.Column<string>(nullable: true),
                     str_id_agente_id = table.Column<string>(nullable: true),
                     int_id_movimiento_id = table.Column<int>(nullable: true),
-                    int_id_saldo_id = table.Column<int>(nullable: true),
                     int_id_vehiculo_id = table.Column<int>(nullable: true),
                     intidconcesion_id = table.Column<int>(nullable: true)
                 },
@@ -1056,12 +1163,6 @@ namespace WebApiParquimetros.Migrations
                         name: "FK_tbmultas_tbmovimientos_int_id_movimiento_id",
                         column: x => x.int_id_movimiento_id,
                         principalTable: "tbmovimientos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_tbmultas_tbsaldo_int_id_saldo_id",
-                        column: x => x.int_id_saldo_id,
-                        principalTable: "tbsaldo",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1147,6 +1248,11 @@ namespace WebApiParquimetros.Migrations
                 column: "intidzona_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbciudades_int_id_ciudad",
+                table: "tbciudades",
+                column: "int_id_ciudad");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbcomerciantes_intidconcesion_id",
                 table: "tbcomerciantes",
                 column: "intidconcesion_id");
@@ -1212,11 +1318,6 @@ namespace WebApiParquimetros.Migrations
                 column: "int_id_saldo_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbmovimientos_int_id_usuario_id",
-                table: "tbmovimientos",
-                column: "int_id_usuario_id");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_tbmovimientos_int_id_vehiculo_id",
                 table: "tbmovimientos",
                 column: "int_id_vehiculo_id");
@@ -1230,11 +1331,6 @@ namespace WebApiParquimetros.Migrations
                 name: "IX_tbmultas_int_id_movimiento_id",
                 table: "tbmultas",
                 column: "int_id_movimiento_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbmultas_int_id_saldo_id",
-                table: "tbmultas",
-                column: "int_id_saldo_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbmultas_int_id_vehiculo_id",
@@ -1307,6 +1403,11 @@ namespace WebApiParquimetros.Migrations
                 column: "intidzona_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbtarifas_intidconcesion_id",
+                table: "tbtarifas",
+                column: "intidconcesion_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbtarjetas_int_id_usuario_id",
                 table: "tbtarjetas",
                 column: "int_id_usuario_id");
@@ -1320,16 +1421,6 @@ namespace WebApiParquimetros.Migrations
                 name: "IX_tbusersconcesiones_int_id_concesion",
                 table: "tbusersconcesiones",
                 column: "int_id_concesion");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbvehiculos_int_id_usuario_id",
-                table: "tbvehiculos",
-                column: "int_id_usuario_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbvehiculos_intidconcesion_id",
-                table: "tbvehiculos",
-                column: "intidconcesion_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbzonas_int_id_ciudad_id",
@@ -1448,6 +1539,9 @@ namespace WebApiParquimetros.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbconcesiones");
+
+            migrationBuilder.DropTable(
+                name: "tbcatciudades");
         }
     }
 }

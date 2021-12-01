@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApiParquimetros.Contexts;
 using WebApiParquimetros.Models;
@@ -20,7 +19,7 @@ namespace WebApiParquimetros.Controllers
         private readonly ApplicationDbContext context;
         public CiudadController(ApplicationDbContext context)
         {
-            this.context= context;
+            this.context = context;
         }
 
         [HttpGet("mtdConsultarCiudades")]
@@ -37,7 +36,7 @@ namespace WebApiParquimetros.Controllers
                 //return BadRequest(ModelState);
                 return Json(new { token = ex.Message });
             }
-            
+
         }
 
         [HttpGet("mtdConsultarCiudadesXId")]
@@ -61,7 +60,7 @@ namespace WebApiParquimetros.Controllers
                 //return BadRequest(ModelState);
                 return Json(new { token = ex.Message });
             }
-            
+
         }
 
 
@@ -82,7 +81,7 @@ namespace WebApiParquimetros.Controllers
                     try
                     {
 
-                        ciudades.created_date =time;
+                        ciudades.created_date = time;
                         ciudades.last_modified_date = time;
                         ciudades.int_id_ciudad = null;
                         context.tbciudades.Add(ciudades);
@@ -104,7 +103,7 @@ namespace WebApiParquimetros.Controllers
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        
+
                         return Json(new { token = ex.Message });
 
                     }
@@ -128,7 +127,7 @@ namespace WebApiParquimetros.Controllers
             {
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
-                
+
                 var response = await context.tbciudades.FirstOrDefaultAsync(x => x.id == id);
                 if (response.id != id)
                 {
@@ -143,7 +142,7 @@ namespace WebApiParquimetros.Controllers
                 response.str_ciudad = ciudades.str_ciudad;
                 //response.intidconcesion_id = ciudades.intidconcesion_id;
 
-                
+
                 await context.SaveChangesAsync();
 
                 return Ok();
@@ -154,10 +153,10 @@ namespace WebApiParquimetros.Controllers
                 //return BadRequest(ModelState);
                 return Json(new { token = ex.Message });
             }
-            
+
         }
 
-      
+
 
         [HttpDelete("mtdBajaCiudad")]
         public async Task<ActionResult<Ciudades>> mtdBajaCiudad(int id)
@@ -165,7 +164,7 @@ namespace WebApiParquimetros.Controllers
             try
             {
                 var response = await context.tbciudades.FirstOrDefaultAsync(x => x.id == id);
-                
+
 
                 if (response == null)
                 {

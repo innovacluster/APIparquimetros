@@ -115,3 +115,109 @@ C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
 C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csprojAssemblyReference.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\app.yaml
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\Dockerfile
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.deps.json
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.dll
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\View.g.cshtml.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\appsettings.Development.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\libman.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\app.yaml
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\Dockerfile
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\appsettings.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.deps.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.dll
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.xml
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.dll
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.AssemblyReference.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.GeneratedMSBuildEditorConfig.editorconfig
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.dll
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.xml
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
+E:\Respaldo Dulce\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\libman.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\app.yaml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\Dockerfile
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.deps.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Debug\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete

@@ -1057,9 +1057,9 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_autos_ios");
 
-                    b.Property<int>("int_autos_por_andriod");
+                    b.Property<double>("int_autos_por_andriod");
 
-                    b.Property<int>("int_autos_por_ios");
+                    b.Property<double>("int_autos_por_ios");
 
                     b.Property<int>("int_dia");
 
@@ -1069,11 +1069,11 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_mes");
 
-                    b.Property<int>("int_por_andriod");
+                    b.Property<double>("int_por_andriod");
 
-                    b.Property<int>("int_por_ant_total");
+                    b.Property<double>("int_por_ant_total");
 
-                    b.Property<int>("int_por_ios");
+                    b.Property<double>("int_por_ios");
 
                     b.Property<int>("int_total");
 
@@ -1140,17 +1140,17 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_mes_autos_ios");
 
-                    b.Property<int>("int_mes_autos_por_andriod");
+                    b.Property<double>("int_mes_autos_por_andriod");
 
-                    b.Property<int>("int_mes_autos_por_ios");
+                    b.Property<double>("int_mes_autos_por_ios");
 
                     b.Property<int>("int_mes_ios");
 
-                    b.Property<int>("int_mes_por_andriod");
+                    b.Property<double>("int_mes_por_andriod");
 
-                    b.Property<int>("int_mes_por_ios");
+                    b.Property<double>("int_mes_por_ios");
 
-                    b.Property<int>("int_mes_por_total");
+                    b.Property<double>("int_mes_por_total");
 
                     b.Property<int>("int_mes_total");
 
@@ -1213,17 +1213,17 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_sem_autos_ios");
 
-                    b.Property<int>("int_sem_autos_por_andriod");
+                    b.Property<double>("int_sem_autos_por_andriod");
 
-                    b.Property<int>("int_sem_autos_por_ios");
+                    b.Property<double>("int_sem_autos_por_ios");
 
                     b.Property<int>("int_sem_ios");
 
-                    b.Property<int>("int_sem_por_andriod");
+                    b.Property<double>("int_sem_por_andriod");
 
-                    b.Property<int>("int_sem_por_ant");
+                    b.Property<double>("int_sem_por_ant");
 
-                    b.Property<int>("int_sem_por_ios");
+                    b.Property<double>("int_sem_por_ios");
 
                     b.Property<int>("int_sem_total");
 

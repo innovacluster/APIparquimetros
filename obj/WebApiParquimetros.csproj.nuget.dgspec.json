@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {}
+    "C:\\Users\\HP\\Desktop\\Proyectos de Software\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {
+    "C:\\Users\\HP\\Desktop\\Proyectos de Software\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Proyectos de Software\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
         "projectName": "WebApiParquimetros",
-        "projectPath": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
-        "packagesPath": "C:\\Users\\Mari2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mari2\\Desktop\\Parquimetros\\Dulce\\UltVerParquimetros\\APIparquimetros\\obj\\",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Proyectos de Software\\UltVerParquimetros\\APIparquimetros\\WebApiParquimetros.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Proyectos de Software\\UltVerParquimetros\\APIparquimetros\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mari2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,6 +29,7 @@
         },
         "frameworks": {
           "netcoreapp2.2": {
+            "targetAlias": "netcoreapp2.2",
             "projectReferences": {}
           }
         },
@@ -40,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
           "dependencies": {
             "Cronos": {
               "target": "Package",
@@ -89,7 +91,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

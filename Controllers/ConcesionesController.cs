@@ -454,6 +454,7 @@ namespace WebApiParquimetros.Controllers
                 }
                 ParametrosController par = new ParametrosController(context);
                 ActionResult<DateTime> horadeTransaccion = par.mtdObtenerFechaMexico();
+                var tipoUsuario = await context.tbtiposusuarios.FirstOrDefaultAsync(x => x.strTipoUsuario == "AGENTE VIAL");
 
                 foreach (var item in licencias.cuentas)
                 {
@@ -463,7 +464,7 @@ namespace WebApiParquimetros.Controllers
                         Email = item.Email,
                         created_date = horadeTransaccion.Value,
                         intidconcesion_id = intidConcesion,
-                        intIdTipoUsuario = 3,
+                        intIdTipoUsuario = tipoUsuario.id,
                         intidciudad = response.intidciudad,
                         EmailConfirmed = true,
                         bit_status = true

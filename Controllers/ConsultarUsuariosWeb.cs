@@ -15,6 +15,7 @@ namespace WebApiParquimetros.Controllers
         public bool bit_status { get; set; }
         public int int_id_concesion { get; set; }
        public string str_nombre_cliente { get; set; }
+
         public string strTipoUsuario { get; set; }
         public string phoneNumber { get; set; }
         public int intidciudad { get; set; }

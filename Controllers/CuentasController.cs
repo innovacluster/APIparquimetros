@@ -212,6 +212,70 @@ namespace WebApiParquimetros.Controllers
 
         }
 
+        [HttpPost("CrearUsuarioSuperAdmin")]
+        public async Task<ActionResult<bool>> mtdCreaUsuarioSuperAdmin(UserInfo model)
+        {
+            try
+            {
+                var tipous = await context.tbtiposusuarios.FirstOrDefaultAsync(x => x.strTipoUsuario == model.Rol);
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    created_by = model.created_by,
+                    created_date = DateTime.Now,
+                    last_modified_by = model.last_modified_by,
+                    //last_modified_date = horadeTransaccion,
+                    EmailConfirmed = true,
+                    intidconcesion_id = null,
+                    intIdTipoUsuario = tipous.id,
+                    str_rfc = model.str_rfc,
+                    str_direccion = model.str_direccion,
+                    str_cp = model.str_cp,
+                    str_razon_social = model.str_razon_social,
+                    dbl_saldo_actual = 0.0,
+                    dbl_saldo_anterior = 0.0,
+                    intidciudad = null,
+                    bit_status = true
+
+                };
+                strIdUsuario = user.Id;
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+
+                if (result.Succeeded)
+                {
+                    //int intSaldo = await mtdCrearSaldo(strIdUsuario);
+
+                    //if (intdSaldo != 0)
+                    //{
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var confirmationLink = Url.Action("ConfirmarEmail", "Cuentas",
+                    new { userId = user.Id, code = code }, Request.Scheme);
+                    _logger.Log(LogLevel.Warning, confirmationLink);
+
+                    await _emailSender.SendEmailAsync(user.Email, "Confirme su cuenta de correo",
+                       "Por favor confirme su cuenta de correo haciendo clic en el siguiente enlace: <a href=\"" + confirmationLink + "\">link</a>");
+                    return true;
+                    //}
+
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { token = ex.Message });
+            }
+
+        }
+
         [NonAction]
         public  async Task<int> mtdCrearSaldo(string strIdUser)
         {
@@ -491,7 +555,7 @@ namespace WebApiParquimetros.Controllers
 
                                 if (strCliente == "WEB")
                                 {
-                                    if (tipo.strTipoUsuario == "ADMINISTRADOR DE CONCESION" || tipo.strTipoUsuario == "RADIO OPERADORA" || tipo.strTipoUsuario == "EGRESOS")
+                                    if (tipo.strTipoUsuario == "ADMINISTRADOR DE CONCESION" || tipo.strTipoUsuario == "RADIO OPERADORA" || tipo.strTipoUsuario == "EGRESOS" || tipo.strTipoUsuario == "SUPER ADMIN")
                                     {
                                         string strId = result.Id;
                                         var roles = await _userManager.GetRolesAsync(result);
@@ -673,9 +737,10 @@ namespace WebApiParquimetros.Controllers
             try
             {
                 List<ConsultarUsuariosWeb> lstItems = new List<ConsultarUsuariosWeb>();
-                var response = await context.NetUsers.Where(x => x.intIdTipoUsuario != 1 && x.bit_status == status).Include(x => x.tbtiposusuarios).Include(x => x.tbconcesiones).ToListAsync(); ;
+                var response = await context.NetUsers.Where(x => x.intIdTipoUsuario != 1 && x.bit_status == status).
+                    Include(x => x.tbtiposusuarios).
+                    Include(x => x.tbconcesiones).ToListAsync(); ;
 
-                
                 var parUsuario = await context.tbparametros.FirstOrDefaultAsync(x=> x.intidconcesion_id == null);
                 string str_nombrecliente = "";
                 int idConcesion = 0;

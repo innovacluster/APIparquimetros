@@ -10,8 +10,8 @@ using WebApiParquimetros.Contexts;
 namespace WebApiParquimetros.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201103223728_Parametroscomision")]
-    partial class Parametroscomision
+    [Migration("20210922160249_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -253,6 +253,19 @@ namespace WebApiParquimetros.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WebApiParquimetros.Models.CatCiudades", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    b.Property<string>("str_ciudad");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tbcatciudades");
+                });
+
             modelBuilder.Entity("WebApiParquimetros.Models.CatalogoOpciones", b =>
                 {
                     b.Property<int>("id")
@@ -281,6 +294,8 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<DateTime>("created_date");
 
+                    b.Property<int?>("int_id_ciudad");
+
                     b.Property<string>("last_modified_by")
                         .HasMaxLength(250);
 
@@ -289,6 +304,8 @@ namespace WebApiParquimetros.Migrations
                     b.Property<string>("str_ciudad")
                         .HasMaxLength(200);
 
+                    b.Property<string>("str_desc_ciudad");
+
                     b.Property<string>("str_latitud")
                         .HasMaxLength(50);
 
@@ -296,6 +313,8 @@ namespace WebApiParquimetros.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("id");
+
+                    b.HasIndex("int_id_ciudad");
 
                     b.ToTable("tbciudades");
                 });
@@ -392,6 +411,10 @@ namespace WebApiParquimetros.Migrations
                     b.Property<int>("int_licencias");
 
                     b.Property<int>("intidciudad");
+
+                    b.Property<int>("intidciudad_cat");
+
+                    b.Property<string>("str_ciudad");
 
                     b.Property<string>("str_clave")
                         .HasMaxLength(100);
@@ -736,6 +759,8 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<double>("flt_monto_devolucion");
 
+                    b.Property<double>("flt_monto_inicial");
+
                     b.Property<double>("flt_monto_porc_devolucion");
 
                     b.Property<double>("flt_monto_porcentaje");
@@ -962,6 +987,8 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int?>("intidconcesion_id");
 
+                    b.Property<string>("str_descrip_us_admin");
+
                     b.HasKey("id");
 
                     b.HasIndex("intidconcesion_id");
@@ -1032,9 +1059,9 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_autos_ios");
 
-                    b.Property<int>("int_autos_por_andriod");
+                    b.Property<double>("int_autos_por_andriod");
 
-                    b.Property<int>("int_autos_por_ios");
+                    b.Property<double>("int_autos_por_ios");
 
                     b.Property<int>("int_dia");
 
@@ -1044,11 +1071,11 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_mes");
 
-                    b.Property<int>("int_por_andriod");
+                    b.Property<double>("int_por_andriod");
 
-                    b.Property<int>("int_por_ant_total");
+                    b.Property<double>("int_por_ant_total");
 
-                    b.Property<int>("int_por_ios");
+                    b.Property<double>("int_por_ios");
 
                     b.Property<int>("int_total");
 
@@ -1115,17 +1142,17 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_mes_autos_ios");
 
-                    b.Property<int>("int_mes_autos_por_andriod");
+                    b.Property<double>("int_mes_autos_por_andriod");
 
-                    b.Property<int>("int_mes_autos_por_ios");
+                    b.Property<double>("int_mes_autos_por_ios");
 
                     b.Property<int>("int_mes_ios");
 
-                    b.Property<int>("int_mes_por_andriod");
+                    b.Property<double>("int_mes_por_andriod");
 
-                    b.Property<int>("int_mes_por_ios");
+                    b.Property<double>("int_mes_por_ios");
 
-                    b.Property<int>("int_mes_por_total");
+                    b.Property<double>("int_mes_por_total");
 
                     b.Property<int>("int_mes_total");
 
@@ -1188,17 +1215,17 @@ namespace WebApiParquimetros.Migrations
 
                     b.Property<int>("int_sem_autos_ios");
 
-                    b.Property<int>("int_sem_autos_por_andriod");
+                    b.Property<double>("int_sem_autos_por_andriod");
 
-                    b.Property<int>("int_sem_autos_por_ios");
+                    b.Property<double>("int_sem_autos_por_ios");
 
                     b.Property<int>("int_sem_ios");
 
-                    b.Property<int>("int_sem_por_andriod");
+                    b.Property<double>("int_sem_por_andriod");
 
-                    b.Property<int>("int_sem_por_ant");
+                    b.Property<double>("int_sem_por_ant");
 
-                    b.Property<int>("int_sem_por_ios");
+                    b.Property<double>("int_sem_por_ios");
 
                     b.Property<int>("int_sem_total");
 
@@ -1254,7 +1281,6 @@ namespace WebApiParquimetros.Migrations
                     b.Property<DateTime>("last_modified_date");
 
                     b.Property<string>("str_forma_pago")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("str_tipo_recarga")
@@ -1554,6 +1580,13 @@ namespace WebApiParquimetros.Migrations
                     b.HasOne("WebApiParquimetros.Models.Zonas", "tbzonas")
                         .WithMany()
                         .HasForeignKey("intidzona");
+                });
+
+            modelBuilder.Entity("WebApiParquimetros.Models.Ciudades", b =>
+                {
+                    b.HasOne("WebApiParquimetros.Models.CatCiudades", "tbcatciudades")
+                        .WithMany()
+                        .HasForeignKey("int_id_ciudad");
                 });
 
             modelBuilder.Entity("WebApiParquimetros.Models.Comerciantes", b =>
