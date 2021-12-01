@@ -189,3 +189,40 @@ C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquim
 C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.xml
 C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.pdb
 C:\Users\Elite\Desktop\ParquimetrosSeguimiento\ParquimetrosVerDell\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\appsettings.Development.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\libman.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\app.yaml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\Dockerfile
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\appsettings.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.deps.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.runtimeconfig.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.runtimeconfig.dev.json
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.AssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorAssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.input.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.TagHelpers.output.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorCoreGenerate.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\Confirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EmailVerificationConfirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\EstablecePassword.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPassword.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\Cuentas\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\Razor\Views\View.cshtml.g.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.RazorTargetAssemblyInfo.cs
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.Views.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.dll
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.xml
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.pdb
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.genruntimeconfig.cache
+C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\obj\Release\netcoreapp2.2\WebApiParquimetros.csproj.CopyComplete

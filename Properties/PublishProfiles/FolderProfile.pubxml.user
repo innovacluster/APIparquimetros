@@ -6,6 +6,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Mari2\Desktop\Parquimetros\Dulce\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\HP\Desktop\Proyectos de Software\UltVerParquimetros\APIparquimetros\bin\Debug\netcoreapp2.2\publish\</_PublishTargetUrl>
+    <History>True|2021-12-01T19:08:04.4361395Z;</History>
   </PropertyGroup>
 </Project>
