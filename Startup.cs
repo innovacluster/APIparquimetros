@@ -47,7 +47,7 @@ namespace WebApiParquimetros
             {
                 //c.TimeZoneInfo = TimeZoneInfo.Local;
                 c.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City");
-                //c.CronExpression = @"0 * * * * MON-SAT";
+                c.CronExpression = @"0 * * * * MON-SAT";
             });
 
             services.AddCronJob<CronJob2MultaDP10>(c =>
